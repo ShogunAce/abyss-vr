@@ -1,0 +1,1840 @@
+[
+  {
+    "domain": "xr",
+    "action": "status",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.status",
+        "result": {
+          "deviceName": "Meta Quest 3",
+          "isRuntimeInstalled": true,
+          "sessionActive": false,
+          "sessionOffered": true,
+          "sessionMode": null,
+          "enabledFeatures": [],
+          "visibilityState": "visible",
+          "runtimeKind": "emulated",
+          "browser": {
+            "lifecycle": {
+              "state": "running",
+              "policy": "eager",
+              "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+              "browserEpoch": 2,
+              "revision": 30,
+              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
+              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "failures": 0,
+              "cleanupConfirmed": true,
+              "attemptLimit": 3,
+              "historyTruncated": false,
+              "retryEligible": false,
+              "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+              "history": [
+                {
+                  "revision": 1,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.189Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 2,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.196Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 3,
+                  "state": "running",
+                  "at": "2026-11-17T20:58:30.081Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 12,
+                  "state": "closing",
+                  "at": "2026-11-17T21:39:14.714Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 15,
+                  "state": "failed",
+                  "at": "2026-11-17T21:39:15.199Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 16,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.202Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 17,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.205Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 18,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:13.876Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 24,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:43.885Z",
+                  "reason": "stable"
+                }
+              ],
+              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+            },
+            "status": "connected",
+            "clients": [
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93oe8-gyi8js",
+                "role": "app",
+                "tabGeneration": 3
+              },
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93ini-lszvgu",
+                "role": "editor",
+                "sceneSessionId": "scene-g0vxifekyn",
+                "tabGeneration": 1
+              }
+            ],
+            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
+            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "connected": true,
+            "commandReady": true,
+            "connectedClientCount": 2,
+            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "audioMuted": false
+          },
+          "browserConnected": true,
+          "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "enter",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.enter",
+        "result": {
+          "success": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-input-mode",
+    "input": {
+      "mode": "hand"
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-input-mode",
+        "result": {
+          "mode": "hand",
+          "activeDevices": [
+            "hand-left",
+            "hand-right"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "find",
+    "input": {
+      "withComponents": [
+        "AbyssSphere"
+      ]
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.find",
+        "result": {
+          "entities": [
+            {
+              "entityIndex": 15,
+              "name": "ABYSS sphere",
+              "componentIds": [
+                "Transform",
+                "Visibility",
+                "LevelTag",
+                "AbyssSphere",
+                "RayInteractable",
+                "Hovered"
+              ]
+            }
+          ],
+          "total": 1,
+          "limited": false
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 4,
+                "lastEvent": "XR hand select #4",
+                "pulse": 0,
+                "immersion": 0,
+                "destination": "room",
+                "phase": "room"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "list-targets",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.list-targets",
+        "result": {
+          "resolver": true,
+          "targets": [
+            {
+              "name": "ABYSS sphere",
+              "position": {
+                "x": 0,
+                "y": 1.4500000476837158,
+                "z": -0.699999988079071
+              },
+              "size": {
+                "x": 0.17000000178813934,
+                "y": 0.17000000178813934,
+                "z": 0.17000000178813934
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "look-at",
+    "input": {
+      "device": "hand-right",
+      "target": {
+        "x": 0,
+        "y": 1.4500000476837158,
+        "z": -0.699999988079071
+      }
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.look-at",
+        "result": {
+          "device": "hand-right",
+          "position": {
+            "x": 0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": -0.059828486293554306,
+            "y": 0.3397354483604431,
+            "z": 0.021660899743437767,
+            "w": 0.9383662343025208
+          }
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "pause",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.pause",
+        "result": {
+          "paused": true,
+          "frame": 7651,
+          "systemCount": 14
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-right",
+      "value": 1
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-right",
+          "value": 1
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 4,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 4,
+          "totalFrame": 7870
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1.0506669282913208,
+                  1.0506669282913208,
+                  1.0506669282913208
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 5,
+                "lastEvent": "XR hand select #5",
+                "pulse": 0.5833333134651184,
+                "immersion": 0.008333333767950535,
+                "destination": "ocean",
+                "phase": "entering"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            },
+            {
+              "componentId": "Pressed",
+              "description": "A tag added by InputSystem while the entity is actively pressed.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 8179
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 8392
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 56,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 56,
+          "totalFrame": 8557
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 5,
+                "lastEvent": "XR hand select #5",
+                "pulse": 0,
+                "immersion": 0.5,
+                "destination": "ocean",
+                "phase": "entering"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            },
+            {
+              "componentId": "Pressed",
+              "description": "A tag added by InputSystem while the entity is actively pressed.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "browser",
+    "action": "screenshot",
+    "input": {},
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "browser.screenshot",
+        "result": {
+          "generation": 3,
+          "id": "tab-mwl93oe8-gyi8js",
+          "outerUrl": "https://localhost:8081/",
+          "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+          "workspaceFramed": true,
+          "downscaled": true,
+          "height": 460,
+          "mimeType": "image/png",
+          "width": 640
+        },
+        "screenshotPath": "artifacts/journey-halfway.png"
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-right",
+      "value": 0
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-right",
+          "value": 0
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 4,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 4,
+          "totalFrame": 9036
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-right",
+      "value": 1
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-right",
+          "value": 1
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 4,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 4,
+          "totalFrame": 9255
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1.0506669282913208,
+                  1.0506669282913208,
+                  1.0506669282913208
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 6,
+                "lastEvent": "XR hand select #6",
+                "pulse": 0.5833333134651184,
+                "immersion": 0.49351853132247925,
+                "destination": "room",
+                "phase": "returning"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            },
+            {
+              "componentId": "Pressed",
+              "description": "A tag added by InputSystem while the entity is actively pressed.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-right",
+      "value": 0
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-right",
+          "value": 0
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 9673
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 60,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 60,
+          "totalFrame": 9841
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 6,
+                "lastEvent": "XR hand select #6",
+                "pulse": 0,
+                "immersion": 0,
+                "destination": "room",
+                "phase": "room"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "look-at",
+    "input": {
+      "device": "hand-left",
+      "target": {
+        "x": 0,
+        "y": 1.4500000476837158,
+        "z": -0.699999988079071
+      }
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.look-at",
+        "result": {
+          "device": "hand-left",
+          "position": {
+            "x": -0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": -0.059828486293554306,
+            "y": -0.3397354483604431,
+            "z": -0.021660899743437767,
+            "w": 0.9383662343025208
+          }
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-left",
+      "value": 1
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-left",
+          "value": 1
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 4,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 4,
+          "totalFrame": 10288
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-left",
+      "value": 0
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-left",
+          "value": 0
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 10591
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 10788
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 10986
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 11183
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 11379
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 30,
+      "delta": 0.016666666666666666
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 30,
+          "totalFrame": 11517
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
+                "pulse": 0,
+                "immersion": 1,
+                "destination": "ocean",
+                "phase": "ocean"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
+                "pulse": 0,
+                "immersion": 1,
+                "destination": "ocean",
+                "phase": "ocean"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "browser",
+    "action": "screenshot",
+    "input": {},
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "browser.screenshot",
+        "result": {
+          "generation": 3,
+          "id": "tab-mwl93oe8-gyi8js",
+          "outerUrl": "https://localhost:8081/",
+          "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+          "workspaceFramed": true,
+          "downscaled": true,
+          "height": 460,
+          "mimeType": "image/png",
+          "width": 640
+        },
+        "screenshotPath": "artifacts/journey-ocean.png"
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "list-targets",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.list-targets",
+        "result": {
+          "resolver": true,
+          "targets": [
+            {
+              "name": "ABYSS sphere",
+              "position": {
+                "x": 0,
+                "y": 1.4500000476837158,
+                "z": -0.699999988079071
+              },
+              "size": {
+                "x": 0.17000000178813934,
+                "y": 0.17000000178813934,
+                "z": 0.17000000178813934
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "resume",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.resume",
+        "result": {
+          "paused": false,
+          "framesWhilePaused": 4470
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "exit",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.exit",
+        "result": {
+          "success": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
+                "pulse": 0,
+                "immersion": 0,
+                "destination": "room",
+                "phase": "room"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
+                "pulse": 0,
+                "immersion": 0,
+                "destination": "room",
+                "phase": "room"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "enter",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.enter",
+        "result": {
+          "success": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
+                "pulse": 0,
+                "immersion": 0,
+                "destination": "room",
+                "phase": "room"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "status",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.status",
+        "result": {
+          "deviceName": "Meta Quest 3",
+          "isRuntimeInstalled": true,
+          "sessionActive": true,
+          "sessionOffered": false,
+          "sessionMode": "immersive-ar",
+          "enabledFeatures": [
+            "local-floor",
+            "bounded-floor",
+            "hand-tracking",
+            "anchors",
+            "plane-detection",
+            "mesh-detection",
+            "viewer",
+            "local"
+          ],
+          "visibilityState": "visible",
+          "runtimeKind": "emulated",
+          "browser": {
+            "lifecycle": {
+              "state": "running",
+              "policy": "eager",
+              "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+              "browserEpoch": 2,
+              "revision": 30,
+              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
+              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "failures": 0,
+              "cleanupConfirmed": true,
+              "attemptLimit": 3,
+              "historyTruncated": false,
+              "retryEligible": false,
+              "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+              "history": [
+                {
+                  "revision": 1,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.189Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 2,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.196Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 3,
+                  "state": "running",
+                  "at": "2026-11-17T20:58:30.081Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 12,
+                  "state": "closing",
+                  "at": "2026-11-17T21:39:14.714Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 15,
+                  "state": "failed",
+                  "at": "2026-11-17T21:39:15.199Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 16,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.202Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 17,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.205Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 18,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:13.876Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 24,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:43.885Z",
+                  "reason": "stable"
+                }
+              ],
+              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+            },
+            "status": "connected",
+            "clients": [
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93oe8-gyi8js",
+                "role": "app",
+                "tabGeneration": 3
+              },
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93ini-lszvgu",
+                "role": "editor",
+                "sceneSessionId": "scene-g0vxifekyn",
+                "tabGeneration": 1
+              }
+            ],
+            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
+            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "connected": true,
+            "commandReady": true,
+            "connectedClientCount": 2,
+            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "audioMuted": false
+          },
+          "browserConnected": true,
+          "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-right",
+      "value": 0
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-right",
+          "value": 0
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-left",
+      "value": 0
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-left",
+          "value": 0
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "resume",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.resume",
+        "result": {
+          "paused": false,
+          "framesWhilePaused": 5434
+        }
+      }
+    }
+  }
+]

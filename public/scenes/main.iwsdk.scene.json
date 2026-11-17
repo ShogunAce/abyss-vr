@@ -1,0 +1,15 @@
+{
+  "version": "iwsdk.scene.v1", "units": "meters", "components": {}, "resources": {},
+  "environment": {"toneMapping": "aces", "exposure": 1, "shadows": false},
+  "authoring": {"views": [{"id":"hero","role":"hero","projection":"perspective","position":[0,1.5,0],"target":[0,1.35,-0.7],"fov":70}]},
+  "nodes": [
+    {"id":"ocean","name":"Ocean environment","content":{"type":"asset","asset":"ocean"},"transform":{"position":[0,1.5,0]}},
+    {"id":"experience","name":"ABYSS seated anchor","transform":{"position":[0,1.35,-0.7]},"children":[
+      {"id":"sphere","name":"ABYSS sphere","content":{"type":"asset","asset":"sphere"},"components":{"RayInteractable":{},"AbyssSphere":{"interactions":0,"lastEvent":"None","pulse":0,"immersion":0,"destination":"room","phase":"room"}}},
+      {"id":"particles","content":{"type":"asset","asset":"particles"}},
+      {"id":"label","content":{"type":"asset","asset":"label"},"transform":{"position":[0,0.20,0]}},
+      {"id":"confirmation","content":{"type":"asset","asset":"confirmation"}}
+    ]},
+    {"id":"aqua-light","components":{"AmbientLight":{"color":[0.15,0.7,0.8,1],"intensity":1.2}}}
+  ]
+}

@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="icon" href="data:,"/><title>ABYSS · An ocean is waiting</title></head>
+<body>
+  <div id="scene-container"></div>
+  <header><span class="eyebrow">AN OCEAN, FROM WHERE YOU ARE</span><h1>ABYSS</h1><p>A quiet encounter, beneath the surface.</p></header>
+  <section id="instructions"><span class="eyebrow">QUEST 3 · SEATED · HANDS FIRST</span><p id="journey-status" role="status">An ocean is waiting.</p><p class="muted">Point at the sphere and pinch to enter.<br/>Pinch again to bring your room back.</p><progress id="journey-progress" value="0" max="1" aria-label="Ocean immersion"></progress><div class="actions"><button id="enter-xr" disabled>Loading XR…</button><button id="return-room" hidden>Return to room</button><button id="exit-xr" hidden>Exit XR</button></div><p id="app-status" role="status">Preparing your space…</p></section>
+  <details id="diagnostics"><summary>Developer diagnostics</summary><pre id="diagnostic-values" aria-live="off">Starting…</pre><p>Emulation is not physical headset verification.</p></details>
+  <footer>THE ARRIVAL <span>YOUR ROOM → YOUR OCEAN</span></footer>
+  <script type="module" src="/src/index.ts"></script>
+</body></html>

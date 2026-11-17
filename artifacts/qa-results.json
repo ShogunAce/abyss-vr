@@ -1,0 +1,3136 @@
+[
+  {
+    "domain": "xr",
+    "action": "status",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.status",
+        "result": {
+          "deviceName": "Meta Quest 3",
+          "isRuntimeInstalled": true,
+          "sessionActive": true,
+          "sessionOffered": false,
+          "sessionMode": "immersive-ar",
+          "enabledFeatures": [
+            "local-floor",
+            "bounded-floor",
+            "hand-tracking",
+            "anchors",
+            "plane-detection",
+            "mesh-detection",
+            "viewer",
+            "local"
+          ],
+          "visibilityState": "visible",
+          "runtimeKind": "emulated",
+          "browser": {
+            "lifecycle": {
+              "state": "running",
+              "policy": "eager",
+              "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+              "browserEpoch": 2,
+              "revision": 30,
+              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
+              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "failures": 0,
+              "cleanupConfirmed": true,
+              "attemptLimit": 3,
+              "historyTruncated": false,
+              "retryEligible": false,
+              "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+              "history": [
+                {
+                  "revision": 1,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.189Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 2,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.196Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 3,
+                  "state": "running",
+                  "at": "2026-11-17T20:58:30.081Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 12,
+                  "state": "closing",
+                  "at": "2026-11-17T21:39:14.714Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 15,
+                  "state": "failed",
+                  "at": "2026-11-17T21:39:15.199Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 16,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.202Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 17,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.205Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 18,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:13.876Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 24,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:43.885Z",
+                  "reason": "stable"
+                }
+              ],
+              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+            },
+            "status": "connected",
+            "clients": [
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93oe8-gyi8js",
+                "role": "app",
+                "tabGeneration": 3
+              },
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93ini-lszvgu",
+                "role": "editor",
+                "sceneSessionId": "scene-g0vxifekyn",
+                "tabGeneration": 1
+              }
+            ],
+            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
+            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "connected": true,
+            "commandReady": true,
+            "connectedClientCount": 2,
+            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "audioMuted": false
+          },
+          "browserConnected": true,
+          "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-input-mode",
+    "input": {
+      "mode": "hand"
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-input-mode",
+        "result": {
+          "mode": "hand",
+          "activeDevices": [
+            "hand-left",
+            "hand-right"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "find",
+    "input": {
+      "withComponents": [
+        "AbyssSphere"
+      ]
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.find",
+        "result": {
+          "entities": [
+            {
+              "entityIndex": 15,
+              "name": "ABYSS sphere",
+              "componentIds": [
+                "Transform",
+                "Visibility",
+                "LevelTag",
+                "AbyssSphere",
+                "RayInteractable",
+                "Hovered"
+              ]
+            }
+          ],
+          "total": 1,
+          "limited": false
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
+                "pulse": 0,
+                "immersion": 0,
+                "destination": "room",
+                "phase": "room"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "list-targets",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.list-targets",
+        "result": {
+          "resolver": true,
+          "targets": [
+            {
+              "name": "ABYSS sphere",
+              "position": {
+                "x": 0,
+                "y": 1.4500000476837158,
+                "z": -0.699999988079071
+              },
+              "size": {
+                "x": 0.17000000178813934,
+                "y": 0.17000000178813934,
+                "z": 0.17000000178813934
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "look-at",
+    "input": {
+      "device": "hand-right",
+      "target": {
+        "x": 0,
+        "y": 1.4500000476837158,
+        "z": -0.699999988079071
+      }
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.look-at",
+        "result": {
+          "device": "hand-right",
+          "position": {
+            "x": 0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": -0.059828486293554306,
+            "y": 0.3397354483604431,
+            "z": 0.021660899743437767,
+            "w": 0.9383662343025208
+          }
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "select",
+    "input": {
+      "device": "hand-right",
+      "duration": 0.2
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.select",
+        "result": {
+          "device": "hand-right",
+          "duration": 0.2
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 8,
+                "lastEvent": "XR hand select #8",
+                "pulse": 0,
+                "immersion": 0.27291250228881836,
+                "destination": "ocean",
+                "phase": "entering"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "look-at",
+    "input": {
+      "device": "hand-left",
+      "target": {
+        "x": 0,
+        "y": 1.4500000476837158,
+        "z": -0.699999988079071
+      }
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.look-at",
+        "result": {
+          "device": "hand-left",
+          "position": {
+            "x": -0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": -0.059828486293554306,
+            "y": -0.3397354483604431,
+            "z": -0.021660899743437767,
+            "w": 0.9383662343025208
+          }
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "select",
+    "input": {
+      "device": "hand-left",
+      "duration": 0.2
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.select",
+        "result": {
+          "device": "hand-left",
+          "duration": 0.2
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 9,
+                "lastEvent": "XR hand select #9",
+                "pulse": 0,
+                "immersion": 0.2689916789531708,
+                "destination": "room",
+                "phase": "returning"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "pause",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.pause",
+        "result": {
+          "paused": true,
+          "frame": 18465,
+          "systemCount": 14
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-right",
+      "value": 1
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-right",
+          "value": 1
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 4
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 4,
+          "totalFrame": 18701
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1.042447566986084,
+                  1.042447566986084,
+                  1.042447566986084
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 10,
+                "lastEvent": "XR hand select #10",
+                "pulse": 0.5944444537162781,
+                "immersion": 0.0069444444961845875,
+                "destination": "ocean",
+                "phase": "entering"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            },
+            {
+              "componentId": "Pressed",
+              "description": "A tag added by InputSystem while the entity is actively pressed.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "step",
+    "input": {
+      "count": 90
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.step",
+        "result": {
+          "framesAdvanced": 90,
+          "totalFrame": 19016
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 10,
+                "lastEvent": "XR hand select #10",
+                "pulse": 0,
+                "immersion": 0.1631944477558136,
+                "destination": "ocean",
+                "phase": "entering"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            },
+            {
+              "componentId": "Pressed",
+              "description": "A tag added by InputSystem while the entity is actively pressed.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-select-value",
+    "input": {
+      "device": "hand-right",
+      "value": 0
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-select-value",
+        "result": {
+          "device": "hand-right",
+          "value": 0
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "resume",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.resume",
+        "result": {
+          "paused": false,
+          "framesWhilePaused": 879
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-connected",
+    "input": {
+      "device": "hand-left",
+      "connected": false
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-connected",
+        "result": {
+          "device": "hand-left",
+          "connected": false
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-connected",
+    "input": {
+      "device": "hand-right",
+      "connected": false
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-connected",
+        "result": {
+          "device": "hand-right",
+          "connected": false
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "status",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.status",
+        "result": {
+          "deviceName": "Meta Quest 3",
+          "isRuntimeInstalled": true,
+          "sessionActive": true,
+          "sessionOffered": false,
+          "sessionMode": "immersive-ar",
+          "enabledFeatures": [
+            "local-floor",
+            "bounded-floor",
+            "hand-tracking",
+            "anchors",
+            "plane-detection",
+            "mesh-detection",
+            "viewer",
+            "local"
+          ],
+          "visibilityState": "visible",
+          "runtimeKind": "emulated",
+          "browser": {
+            "lifecycle": {
+              "state": "running",
+              "policy": "eager",
+              "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+              "browserEpoch": 2,
+              "revision": 30,
+              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
+              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "failures": 0,
+              "cleanupConfirmed": true,
+              "attemptLimit": 3,
+              "historyTruncated": false,
+              "retryEligible": false,
+              "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+              "history": [
+                {
+                  "revision": 1,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.189Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 2,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.196Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 3,
+                  "state": "running",
+                  "at": "2026-11-17T20:58:30.081Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 12,
+                  "state": "closing",
+                  "at": "2026-11-17T21:39:14.714Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 15,
+                  "state": "failed",
+                  "at": "2026-11-17T21:39:15.199Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 16,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.202Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 17,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.205Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 18,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:13.876Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 24,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:43.885Z",
+                  "reason": "stable"
+                }
+              ],
+              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+            },
+            "status": "connected",
+            "clients": [
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93oe8-gyi8js",
+                "role": "app",
+                "tabGeneration": 3
+              },
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93ini-lszvgu",
+                "role": "editor",
+                "sceneSessionId": "scene-g0vxifekyn",
+                "tabGeneration": 1
+              }
+            ],
+            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
+            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "connected": true,
+            "commandReady": true,
+            "connectedClientCount": 2,
+            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "audioMuted": false
+          },
+          "browserConnected": true,
+          "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "browser",
+    "action": "snapshot",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "browser.snapshot",
+        "result": {
+          "application": {
+            "generation": 3,
+            "id": "tab-mwl93oe8-gyi8js",
+            "outerUrl": "https://localhost:8081/",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+            "workspaceFramed": true
+          },
+          "elements": [
+            {
+              "bounds": {
+                "height": 69.47368621826172,
+                "width": 225.76754760742188,
+                "x": 62.390350341796875,
+                "y": 88.10307312011719
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "ABYSS",
+              "role": "heading",
+              "tag": "h1",
+              "text": "ABYSS",
+              "visible": true,
+              "ref": "s0f38997ee1"
+            },
+            {
+              "bounds": {
+                "height": 30.394737243652344,
+                "width": 320.0657958984375,
+                "x": 62.390350341796875,
+                "y": 446.7982482910156
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "You are here. Breathe.",
+              "role": "status",
+              "tag": "p",
+              "text": "You are here. Breathe.",
+              "visible": true,
+              "ref": "s0f38997ee2"
+            },
+            {
+              "bounds": null,
+              "disabled": false,
+              "focused": false,
+              "name": "Enter XR",
+              "role": "button",
+              "tag": "button",
+              "text": "Enter XR",
+              "visible": false,
+              "ref": "s0f38997ee3"
+            },
+            {
+              "bounds": {
+                "height": 42.828948974609375,
+                "width": 132.5219268798828,
+                "x": 62.390350341796875,
+                "y": 571.7763061523438
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "Return to room",
+              "role": "button",
+              "tag": "button",
+              "text": "Return to room",
+              "visible": true,
+              "ref": "s0f38997ee4"
+            },
+            {
+              "bounds": {
+                "height": 42.828948974609375,
+                "width": 69.47368621826172,
+                "x": 202.90570068359375,
+                "y": 571.7763061523438
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "Exit XR",
+              "role": "button",
+              "tag": "button",
+              "text": "Exit XR",
+              "visible": true,
+              "ref": "s0f38997ee5"
+            },
+            {
+              "bounds": {
+                "height": 19.188596725463867,
+                "width": 320.0657958984375,
+                "x": 62.390350341796875,
+                "y": 634.6052856445312
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "Hands unavailable. Enable tracking and set controllers down.",
+              "role": "status",
+              "tag": "p",
+              "text": "Hands unavailable. Enable tracking and set controllers down.",
+              "visible": true,
+              "ref": "s0f38997ee6"
+            },
+            {
+              "bounds": {
+                "height": 18.695175170898438,
+                "width": 261.60089111328125,
+                "x": 737.7083129882812,
+                "y": 40.69078826904297
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "Developer diagnostics",
+              "role": "button",
+              "tag": "summary",
+              "text": "Developer diagnostics",
+              "visible": true,
+              "ref": "s0f38997ee7"
+            },
+            {
+              "bounds": {
+                "height": 747.993408203125,
+                "width": 1040,
+                "x": 0,
+                "y": 0.03837719187140465
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "",
+              "role": "canvas",
+              "tag": "canvas",
+              "text": "",
+              "visible": true,
+              "ref": "s0f38997ee8"
+            },
+            {
+              "bounds": {
+                "height": 747.993408203125,
+                "width": 1040,
+                "x": 0,
+                "y": 0.03837719187140465
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "",
+              "role": "canvas",
+              "tag": "canvas",
+              "text": "",
+              "visible": true,
+              "ref": "s0f38997ee9"
+            },
+            {
+              "bounds": {
+                "height": 747.993408203125,
+                "width": 1040,
+                "x": 0,
+                "y": 0.032894738018512726
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "",
+              "role": "canvas",
+              "tag": "canvas",
+              "text": "",
+              "visible": true,
+              "ref": "s0f38997ee10"
+            }
+          ],
+          "snapshotId": "0f38997e-89df-47be-baf3-0f488ab4c406",
+          "truncated": false
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-connected",
+    "input": {
+      "device": "hand-left",
+      "connected": true
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-connected",
+        "result": {
+          "device": "hand-left",
+          "connected": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "set-connected",
+    "input": {
+      "device": "hand-right",
+      "connected": true
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.set-connected",
+        "result": {
+          "device": "hand-right",
+          "connected": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "look-at",
+    "input": {
+      "device": "hand-right",
+      "target": {
+        "x": 0,
+        "y": 1.4500000476837158,
+        "z": -0.699999988079071
+      }
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.look-at",
+        "result": {
+          "device": "hand-right",
+          "position": {
+            "x": 0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": -0.059828486293554306,
+            "y": 0.3397354483604431,
+            "z": 0.021660899743437767,
+            "w": 0.9383662343025208
+          }
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "select",
+    "input": {
+      "device": "hand-right",
+      "duration": 0.2
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.select",
+        "result": {
+          "device": "hand-right",
+          "duration": 0.2
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "query",
+    "input": {
+      "entityIndex": 15
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.query",
+        "result": {
+          "entityIndex": 15,
+          "active": true,
+          "name": "ABYSS sphere",
+          "components": [
+            {
+              "componentId": "Transform",
+              "description": "Component for 3D transformation (position, rotation, scale)",
+              "values": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "orientation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "parent": {
+                  "entityIndex": 14,
+                  "name": "ABYSS seated anchor"
+                }
+              }
+            },
+            {
+              "componentId": "Visibility",
+              "description": "Component to control if an entity object is visible",
+              "values": {
+                "isVisible": true
+              }
+            },
+            {
+              "componentId": "LevelTag",
+              "description": "Marker component for level membership",
+              "values": {
+                "id": "/scenes/main.iwsdk.scene.json"
+              }
+            },
+            {
+              "componentId": "AbyssSphere",
+              "values": {
+                "interactions": 11,
+                "lastEvent": "XR hand select #11",
+                "pulse": 0,
+                "immersion": 0.5111111402511597,
+                "destination": "room",
+                "phase": "returning"
+              }
+            },
+            {
+              "componentId": "RayInteractable",
+              "description": "Marks an entity as eligible for ray-based pointer interaction.",
+              "values": {}
+            },
+            {
+              "componentId": "Hovered",
+              "description": "A tag added by InputSystem while a pointer is hovering over the entity.",
+              "values": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "look-at",
+    "input": {
+      "device": "headset",
+      "target": {
+        "x": 0.3,
+        "y": 1.4500000476837158,
+        "z": -0.699999988079071
+      }
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.look-at",
+        "result": {
+          "device": "headset",
+          "position": {
+            "x": 0,
+            "y": 1.600000023841858,
+            "z": 0
+          },
+          "orientation": {
+            "x": -0.09509941935539246,
+            "y": -0.2001161277294159,
+            "z": -0.01951988972723484,
+            "w": 0.9749505519866943
+          }
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "list-targets",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.list-targets",
+        "result": {
+          "resolver": true,
+          "targets": [
+            {
+              "name": "ABYSS sphere",
+              "position": {
+                "x": 0,
+                "y": 1.4500000476837158,
+                "z": -0.699999988079071
+              },
+              "size": {
+                "x": 0.17000000178813934,
+                "y": 0.17000000178813934,
+                "z": 0.17000000178813934
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "look-at",
+    "input": {
+      "device": "headset",
+      "target": {
+        "x": 0,
+        "y": 1.6,
+        "z": -1
+      }
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.look-at",
+        "result": {
+          "device": "headset",
+          "position": {
+            "x": 0,
+            "y": 1.600000023841858,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "exit",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.exit",
+        "result": {
+          "success": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "status",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.status",
+        "result": {
+          "deviceName": "Meta Quest 3",
+          "isRuntimeInstalled": true,
+          "sessionActive": false,
+          "sessionOffered": true,
+          "sessionMode": null,
+          "enabledFeatures": [],
+          "visibilityState": "visible",
+          "runtimeKind": "emulated",
+          "browser": {
+            "lifecycle": {
+              "state": "running",
+              "policy": "eager",
+              "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+              "browserEpoch": 2,
+              "revision": 30,
+              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
+              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "failures": 0,
+              "cleanupConfirmed": true,
+              "attemptLimit": 3,
+              "historyTruncated": false,
+              "retryEligible": false,
+              "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+              "history": [
+                {
+                  "revision": 1,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.189Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 2,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.196Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 3,
+                  "state": "running",
+                  "at": "2026-11-17T20:58:30.081Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 12,
+                  "state": "closing",
+                  "at": "2026-11-17T21:39:14.714Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 15,
+                  "state": "failed",
+                  "at": "2026-11-17T21:39:15.199Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 16,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.202Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 17,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.205Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 18,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:13.876Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 24,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:43.885Z",
+                  "reason": "stable"
+                }
+              ],
+              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+            },
+            "status": "connected",
+            "clients": [
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93oe8-gyi8js",
+                "role": "app",
+                "tabGeneration": 3
+              },
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93ini-lszvgu",
+                "role": "editor",
+                "sceneSessionId": "scene-g0vxifekyn",
+                "tabGeneration": 1
+              }
+            ],
+            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
+            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "connected": true,
+            "commandReady": true,
+            "connectedClientCount": 2,
+            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "audioMuted": false
+          },
+          "browserConnected": true,
+          "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "enter",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.enter",
+        "result": {
+          "success": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "status",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.status",
+        "result": {
+          "deviceName": "Meta Quest 3",
+          "isRuntimeInstalled": true,
+          "sessionActive": true,
+          "sessionOffered": false,
+          "sessionMode": "immersive-ar",
+          "enabledFeatures": [
+            "local-floor",
+            "bounded-floor",
+            "hand-tracking",
+            "anchors",
+            "plane-detection",
+            "mesh-detection",
+            "viewer",
+            "local"
+          ],
+          "visibilityState": "visible",
+          "runtimeKind": "emulated",
+          "browser": {
+            "lifecycle": {
+              "state": "running",
+              "policy": "eager",
+              "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+              "browserEpoch": 2,
+              "revision": 30,
+              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
+              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "failures": 0,
+              "cleanupConfirmed": true,
+              "attemptLimit": 3,
+              "historyTruncated": false,
+              "retryEligible": false,
+              "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+              "history": [
+                {
+                  "revision": 1,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.189Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 2,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.196Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 3,
+                  "state": "running",
+                  "at": "2026-11-17T20:58:30.081Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 12,
+                  "state": "closing",
+                  "at": "2026-11-17T21:39:14.714Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 15,
+                  "state": "failed",
+                  "at": "2026-11-17T21:39:15.199Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 16,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.202Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 17,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.205Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 18,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:13.876Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 24,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:43.885Z",
+                  "reason": "stable"
+                }
+              ],
+              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+            },
+            "status": "connected",
+            "clients": [
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93oe8-gyi8js",
+                "role": "app",
+                "tabGeneration": 3
+              },
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93ini-lszvgu",
+                "role": "editor",
+                "sceneSessionId": "scene-g0vxifekyn",
+                "tabGeneration": 1
+              }
+            ],
+            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
+            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "connected": true,
+            "commandReady": true,
+            "connectedClientCount": 2,
+            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "audioMuted": false
+          },
+          "browserConnected": true,
+          "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "exit",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.exit",
+        "result": {
+          "success": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "browser",
+    "action": "logs",
+    "input": {
+      "count": 100
+    },
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "browser.logs",
+        "result": [
+          {
+            "timestamp": 1794953713874,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]"
+          },
+          {
+            "timestamp": 1794953713984,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794953715156,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794953720948,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953720999,
+            "level": "info",
+            "message": "Frame navigated: about:blank",
+            "args": [
+              "Frame navigated: about:blank"
+            ],
+            "frameUrl": "about:blank",
+            "kind": "navigation",
+            "url": "about:blank",
+            "repeatCount": 2
+          },
+          {
+            "timestamp": 1794953721095,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794953721859,
+            "level": "warn",
+            "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+            "args": [
+              "\"THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953722624,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794953723155,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953943819,
+            "level": "warn",
+            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
+            "args": [
+              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "repeatCount": 2
+          },
+          {
+            "timestamp": 1794953987658,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99csb"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb"
+          },
+          {
+            "timestamp": 1794953988385,
+            "level": "error",
+            "message": "GET https://localhost:8081/?__iwsdk_preview_reload=mwl99dbn: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/?__iwsdk_preview_reload=mwl99dbn: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "document",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dbn"
+          },
+          {
+            "timestamp": 1794953988710,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/KTX2Loader.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/KTX2Loader.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/loaders/KTX2Loader.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988710,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/.vite/deps/@drawcall_uikitml.js?v=5ae6f983: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/.vite/deps/@drawcall_uikitml.js?v=5ae6f983: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/.vite/deps/@drawcall_uikitml.js?v=5ae6f983"
+          },
+          {
+            "timestamp": 1794953988710,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/DRACOLoader.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/DRACOLoader.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/loaders/DRACOLoader.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988711,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/ecs-debug-tools.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/ecs-debug-tools.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/ecs-debug-tools.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988711,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/locomotion/geometries/beveled-cylinder.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/locomotion/geometries/beveled-cylinder.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/locomotion/geometries/beveled-cylinder.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988711,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/.vite/deps/chunk-PZ5AY32C.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/.vite/deps/chunk-PZ5AY32C.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-PZ5AY32C.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988711,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-hand.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-hand.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-hand.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988711,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/physics/utils.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/physics/utils.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/physics/utils.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988711,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/hdr-texture-loader.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/hdr-texture-loader.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/hdr-texture-loader.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988711,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/filtered-eye-gaze.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/filtered-eye-gaze.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/filtered-eye-gaze.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/grab/grab-helpers.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/grab/grab-helpers.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/grab/grab-helpers.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/grab/pointer-events-patch.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/grab/pointer-events-patch.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/grab/pointer-events-patch.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/grab/grab-warnings.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/grab/grab-warnings.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/grab/grab-warnings.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three-mesh-bvh/src/index.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three-mesh-bvh/src/index.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three-mesh-bvh/src/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/init/session-grant.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/init/session-grant.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/init/session-grant.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/grab-pointer.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/grab-pointer.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/grab-pointer.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/cursor-visual.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/cursor-visual.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/cursor-visual.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/lines/LineGeometry.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/lines/LineGeometry.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/lines/LineGeometry.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/rig/xr-origin.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/rig/xr-origin.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/rig/xr-origin.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/lines/Line2.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/lines/Line2.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/lines/Line2.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-controller.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-controller.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-controller.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/multi-pointer.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/multi-pointer.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/multi-pointer.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/touch-pointer.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/touch-pointer.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/touch-pointer.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/.vite/deps/chunk-BK2SZHZJ.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/.vite/deps/chunk-BK2SZHZJ.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-BK2SZHZJ.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/base-impl.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/base-impl.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/base-impl.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/lights/RectAreaLightUniformsLib.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/lights/RectAreaLightUniformsLib.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/lights/RectAreaLightUniformsLib.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/base-visual-adapter.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/base-visual-adapter.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/base-visual-adapter.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/init/player-camera.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/init/player-camera.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/init/player-camera.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/depth/occlusion/preprocessing-pass.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/depth/occlusion/preprocessing-pass.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/depth/occlusion/preprocessing-pass.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/.vite/deps/chunk-MYJUABEF.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/.vite/deps/chunk-MYJUABEF.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-MYJUABEF.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/controller-visual-adapter.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/controller-visual-adapter.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/controller-visual-adapter.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988712,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/scene-tools.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/scene-tools.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/scene-tools.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/locomotor/dist/types/environment-types.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/locomotor/dist/types/environment-types.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/locomotor/dist/types/environment-types.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-controller-hand.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-controller-hand.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/impl/animated-controller-hand.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/locomotor/dist/physics/math-utils.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/locomotor/dist/physics/math-utils.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/locomotor/dist/physics/math-utils.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/utils/SkeletonUtils.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/utils/SkeletonUtils.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/utils/SkeletonUtils.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/stateful-gamepad.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/stateful-gamepad.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/stateful-gamepad.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/uikitml-loader.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/uikitml-loader.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/uikitml-loader.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/utils/flex-batched-mesh.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/utils/flex-batched-mesh.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/utils/flex-batched-mesh.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/environment/gradient-environment.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/environment/gradient-environment.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/environment/gradient-environment.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/level/level-player-rig.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/level/level-player-rig.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/level/level-player-rig.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/init/browser-camera.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/init/browser-camera.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/init/browser-camera.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/ray-pointer.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/ray-pointer.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/ray-pointer.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/audio-loader.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/audio-loader.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/audio-loader.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/layers/xr-layer-transform.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/layers/xr-layer-transform.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/layers/xr-layer-transform.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/physics/physics-transport.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/physics/physics-transport.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/physics/physics-transport.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/locomotion/materials/line.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/locomotion/materials/line.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/locomotion/materials/line.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/locomotor/dist/core/locomotor.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/locomotor/dist/core/locomotor.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/locomotor/dist/core/locomotor.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/runtime/deferred-texture-uploads.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/runtime/deferred-texture-uploads.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/runtime/deferred-texture-uploads.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/texture-loader.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/texture-loader.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/asset/loaders/texture-loader.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@pmndrs/pointer-events/dist/index.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@pmndrs/pointer-events/dist/index.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@pmndrs/pointer-events/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/layers/xr-layer-init.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/layers/xr-layer-init.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/layers/xr-layer-init.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/ui-debug-tools.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/ui-debug-tools.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/mcp/ui-debug-tools.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/core/dist/environment/scene-ar-environment.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/core/dist/environment/scene-ar-environment.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/environment/scene-ar-environment.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/visibility.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/visibility.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/visibility.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988713,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/xr-input-manager.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/xr-input-manager.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/xr-input-manager.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-conecaster.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-conecaster.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-conecaster.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/src/assets.ts?t=1794953674421: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/src/assets.ts?t=1794953674421: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/src/assets.ts?t=1794953674421"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/stateful-button-axes-device.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/stateful-button-axes-device.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/stateful-button-axes-device.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/hand-visual-adapter.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/hand-visual-adapter.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/visual/adapter/hand-visual-adapter.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/GLTFLoader.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/GLTFLoader.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/loaders/GLTFLoader.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@pmndrs/handle/dist/index.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@pmndrs/handle/dist/index.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@pmndrs/handle/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/src/components.ts: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/src/components.ts: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/src/components.ts"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/input-profiles.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/input-profiles.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/gamepad/input-profiles.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "error",
+            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/environments/RoomEnvironment.js?v=31729a6f: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/node_modules/three/examples/jsm/environments/RoomEnvironment.js?v=31729a6f: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/node_modules/three/examples/jsm/environments/RoomEnvironment.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794953988714,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv"
+          },
+          {
+            "timestamp": 1794953989247,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794953994599,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794954096246,
+            "level": "warn",
+            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
+            "args": [
+              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "repeatCount": 2
+          },
+          {
+            "timestamp": 1794955525295,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv"
+          },
+          {
+            "timestamp": 1794955526206,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794955531569,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794955886348,
+            "level": "warn",
+            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
+            "args": [
+              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "repeatCount": 5
+          }
+        ]
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "status",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.status",
+        "result": {
+          "deviceName": "Meta Quest 3",
+          "isRuntimeInstalled": true,
+          "sessionActive": false,
+          "sessionOffered": true,
+          "sessionMode": null,
+          "enabledFeatures": [],
+          "visibilityState": "visible",
+          "runtimeKind": "emulated",
+          "browser": {
+            "lifecycle": {
+              "state": "running",
+              "policy": "eager",
+              "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+              "browserEpoch": 2,
+              "revision": 30,
+              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
+              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "failures": 0,
+              "cleanupConfirmed": true,
+              "attemptLimit": 3,
+              "historyTruncated": false,
+              "retryEligible": false,
+              "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+              "history": [
+                {
+                  "revision": 1,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.189Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 2,
+                  "state": "launching",
+                  "at": "2026-11-17T20:58:26.196Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 3,
+                  "state": "running",
+                  "at": "2026-11-17T20:58:30.081Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 12,
+                  "state": "closing",
+                  "at": "2026-11-17T21:39:14.714Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 15,
+                  "state": "failed",
+                  "at": "2026-11-17T21:39:15.199Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 16,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.202Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 17,
+                  "state": "launching",
+                  "at": "2026-11-17T22:15:12.205Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 18,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:13.876Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 24,
+                  "state": "running",
+                  "at": "2026-11-17T22:15:43.885Z",
+                  "reason": "stable"
+                }
+              ],
+              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+            },
+            "status": "connected",
+            "clients": [
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93oe8-gyi8js",
+                "role": "app",
+                "tabGeneration": 3
+              },
+              {
+                "commandReady": true,
+                "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
+                "browserEpoch": 2,
+                "deviceClass": "managed",
+                "pageId": "tab-mwl93ini-lszvgu",
+                "role": "editor",
+                "sceneSessionId": "scene-g0vxifekyn",
+                "tabGeneration": 1
+              }
+            ],
+            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
+            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "connected": true,
+            "commandReady": true,
+            "connectedClientCount": 2,
+            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "audioMuted": false
+          },
+          "browserConnected": true,
+          "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "ecs",
+    "action": "resume",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "ecs.resume",
+        "result": {
+          "paused": false,
+          "framesWhilePaused": 3059
+        }
+      }
+    }
+  }
+]
