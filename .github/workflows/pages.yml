@@ -23,7 +23,11 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      # A dev-tool dependency (onnxruntime-node, via IWSDK reference/Meta tooling) tries to
+      # download CUDA binaries on Linux and 404s; the app build never uses it.
       - run: npm ci
+        env:
+          npm_config_onnxruntime_node_install_cuda: skip
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
