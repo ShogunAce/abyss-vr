@@ -23,7 +23,7 @@ Your room becomes an ocean, and the ocean responds to you. ABYSS is a seated, ha
 **Depth Compass buttons:**
 - Bands: Sunlit, Open blue, Twilight, Midnight
 - Drift, Pause, Calm (reduced motion), Restart
-- Recenter, Text size, Sound, Room
+- Recenter, Text size, Sound, Guide (shows or hides NAMI and captions)
 
 Pinch NAMI's caption to dismiss it. Discoveries and comfort preferences are saved on the device.
 
