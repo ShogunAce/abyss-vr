@@ -33,6 +33,7 @@ With the managed development browser/server running:
 
 ```powershell
 npm run test:journey
+npm run test:ocean
 npm run test:smoke
 ```
 

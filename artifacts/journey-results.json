@@ -22,9 +22,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 2,
-              "revision": 30,
+              "revision": 50,
               "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "lastObservedAt": "2026-11-17T23:14:49.832Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -98,7 +98,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93oe8-gyi8js",
                 "role": "app",
-                "tabGeneration": 3
+                "tabGeneration": 7
               },
               {
                 "commandReady": true,
@@ -107,12 +107,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93ini-lszvgu",
                 "role": "editor",
-                "sceneSessionId": "scene-g0vxifekyn",
-                "tabGeneration": 1
+                "sceneSessionId": "scene-h4fhuavrnvm",
+                "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
-            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
+            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -253,8 +253,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 4,
-                "lastEvent": "XR hand select #4",
+                "interactions": 12,
+                "lastEvent": "XR hand select #12",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -348,8 +348,8 @@
         "operation": "ecs.pause",
         "result": {
           "paused": true,
-          "frame": 7651,
-          "systemCount": 14
+          "frame": 114896,
+          "systemCount": 15
         }
       }
     }
@@ -387,7 +387,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 7870
+          "totalFrame": 115118
         }
       }
     }
@@ -451,8 +451,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 5,
-                "lastEvent": "XR hand select #5",
+                "interactions": 13,
+                "lastEvent": "XR hand select #13",
                 "pulse": 0.5833333134651184,
                 "immersion": 0.008333333767950535,
                 "destination": "ocean",
@@ -493,7 +493,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 8179
+          "totalFrame": 115420
         }
       }
     }
@@ -512,7 +512,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 8392
+          "totalFrame": 115625
         }
       }
     }
@@ -531,7 +531,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 56,
-          "totalFrame": 8557
+          "totalFrame": 115788
         }
       }
     }
@@ -595,8 +595,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 5,
-                "lastEvent": "XR hand select #5",
+                "interactions": 13,
+                "lastEvent": "XR hand select #13",
                 "pulse": 0,
                 "immersion": 0.5,
                 "destination": "ocean",
@@ -633,10 +633,10 @@
         "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
         "operation": "browser.screenshot",
         "result": {
-          "generation": 3,
+          "generation": 7,
           "id": "tab-mwl93oe8-gyi8js",
           "outerUrl": "https://localhost:8081/",
-          "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+          "url": "https://localhost:8081/",
           "workspaceFramed": true,
           "downscaled": true,
           "height": 460,
@@ -680,7 +680,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 9036
+          "totalFrame": 116267
         }
       }
     }
@@ -718,7 +718,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 9255
+          "totalFrame": 116485
         }
       }
     }
@@ -782,8 +782,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 6,
-                "lastEvent": "XR hand select #6",
+                "interactions": 14,
+                "lastEvent": "XR hand select #14",
                 "pulse": 0.5833333134651184,
                 "immersion": 0.49351853132247925,
                 "destination": "room",
@@ -843,7 +843,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 9673
+          "totalFrame": 116901
         }
       }
     }
@@ -862,7 +862,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 60,
-          "totalFrame": 9841
+          "totalFrame": 117067
         }
       }
     }
@@ -926,8 +926,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 6,
-                "lastEvent": "XR hand select #6",
+                "interactions": 14,
+                "lastEvent": "XR hand select #14",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1015,7 +1015,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 10288
+          "totalFrame": 117507
         }
       }
     }
@@ -1053,7 +1053,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10591
+          "totalFrame": 117813
         }
       }
     }
@@ -1072,7 +1072,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10788
+          "totalFrame": 118009
         }
       }
     }
@@ -1091,7 +1091,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10986
+          "totalFrame": 118208
         }
       }
     }
@@ -1110,7 +1110,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 11183
+          "totalFrame": 118409
         }
       }
     }
@@ -1129,7 +1129,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 11379
+          "totalFrame": 118609
         }
       }
     }
@@ -1148,7 +1148,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 11517
+          "totalFrame": 118746
         }
       }
     }
@@ -1212,8 +1212,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 7,
-                "lastEvent": "XR hand select #7",
+                "interactions": 15,
+                "lastEvent": "XR hand select #15",
                 "pulse": 0,
                 "immersion": 1,
                 "destination": "ocean",
@@ -1294,8 +1294,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 7,
-                "lastEvent": "XR hand select #7",
+                "interactions": 15,
+                "lastEvent": "XR hand select #15",
                 "pulse": 0,
                 "immersion": 1,
                 "destination": "ocean",
@@ -1327,10 +1327,10 @@
         "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
         "operation": "browser.screenshot",
         "result": {
-          "generation": 3,
+          "generation": 7,
           "id": "tab-mwl93oe8-gyi8js",
           "outerUrl": "https://localhost:8081/",
-          "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+          "url": "https://localhost:8081/",
           "workspaceFramed": true,
           "downscaled": true,
           "height": 460,
@@ -1364,6 +1364,110 @@
                 "y": 0.17000000178813934,
                 "z": 0.17000000178813934
               }
+            },
+            {
+              "name": "Depth control Sunlit",
+              "position": {
+                "x": -0.4369949518684409,
+                "y": 1.4073280353467648,
+                "z": -0.499827556839581
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
+            },
+            {
+              "name": "Depth control Open blue",
+              "position": {
+                "x": -0.3722030864514029,
+                "y": 1.4025725600557253,
+                "z": -0.5392661146545812
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
+            },
+            {
+              "name": "Depth control Twilight",
+              "position": {
+                "x": -0.30741122103436486,
+                "y": 1.3978170847646856,
+                "z": -0.5787046724695812
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
+            },
+            {
+              "name": "Depth control Midnight",
+              "position": {
+                "x": -0.2426193587932282,
+                "y": 1.3930616097067452,
+                "z": -0.6181432283514224
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
+            },
+            {
+              "name": "Depth control Drift",
+              "position": {
+                "x": -0.43699495197471,
+                "y": 1.3497451342807898,
+                "z": -0.4928842487097602
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
+            },
+            {
+              "name": "Depth control Pause",
+              "position": {
+                "x": -0.372203086557672,
+                "y": 1.3449896589897503,
+                "z": -0.5323228065247604
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
+            },
+            {
+              "name": "Depth control Calm",
+              "position": {
+                "x": -0.30741122114063396,
+                "y": 1.3402341836987106,
+                "z": -0.5717613643397604
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
+            },
+            {
+              "name": "Depth control Reset",
+              "position": {
+                "x": -0.24261935889949732,
+                "y": 1.3354787086407702,
+                "z": -0.6111999202216016
+              },
+              "size": {
+                "x": 0.059676724597050645,
+                "y": 0.05203486410941016,
+                "z": 0.042071178087834005
+              }
             }
           ]
         }
@@ -1380,7 +1484,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 4470
+          "framesWhilePaused": 4437
         }
       }
     }
@@ -1458,8 +1562,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 7,
-                "lastEvent": "XR hand select #7",
+                "interactions": 15,
+                "lastEvent": "XR hand select #15",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1535,8 +1639,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 7,
-                "lastEvent": "XR hand select #7",
+                "interactions": 15,
+                "lastEvent": "XR hand select #15",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1626,8 +1730,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 7,
-                "lastEvent": "XR hand select #7",
+                "interactions": 15,
+                "lastEvent": "XR hand select #15",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1681,9 +1785,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 2,
-              "revision": 30,
+              "revision": 50,
               "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "lastObservedAt": "2026-11-17T23:14:49.832Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -1757,7 +1861,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93oe8-gyi8js",
                 "role": "app",
-                "tabGeneration": 3
+                "tabGeneration": 7
               },
               {
                 "commandReady": true,
@@ -1766,12 +1870,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93ini-lszvgu",
                 "role": "editor",
-                "sceneSessionId": "scene-g0vxifekyn",
-                "tabGeneration": 1
+                "sceneSessionId": "scene-h4fhuavrnvm",
+                "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
-            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
+            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -1832,7 +1936,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 5434
+          "framesWhilePaused": 5390
         }
       }
     }

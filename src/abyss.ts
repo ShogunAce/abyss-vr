@@ -178,7 +178,6 @@ export class AbyssSystem extends createSystem({
     this.ocean.visible = reveal > 0;
     for (const mat of this.oceanMaterials) {
       mat.uniforms.uReveal.value = reveal;
-      mat.uniforms.uTime.value = this.elapsed;
       mat.depthWrite = reveal === 1 && mat.userData.solid === true;
     }
     for (const entity of this.queries.spheres.entities) {

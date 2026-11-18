@@ -1,4 +1,4 @@
-import { BackSide, BufferGeometry, DoubleSide, Float32BufferAttribute, Group, IcosahedronGeometry, InstancedMesh, Mesh, Object3D, PlaneGeometry, Points, ShaderMaterial, SphereGeometry } from '@iwsdk/core';
+import { BackSide, Color, BufferGeometry, DoubleSide, Float32BufferAttribute, Group, IcosahedronGeometry, InstancedMesh, Mesh, Object3D, PlaneGeometry, Points, ShaderMaterial, SphereGeometry, Vector3 } from '@iwsdk/core';
 
 // A stationary 110 m underwater volume. Origin is the initial viewer eye position.
 // No surfaces within the seated interaction envelope; seabed is 3.4 m below it.
@@ -21,29 +21,40 @@ const vertex = `
 const waterColor = `
   vec3 water(vec3 direction) {
     float elevation = direction.y * 0.5 + 0.5;
-    vec3 deep = vec3(0.005, 0.038, 0.075);
-    vec3 blue = vec3(0.012, 0.18, 0.23);
-    vec3 shallow = vec3(0.09, 0.46, 0.49);
-    return mix(mix(deep, blue, smoothstep(0.05, 0.62, elevation)), shallow, pow(max(direction.y, 0.0), 2.5));
+    return mix(mix(uDeep, uBlue, smoothstep(0.05, 0.62, elevation)), uShallow, pow(max(direction.y, 0.0), 2.5));
   }`;
+// Depth-driven environment uniforms. Defaults are the sunlit band; OceanSystem
+// writes runtime copies from the Ocean Director every frame.
+export function environmentUniforms() {
+  return {
+    uShallow: { value: new Color(0.09, 0.46, 0.49) },
+    uBlue: { value: new Color(0.012, 0.18, 0.23) },
+    uDeep: { value: new Color(0.005, 0.038, 0.075) },
+    uLight: { value: 1 }, uFog: { value: 0.095 }, uGlow: { value: 0 },
+  };
+}
+const environmentGlsl = 'uniform vec3 uShallow; uniform vec3 uBlue; uniform vec3 uDeep; uniform float uLight; uniform float uFog; uniform float uGlow;';
 function material(fragment: string, extras: Record<string, { value: unknown }> = {}) {
   return new ShaderMaterial({
-    uniforms: { uTime: { value: 0 }, uReveal: { value: 0 }, ...extras },
+    uniforms: { uTime: { value: 0 }, uReveal: { value: 0 }, ...environmentUniforms(), ...extras },
     vertexShader: vertex,
-    fragmentShader: `uniform float uTime; uniform float uReveal; varying vec3 vPosition; varying vec3 vWorld; varying vec3 vNormal; ${waterColor} ${fragment}`,
+    fragmentShader: `uniform float uTime; uniform float uReveal; ${environmentGlsl} varying vec3 vPosition; varying vec3 vWorld; varying vec3 vNormal; ${waterColor} ${fragment}`,
     transparent: true, depthWrite: false,
   });
 }
 
 export function createOcean() {
   const root = new Group(); root.name = 'Ocean environment';
+  // Scenery that shifts during bounded hand-directed travel. The enclosing water
+  // volume stays centred on the viewer so its horizon never comes closer.
+  const frame = new Group(); frame.name = 'Ocean travel frame'; root.add(frame);
   const skyMaterial = material(`
     void main() {
       vec3 d = normalize(vPosition);
       vec3 col = water(d);
       vec3 sun = normalize(vec3(-0.3, 1.0, -0.55));
       float glow = pow(max(dot(d, sun), 0.0), 32.0);
-      col += vec3(0.20, 0.38, 0.32) * glow * 0.42;
+      col += vec3(0.20, 0.38, 0.32) * glow * 0.42 * uLight;
       gl_FragColor = vec4(col, uReveal);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
@@ -69,9 +80,9 @@ export function createOcean() {
       float ripple = sin(vPosition.x * 5.0 + sin(vPosition.z * 1.2) * 1.1) * 0.018;
       float caustic = pow(0.5 + 0.5 * sin(vPosition.x * 1.6 + sin(vPosition.z * 1.9 + uTime * 0.18) * 1.8), 12.0);
       caustic *= pow(0.5 + 0.5 * sin(vPosition.z * 1.4 - uTime * 0.12), 2.0);
-      vec3 sand = vec3(0.16, 0.31, 0.29) + ripple + vec3(0.14, 0.30, 0.23) * caustic * 0.42;
+      vec3 sand = (vec3(0.16, 0.31, 0.29) + ripple) * (0.12 + 0.88 * uLight) + vec3(0.14, 0.30, 0.23) * caustic * 0.42 * uLight * uLight;
       sand *= 0.7 + max(vNormal.y, 0.0) * 0.3;
-      vec3 col = mix(sand, water(d), 1.0 - exp(-distanceToEye * 0.095));
+      vec3 col = mix(sand, water(d), 1.0 - exp(-distanceToEye * uFog));
       gl_FragColor = vec4(col, uReveal);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
@@ -79,15 +90,15 @@ export function createOcean() {
   const seabed = new Mesh(floorGeometry, groundMaterial);
   groundMaterial.userData.solid = true;
   seabed.name = 'Rippled sand'; seabed.position.y = -3.4; seabed.renderOrder = -90;
-  root.add(seabed);
+  frame.add(seabed);
 
   const rockMaterial = material(`
     void main() {
       float lighting = 0.26 + max(dot(normalize(vNormal), normalize(vec3(-0.3, 1.0, -0.2))), 0.0) * 0.7;
       float strata = sin(vWorld.y * 7.0 + sin(vWorld.x * 3.0)) * 0.018;
-      vec3 stone = (vec3(0.075, 0.18, 0.19) + strata) * lighting;
+      vec3 stone = (vec3(0.075, 0.18, 0.19) + strata) * lighting * (0.1 + 0.9 * uLight);
       float distanceToEye = length(vWorld - cameraPosition);
-      vec3 col = mix(stone, water(normalize(vWorld - cameraPosition)), 1.0 - exp(-distanceToEye * 0.075));
+      vec3 col = mix(stone, water(normalize(vWorld - cameraPosition)), 1.0 - exp(-distanceToEye * uFog * 0.79));
       gl_FragColor = vec4(col, uReveal);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
@@ -107,7 +118,7 @@ export function createOcean() {
     dummy.rotation.set(random() * 0.3, random() * Math.PI, random() * 0.15);
     dummy.updateMatrix(); reef.setMatrixAt(i, dummy.matrix);
   }
-  root.add(reef);
+  frame.add(reef);
 
   const surfaceMaterial = material(`
     void main() {
@@ -116,7 +127,7 @@ export function createOcean() {
       float lines = pow(abs(waves), 9.0);
       float centre = exp(-length(p) * 0.055);
       float edge = 1.0 - smoothstep(14.0, 34.0, length(p));
-      vec3 col = water(normalize(vWorld - cameraPosition)) + vec3(0.10, 0.23, 0.19) * lines * centre;
+      vec3 col = water(normalize(vWorld - cameraPosition)) + vec3(0.10, 0.23, 0.19) * lines * centre * uLight;
       gl_FragColor = vec4(col, uReveal * edge * 0.55);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
@@ -124,7 +135,7 @@ export function createOcean() {
   surfaceMaterial.side = DoubleSide;
   const surface = new Mesh(new PlaneGeometry(80, 80), surfaceMaterial);
   surface.name = 'Overhead water surface'; surface.rotation.x = Math.PI / 2; surface.position.y = 5.8;
-  surface.renderOrder = -70; root.add(surface);
+  surface.renderOrder = -70; frame.add(surface);
 
   // Broad, soft light shafts: low contrast, slow movement, no strobing.
   const shaftMaterial = material(`
@@ -132,7 +143,7 @@ export function createOcean() {
       float edge = pow(max(0.0, 1.0 - abs(vPosition.x)), 3.0);
       float end = smoothstep(-1.0, -0.7, vPosition.y) * (1.0 - smoothstep(0.5, 1.0, vPosition.y));
       float breathe = 0.9 + 0.1 * sin(uTime * 0.15 + vWorld.x);
-      gl_FragColor = vec4(0.28, 0.73, 0.69, edge * end * breathe * uReveal * 0.045);
+      gl_FragColor = vec4(0.28, 0.73, 0.69, edge * end * breathe * uReveal * 0.045 * uLight);
     }`);
   shaftMaterial.side = DoubleSide;
   for (let i = 0; i < 7; i++) {
@@ -141,7 +152,7 @@ export function createOcean() {
     beam.position.set(-8 + i * 2.6, 1.7, -7 - i * 1.2);
     beam.scale.set(0.7 + i * 0.16, 5, 1);
     beam.rotation.z = -0.22; beam.rotation.y = (i - 3) * 0.12;
-    beam.renderOrder = -60; root.add(beam);
+    beam.renderOrder = -60; frame.add(beam);
   }
 
   const motePositions = new Float32Array(360 * 3);
@@ -154,15 +165,25 @@ export function createOcean() {
   const moteGeometry = new BufferGeometry();
   moteGeometry.setAttribute('position', new Float32BufferAttribute(motePositions, 3));
   const moteMaterial = new ShaderMaterial({
-    uniforms: { uTime: { value: 0 }, uReveal: { value: 0 } }, transparent: true, depthWrite: false,
-    vertexShader: `uniform float uTime; varying float vAlpha; void main() {
-      vec3 p = position; p.x += sin(uTime * 0.11 + p.z) * 0.08; p.y += sin(uTime * 0.15 + p.x) * 0.1;
+    uniforms: { uTime: { value: 0 }, uReveal: { value: 0 }, uDrift: { value: new Vector3() }, uTravel: { value: new Vector3() }, ...environmentUniforms() }, transparent: true, depthWrite: false,
+    vertexShader: `uniform float uTime; uniform vec3 uDrift; uniform vec3 uTravel; varying float vAlpha; void main() {
+      // Passive drift and travel wrap inside a 32 m cell centred on the viewer: endless suspension, fixed count.
+      vec3 p = position + uDrift - uTravel;
+      p.xz = mod(p.xz + 16.0, 32.0) - 16.0;
+      p.y = mod(p.y + 2.8, 8.0) - 2.8;
+      p.x += sin(uTime * 0.11 + p.z) * 0.08; p.y += sin(uTime * 0.15 + p.x) * 0.1;
       vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv;
       gl_PointSize = clamp(10.0 / max(1.0, -mv.z), 1.0, 4.0); vAlpha = 0.25 + 0.3 * sin(position.x * 7.0) * sin(position.x * 7.0);
     }`,
-    fragmentShader: `uniform float uReveal; varying float vAlpha; void main() {
+    fragmentShader: `uniform float uReveal; ${environmentGlsl} varying float vAlpha; void main() {
       float soft = 1.0 - smoothstep(0.05, 0.5, length(gl_PointCoord - 0.5));
-      gl_FragColor = vec4(0.46, 0.87, 0.82, soft * vAlpha * uReveal);
+      // Sunlit motes scatter daylight; deep motes become sparse cyan/violet bioluminescence.
+      vec3 lit = vec3(0.46, 0.87, 0.82) * (0.25 + 0.75 * uLight);
+      vec3 glow = mix(vec3(0.47, 0.85, 0.86), vec3(0.62, 0.51, 0.83), step(0.5, fract(vAlpha * 13.0)));
+      float sparse = step(0.62, fract(vAlpha * 7.3));
+      vec3 col = mix(lit, glow, uGlow * sparse);
+      float alpha = soft * vAlpha * uReveal * mix(1.0, 0.4 + 1.6 * sparse, uGlow);
+      gl_FragColor = vec4(col, alpha);
     }`,
   });
   const motes = new Points(moteGeometry, moteMaterial); motes.name = 'Ocean suspension'; motes.renderOrder = -50; root.add(motes);

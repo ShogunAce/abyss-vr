@@ -3,7 +3,7 @@
   "environment": {"toneMapping": "aces", "exposure": 1, "shadows": false},
   "authoring": {"views": [{"id":"hero","role":"hero","projection":"perspective","position":[0,1.5,0],"target":[0,1.35,-0.7],"fov":70}]},
   "nodes": [
-    {"id":"ocean","name":"Ocean environment","content":{"type":"asset","asset":"ocean"},"transform":{"position":[0,1.5,0]}},
+    {"id":"ocean","name":"Ocean environment","content":{"type":"asset","asset":"ocean"},"transform":{"position":[0,1.5,0]},"components":{"OceanStatus":{"depth":0.15,"targetDepth":0.15,"band":"sunlit","depthLocked":false,"paused":false,"reducedMotion":false,"ambientLight":1,"interactionMode":"world","travelX":0,"travelZ":0,"oceanInstances":1,"panelVisible":false,"lastEvent":"None","command":""}}},
     {"id":"experience","name":"ABYSS seated anchor","transform":{"position":[0,1.35,-0.7]},"children":[
       {"id":"sphere","name":"ABYSS sphere","content":{"type":"asset","asset":"sphere"},"components":{"RayInteractable":{},"AbyssSphere":{"interactions":0,"lastEvent":"None","pulse":0,"immersion":0,"destination":"room","phase":"room"}}},
       {"id":"particles","content":{"type":"asset","asset":"particles"}},

@@ -41,3 +41,11 @@ New files: `src/transition.ts`, `src/scene-assets/ocean.scene-asset.ts`, `tests/
 Updated files: `src/abyss.ts`, `src/abyss-component.ts`, `src/assets.ts`, `public/scenes/main.iwsdk.scene.json`, `index.html`, `src/style.css`, `package.json`, `README.md`, and the existing documentation files. The IWSDK/Vite configuration and installed dependency versions are unchanged.
 
 New evidence: `artifacts/journey-results.json`, `artifacts/journey-halfway.png`, `artifacts/journey-ocean.png`, and final ocean capture. The earlier Phase 0 artifacts remain historical evidence.
+
+## Phase 1 — persistent ocean and Ocean Director
+
+New files: `src/ocean/ocean-director.ts` (pure seeded simulation), `src/ocean/ocean-system.ts` (ECS bridge, Depth Compass, travel, diagnostics), `src/ocean/ocean-components.ts` (`OceanStatus`, `OceanControl`), `tests/ocean-director.test.mjs`, `scripts/ocean-smoke.mjs` (`npm run test:ocean`).
+
+Updated: `src/scene-assets/ocean.scene-asset.ts` (depth uniforms, travel frame, drifting motes), `src/abyss.ts` (no longer writes ocean time), `src/components.ts`, `src/index.ts`, `public/scenes/main.iwsdk.scene.json` (authored `OceanStatus`), `index.html`/`src/style.css` (ocean diagnostics and debug buttons), `package.json`.
+
+Evidence: `artifacts/ocean-results.json`, `artifacts/phase1-depth-bands.png` (sunlit / open blue / midnight in emulated XR).

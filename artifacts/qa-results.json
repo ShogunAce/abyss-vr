@@ -10,19 +10,10 @@
         "result": {
           "deviceName": "Meta Quest 3",
           "isRuntimeInstalled": true,
-          "sessionActive": true,
-          "sessionOffered": false,
-          "sessionMode": "immersive-ar",
-          "enabledFeatures": [
-            "local-floor",
-            "bounded-floor",
-            "hand-tracking",
-            "anchors",
-            "plane-detection",
-            "mesh-detection",
-            "viewer",
-            "local"
-          ],
+          "sessionActive": false,
+          "sessionOffered": true,
+          "sessionMode": null,
+          "enabledFeatures": [],
           "visibilityState": "visible",
           "runtimeKind": "emulated",
           "browser": {
@@ -31,9 +22,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 2,
-              "revision": 30,
+              "revision": 50,
               "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "lastObservedAt": "2026-11-17T23:14:49.832Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -107,7 +98,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93oe8-gyi8js",
                 "role": "app",
-                "tabGeneration": 3
+                "tabGeneration": 7
               },
               {
                 "commandReady": true,
@@ -116,12 +107,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93ini-lszvgu",
                 "role": "editor",
-                "sceneSessionId": "scene-g0vxifekyn",
-                "tabGeneration": 1
+                "sceneSessionId": "scene-h4fhuavrnvm",
+                "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
-            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
+            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -130,6 +121,20 @@
           },
           "browserConnected": true,
           "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "enter",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.enter",
+        "result": {
+          "success": true
         }
       }
     }
@@ -248,8 +253,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 7,
-                "lastEvent": "XR hand select #7",
+                "interactions": 8,
+                "lastEvent": "XR hand select #8",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -411,10 +416,10 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 8,
-                "lastEvent": "XR hand select #8",
+                "interactions": 9,
+                "lastEvent": "XR hand select #9",
                 "pulse": 0,
-                "immersion": 0.27291250228881836,
+                "immersion": 0.2687624990940094,
                 "destination": "ocean",
                 "phase": "entering"
               }
@@ -545,10 +550,10 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 9,
-                "lastEvent": "XR hand select #9",
+                "interactions": 10,
+                "lastEvent": "XR hand select #10",
                 "pulse": 0,
-                "immersion": 0.2689916789531708,
+                "immersion": 0.25709304213523865,
                 "destination": "room",
                 "phase": "returning"
               }
@@ -578,8 +583,8 @@
         "operation": "ecs.pause",
         "result": {
           "paused": true,
-          "frame": 18465,
-          "systemCount": 14
+          "frame": 110731,
+          "systemCount": 15
         }
       }
     }
@@ -616,7 +621,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 18701
+          "totalFrame": 110954
         }
       }
     }
@@ -680,8 +685,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 10,
-                "lastEvent": "XR hand select #10",
+                "interactions": 11,
+                "lastEvent": "XR hand select #11",
                 "pulse": 0.5944444537162781,
                 "immersion": 0.0069444444961845875,
                 "destination": "ocean",
@@ -721,7 +726,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 19016
+          "totalFrame": 111266
         }
       }
     }
@@ -785,8 +790,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 10,
-                "lastEvent": "XR hand select #10",
+                "interactions": 11,
+                "lastEvent": "XR hand select #11",
                 "pulse": 0,
                 "immersion": 0.1631944477558136,
                 "destination": "ocean",
@@ -842,7 +847,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 879
+          "framesWhilePaused": 868
         }
       }
     }
@@ -917,9 +922,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 2,
-              "revision": 30,
+              "revision": 50,
               "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "lastObservedAt": "2026-11-17T23:14:49.832Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -993,7 +998,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93oe8-gyi8js",
                 "role": "app",
-                "tabGeneration": 3
+                "tabGeneration": 7
               },
               {
                 "commandReady": true,
@@ -1002,12 +1007,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93ini-lszvgu",
                 "role": "editor",
-                "sceneSessionId": "scene-g0vxifekyn",
-                "tabGeneration": 1
+                "sceneSessionId": "scene-h4fhuavrnvm",
+                "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
-            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
+            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -1030,10 +1035,10 @@
         "operation": "browser.snapshot",
         "result": {
           "application": {
-            "generation": 3,
+            "generation": 7,
             "id": "tab-mwl93oe8-gyi8js",
             "outerUrl": "https://localhost:8081/",
-            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dcv",
+            "url": "https://localhost:8081/",
             "workspaceFramed": true
           },
           "elements": [
@@ -1051,7 +1056,7 @@
               "tag": "h1",
               "text": "ABYSS",
               "visible": true,
-              "ref": "s0f38997ee1"
+              "ref": "s4e316676e1"
             },
             {
               "bounds": {
@@ -1067,7 +1072,7 @@
               "tag": "p",
               "text": "You are here. Breathe.",
               "visible": true,
-              "ref": "s0f38997ee2"
+              "ref": "s4e316676e2"
             },
             {
               "bounds": null,
@@ -1078,7 +1083,7 @@
               "tag": "button",
               "text": "Enter XR",
               "visible": false,
-              "ref": "s0f38997ee3"
+              "ref": "s4e316676e3"
             },
             {
               "bounds": {
@@ -1094,7 +1099,7 @@
               "tag": "button",
               "text": "Return to room",
               "visible": true,
-              "ref": "s0f38997ee4"
+              "ref": "s4e316676e4"
             },
             {
               "bounds": {
@@ -1110,7 +1115,7 @@
               "tag": "button",
               "text": "Exit XR",
               "visible": true,
-              "ref": "s0f38997ee5"
+              "ref": "s4e316676e5"
             },
             {
               "bounds": {
@@ -1126,7 +1131,7 @@
               "tag": "p",
               "text": "Hands unavailable. Enable tracking and set controllers down.",
               "visible": true,
-              "ref": "s0f38997ee6"
+              "ref": "s4e316676e6"
             },
             {
               "bounds": {
@@ -1142,7 +1147,119 @@
               "tag": "summary",
               "text": "Developer diagnostics",
               "visible": true,
-              "ref": "s0f38997ee7"
+              "ref": "s4e316676e7"
+            },
+            {
+              "bounds": {
+                "height": 28.39912223815918,
+                "width": 39.385963439941406,
+                "x": 737.7083129882812,
+                "y": 416.8969421386719
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "0.00",
+              "role": "button",
+              "tag": "button",
+              "text": "0.00",
+              "visible": true,
+              "ref": "s4e316676e8"
+            },
+            {
+              "bounds": {
+                "height": 28.39912223815918,
+                "width": 39.385963439941406,
+                "x": 781.0855102539062,
+                "y": 416.8969421386719
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "0.35",
+              "role": "button",
+              "tag": "button",
+              "text": "0.35",
+              "visible": true,
+              "ref": "s4e316676e9"
+            },
+            {
+              "bounds": {
+                "height": 28.39912223815918,
+                "width": 39.385963439941406,
+                "x": 824.4627075195312,
+                "y": 416.8969421386719
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "0.65",
+              "role": "button",
+              "tag": "button",
+              "text": "0.65",
+              "visible": true,
+              "ref": "s4e316676e10"
+            },
+            {
+              "bounds": {
+                "height": 28.39912223815918,
+                "width": 39.385963439941406,
+                "x": 867.8399047851562,
+                "y": 416.8969421386719
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "1.00",
+              "role": "button",
+              "tag": "button",
+              "text": "1.00",
+              "visible": true,
+              "ref": "s4e316676e11"
+            },
+            {
+              "bounds": {
+                "height": 28.39912223815918,
+                "width": 39.385963439941406,
+                "x": 911.2171020507812,
+                "y": 416.8969421386719
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "Auto",
+              "role": "button",
+              "tag": "button",
+              "text": "Auto",
+              "visible": true,
+              "ref": "s4e316676e12"
+            },
+            {
+              "bounds": {
+                "height": 28.39912223815918,
+                "width": 44.890350341796875,
+                "x": 737.7083129882812,
+                "y": 449.28729248046875
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "Pause",
+              "role": "button",
+              "tag": "button",
+              "text": "Pause",
+              "visible": true,
+              "ref": "s4e316676e13"
+            },
+            {
+              "bounds": {
+                "height": 28.39912223815918,
+                "width": 44.890350341796875,
+                "x": 786.5899047851562,
+                "y": 449.28729248046875
+              },
+              "disabled": false,
+              "focused": false,
+              "name": "Reset",
+              "role": "button",
+              "tag": "button",
+              "text": "Reset",
+              "visible": true,
+              "ref": "s4e316676e14"
             },
             {
               "bounds": {
@@ -1158,7 +1275,7 @@
               "tag": "canvas",
               "text": "",
               "visible": true,
-              "ref": "s0f38997ee8"
+              "ref": "s4e316676e15"
             },
             {
               "bounds": {
@@ -1174,7 +1291,7 @@
               "tag": "canvas",
               "text": "",
               "visible": true,
-              "ref": "s0f38997ee9"
+              "ref": "s4e316676e16"
             },
             {
               "bounds": {
@@ -1190,10 +1307,10 @@
               "tag": "canvas",
               "text": "",
               "visible": true,
-              "ref": "s0f38997ee10"
+              "ref": "s4e316676e17"
             }
           ],
-          "snapshotId": "0f38997e-89df-47be-baf3-0f488ab4c406",
+          "snapshotId": "4e316676-561b-4d16-b043-cab46da5351f",
           "truncated": false
         }
       }
@@ -1348,10 +1465,10 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 11,
-                "lastEvent": "XR hand select #11",
+                "interactions": 12,
+                "lastEvent": "XR hand select #12",
                 "pulse": 0,
-                "immersion": 0.5111111402511597,
+                "immersion": 0.5260444283485413,
                 "destination": "room",
                 "phase": "returning"
               }
@@ -1503,9 +1620,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 2,
-              "revision": 30,
+              "revision": 50,
               "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "lastObservedAt": "2026-11-17T23:14:49.832Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -1579,7 +1696,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93oe8-gyi8js",
                 "role": "app",
-                "tabGeneration": 3
+                "tabGeneration": 7
               },
               {
                 "commandReady": true,
@@ -1588,12 +1705,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93ini-lszvgu",
                 "role": "editor",
-                "sceneSessionId": "scene-g0vxifekyn",
-                "tabGeneration": 1
+                "sceneSessionId": "scene-h4fhuavrnvm",
+                "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
-            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
+            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -1652,9 +1769,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 2,
-              "revision": 30,
+              "revision": 50,
               "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "lastObservedAt": "2026-11-17T23:14:49.832Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -1728,7 +1845,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93oe8-gyi8js",
                 "role": "app",
-                "tabGeneration": 3
+                "tabGeneration": 7
               },
               {
                 "commandReady": true,
@@ -1737,12 +1854,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93ini-lszvgu",
                 "role": "editor",
-                "sceneSessionId": "scene-g0vxifekyn",
-                "tabGeneration": 1
+                "sceneSessionId": "scene-h4fhuavrnvm",
+                "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
-            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
+            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -1781,199 +1898,6 @@
         "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
         "operation": "browser.logs",
         "result": [
-          {
-            "timestamp": 1794953713874,
-            "level": "info",
-            "message": "Frame navigated: https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]",
-            "args": [
-              "Frame navigated: https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]"
-            ],
-            "frameUrl": "https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]",
-            "kind": "navigation",
-            "url": "https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]"
-          },
-          {
-            "timestamp": 1794953713984,
-            "level": "info",
-            "message": "Frame navigated: https://localhost:8081/",
-            "args": [
-              "Frame navigated: https://localhost:8081/"
-            ],
-            "frameUrl": "https://localhost:8081/",
-            "kind": "navigation",
-            "url": "https://localhost:8081/"
-          },
-          {
-            "timestamp": 1794953715156,
-            "level": "log",
-            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
-            "args": [
-              "\"[IWSDK Dev] Configuration:\"",
-              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
-            ],
-            "columnNumber": 1084215,
-            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
-            "kind": "console",
-            "lineNumber": 983,
-            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
-          },
-          {
-            "timestamp": 1794953720948,
-            "level": "log",
-            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
-            "args": [
-              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
-            ],
-            "columnNumber": 8,
-            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
-            "kind": "console",
-            "lineNumber": 122,
-            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
-          },
-          {
-            "timestamp": 1794953720999,
-            "level": "info",
-            "message": "Frame navigated: about:blank",
-            "args": [
-              "Frame navigated: about:blank"
-            ],
-            "frameUrl": "about:blank",
-            "kind": "navigation",
-            "url": "about:blank",
-            "repeatCount": 2
-          },
-          {
-            "timestamp": 1794953721095,
-            "level": "info",
-            "message": "Frame navigated: https://localhost:8081/",
-            "args": [
-              "Frame navigated: https://localhost:8081/"
-            ],
-            "frameUrl": "https://localhost:8081/",
-            "kind": "navigation",
-            "url": "https://localhost:8081/"
-          },
-          {
-            "timestamp": 1794953721859,
-            "level": "warn",
-            "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
-            "args": [
-              "\"THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\""
-            ],
-            "columnNumber": 14,
-            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
-            "kind": "console",
-            "lineNumber": 296,
-            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f"
-          },
-          {
-            "timestamp": 1794953722624,
-            "level": "log",
-            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
-            "args": [
-              "\"[IWSDK Dev] Configuration:\"",
-              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
-            ],
-            "columnNumber": 1084215,
-            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
-            "kind": "console",
-            "lineNumber": 983,
-            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
-          },
-          {
-            "timestamp": 1794953723155,
-            "level": "log",
-            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
-            "args": [
-              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
-            ],
-            "columnNumber": 8,
-            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
-            "kind": "console",
-            "lineNumber": 122,
-            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
-          },
-          {
-            "timestamp": 1794953943819,
-            "level": "warn",
-            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
-            "args": [
-              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
-            ],
-            "columnNumber": 14,
-            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
-            "kind": "console",
-            "lineNumber": 296,
-            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
-            "repeatCount": 2
-          },
-          {
-            "timestamp": 1794953987658,
-            "level": "info",
-            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
-            "args": [
-              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwl99csb"
-            ],
-            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
-            "kind": "navigation",
-            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb"
-          },
-          {
-            "timestamp": 1794953988385,
-            "level": "error",
-            "message": "GET https://localhost:8081/?__iwsdk_preview_reload=mwl99dbn: net::ERR_ABORTED",
-            "args": [
-              "GET https://localhost:8081/?__iwsdk_preview_reload=mwl99dbn: net::ERR_ABORTED"
-            ],
-            "failure": "net::ERR_ABORTED",
-            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
-            "kind": "requestfailed",
-            "method": "GET",
-            "resourceType": "document",
-            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwl99dbn"
-          },
-          {
-            "timestamp": 1794953988710,
-            "level": "error",
-            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/KTX2Loader.js?v=31729a6f: net::ERR_ABORTED",
-            "args": [
-              "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/KTX2Loader.js?v=31729a6f: net::ERR_ABORTED"
-            ],
-            "failure": "net::ERR_ABORTED",
-            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
-            "kind": "requestfailed",
-            "method": "GET",
-            "resourceType": "script",
-            "url": "https://localhost:8081/node_modules/three/examples/jsm/loaders/KTX2Loader.js?v=31729a6f"
-          },
-          {
-            "timestamp": 1794953988710,
-            "level": "error",
-            "message": "GET https://localhost:8081/node_modules/.vite/deps/@drawcall_uikitml.js?v=5ae6f983: net::ERR_ABORTED",
-            "args": [
-              "GET https://localhost:8081/node_modules/.vite/deps/@drawcall_uikitml.js?v=5ae6f983: net::ERR_ABORTED"
-            ],
-            "failure": "net::ERR_ABORTED",
-            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
-            "kind": "requestfailed",
-            "method": "GET",
-            "resourceType": "script",
-            "url": "https://localhost:8081/node_modules/.vite/deps/@drawcall_uikitml.js?v=5ae6f983"
-          },
-          {
-            "timestamp": 1794953988710,
-            "level": "error",
-            "message": "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/DRACOLoader.js?v=31729a6f: net::ERR_ABORTED",
-            "args": [
-              "GET https://localhost:8081/node_modules/three/examples/jsm/loaders/DRACOLoader.js?v=31729a6f: net::ERR_ABORTED"
-            ],
-            "failure": "net::ERR_ABORTED",
-            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwl99csb",
-            "kind": "requestfailed",
-            "method": "GET",
-            "resourceType": "script",
-            "url": "https://localhost:8081/node_modules/three/examples/jsm/loaders/DRACOLoader.js?v=31729a6f"
-          },
           {
             "timestamp": 1794953988711,
             "level": "error",
@@ -2975,7 +2899,7 @@
             "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
           },
           {
-            "timestamp": 1794955886348,
+            "timestamp": 1794955948006,
             "level": "warn",
             "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
             "args": [
@@ -2986,7 +2910,355 @@
             "kind": "console",
             "lineNumber": 296,
             "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
-            "repeatCount": 5
+            "repeatCount": 6
+          },
+          {
+            "timestamp": 1794957124632,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf"
+          },
+          {
+            "timestamp": 1794957125519,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794957131165,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794957178897,
+            "level": "error",
+            "message": "GET https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "document",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwlb4laf"
+          },
+          {
+            "timestamp": 1794957179579,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794957180398,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794957186097,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794957186165,
+            "level": "info",
+            "message": "Frame navigated: about:blank",
+            "args": [
+              "Frame navigated: about:blank"
+            ],
+            "frameUrl": "about:blank",
+            "kind": "navigation",
+            "url": "about:blank",
+            "repeatCount": 2
+          },
+          {
+            "timestamp": 1794957186353,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794957186531,
+            "level": "warn",
+            "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+            "args": [
+              "\"THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794957188001,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794957188437,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794957255298,
+            "level": "error",
+            "message": "GET https://localhost:8081/?__iwsdk_preview_reload=mwlb7e5g: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/?__iwsdk_preview_reload=mwlb7e5g: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "document",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwlb7e5g"
+          },
+          {
+            "timestamp": 1794957255358,
+            "level": "error",
+            "message": "GET https://localhost:8081/: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "document",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794957255381,
+            "level": "error",
+            "message": "GET https://localhost:8081/src/style.css?t=1794957255276: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/src/style.css?t=1794957255276: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "script",
+            "url": "https://localhost:8081/src/style.css?t=1794957255276"
+          },
+          {
+            "timestamp": 1794957255381,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794957256138,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794957261965,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794957262020,
+            "level": "info",
+            "message": "Frame navigated: about:blank",
+            "args": [
+              "Frame navigated: about:blank"
+            ],
+            "frameUrl": "about:blank",
+            "kind": "navigation",
+            "url": "about:blank",
+            "repeatCount": 2
+          },
+          {
+            "timestamp": 1794957262137,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794957262340,
+            "level": "warn",
+            "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+            "args": [
+              "\"THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794957263407,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794957263883,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794957288433,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794957289109,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794957289597,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794959187464,
+            "level": "warn",
+            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
+            "args": [
+              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "repeatCount": 11
           }
         ]
       }
@@ -3015,9 +3287,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 2,
-              "revision": 30,
+              "revision": 50,
               "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T22:45:31.765Z",
+              "lastObservedAt": "2026-11-17T23:14:49.832Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -3091,7 +3363,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93oe8-gyi8js",
                 "role": "app",
-                "tabGeneration": 3
+                "tabGeneration": 7
               },
               {
                 "commandReady": true,
@@ -3100,12 +3372,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwl93ini-lszvgu",
                 "role": "editor",
-                "sceneSessionId": "scene-g0vxifekyn",
-                "tabGeneration": 1
+                "sceneSessionId": "scene-h4fhuavrnvm",
+                "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T22:45:26.234Z",
-            "lastCommandReadyAt": "2026-11-17T22:45:31.765Z",
+            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
+            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -3128,7 +3400,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 3059
+          "framesWhilePaused": 3125
         }
       }
     }

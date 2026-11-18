@@ -97,3 +97,32 @@ Re-run against the live managed dev server (`https://localhost:8081/`, Quest 3 I
 - Visual: in an emulated XR session a right-hand ray pinch turned the sphere cyan with the confirmation ring; label and instruction panel readable.
 
 Physical Quest 3 checks remain **unverified**. Use the steps above with the current Network URL from `npm run dev:status` (it was `https://10.0.0.222:8081/` at this time).
+
+## Phase 1 — persistent ocean (2026-11-17)
+
+Automated, actually executed against the managed dev server (Quest 3 IWER profile):
+
+| Check | Result |
+| --- | --- |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS (bundle-size warning only) |
+| `npm test` | 14/14 PASS. 11 Ocean Director unit tests, including the spec input: 0.15 → 0.95 reversed to 0.30 at ~0.55, max step ≤ rate cap, settles at 0.30. Also covers lock vs. automatic change, seeded reproducibility, pause, bounded travel, reset, band hysteresis, invalid deltas |
+| `npm run test:ocean` | 22/22 PASS with real emulated hand pinches: starts sunlit at 0.15 with panel hidden and one ocean instance; Arrival entry; right-hand Midnight selection locks target without travel; gradual descent (0.297 after 2 s), no jumps; continuous mid-transition reversal (0.577 → 0.542); settles at 0.30; lock holds 90 s; left-hand panel pinch; open-water pinch travels 0.35 m in 1 s and stops on release; headset pose unchanged; pause freezes and resume continues; reset restores defaults with no duplicates; re-entry starts fresh sunlit; no console errors |
+| `npm run test:smoke`, `npm run test:journey` (Phase 0 regressions) | 12/12 and 12/12 PASS |
+| Visual | `artifacts/phase1-depth-bands.png`: sunlit, open blue and midnight in emulated XR are clearly distinct; panel readable; midnight shows sparse cyan/violet motes |
+
+FPS was **not measured** on hardware. Emulator frame times are not representative.
+
+### Phase 1 Quest checks (manual, pending)
+
+Open the current Network URL (`npm run dev:status`) in Quest Browser, seated, then Enter XR.
+
+- [ ] Pinch the sphere: the room fades into a bright sunlit ocean.
+- [ ] Depth Compass appears to the lower left, is readable, and every button responds to a hand pinch (either hand).
+- [ ] Midnight: the ocean darkens gradually over ~13 s with no flashes. Choose Open blue halfway through and the change reverses smoothly.
+- [ ] Twilight/Midnight feel like the same ocean, only deeper. No reload, no pop.
+- [ ] Pinch-and-hold while pointing at open water: the scenery glides and a small cyan cone shows direction. Release stops it immediately. No nausea at the default rate. Calm makes it slower.
+- [ ] Pinching the panel or sphere never makes you travel.
+- [ ] Pause freezes the ocean while head tracking stays live. Resume, Reset and Drift work.
+- [ ] Exit XR and re-enter: starts in the room, then sunlit.
+- [ ] Frame rate feels smooth at Midnight and Sunlit (record FPS from `?debug=1` if possible).
