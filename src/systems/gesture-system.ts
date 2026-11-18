@@ -73,8 +73,8 @@ export class GestureSystem extends createSystem({}) {
       s.pinchDistance = hasThumb ? this.thumb.distanceTo(this.index) : 1;
       // Point: only the index is out and the thumb is not touching it. Fist: nothing out, hand raised
       // into view (a hand resting curled in the lap is not a command).
-      s.point = indexOut && extended === 1 && s.pinchDistance > 0.045;
-      s.fist = extended === 0 && s.pinchDistance > 0.02 && this.palm.y > this.head.y - 0.45;
+      s.point = indexOut && extended <= 2 && s.pinchDistance > 0.03;
+      s.fist = extended === 0 && s.pinchDistance > 0.018 && this.palm.y > this.head.y - 0.7 && runtime.pinchOwner[hand] !== 'target' && runtime.dragging === null;
       if (hasThumb) {
         filter.update(this.index.x, this.index.y, this.index.z, this.dt);
         const t = runtime.tips[hand]; t.ok = true; t.x = filter.x; t.y = filter.y; t.z = filter.z;

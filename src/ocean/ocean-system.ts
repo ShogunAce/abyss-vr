@@ -412,8 +412,8 @@ export class OceanSystem extends createSystem({
       ctx.fillText(label, button.x + button.w / 2, button.y + button.h / 2 + 9);
       ctx.textAlign = 'start';
     }
-    ctx.fillStyle = '#7fa3ab'; ctx.font = font(18);
-    ctx.fillText('\u{1F449} Point to swim  ·  ✋ Hold palm for light  ·  ✊ Fist hides this menu', 22, 600);
+    ctx.fillStyle = PALETTE.cyan; ctx.font = font(19, '600');
+    ctx.fillText(`Hands: ${runtime.stats.gesture}`, 22, 600, PANEL_W - 44);
   }
 
   private drawSigns(ctx: CanvasRenderingContext2D, font: (size: number, weight?: string) => string) {

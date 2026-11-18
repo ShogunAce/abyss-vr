@@ -162,13 +162,13 @@ export class HandGesture {
     if (this.openPalm && !this.pulseFired && this.openFor >= GESTURE.palmPulse) { this.palmPulse = true; this.pulseFired = true; }
 
     // Point: index out, others curled. Exclusive with open palm (4 fingers) and fist (0 fingers).
-    const point = !!sample.point && !sample.select;
+    const point = !!sample.point && !sample.select && sample.extended <= 2;
     if (point) { this.pointRaw += dt; this.unpointRaw = 0; } else { this.unpointRaw += dt; this.pointRaw = 0; }
     if (!this.pointing && this.pointRaw >= GESTURE.pointHold) this.pointing = true;
     if (this.pointing && this.unpointRaw >= GESTURE.pointRelease) this.pointing = false;
 
     // Fist: held still-ish for fistHold, fires once until the hand opens again.
-    const fist = !!sample.fist && !sample.select && this.motion !== 'fast';
+    const fist = !!sample.fist && this.motion !== 'fast';
     this.fistRaw = fist ? this.fistRaw + dt : 0;
     if (!fist) this.fistFired = false;
     if (fist && !this.fistFired && this.fistRaw >= GESTURE.fistHold) { this.fistToggle = true; this.fistFired = true; }

@@ -92,13 +92,13 @@ export class AudioEngine {
   }
 
   // D major / B minor colours: warm and unresolved, never a "track" that ends.
+  // Tuned to 852 Hz in the style of "852 Hz relaxation" music: pad root 213 Hz (852 / 4),
+  // just-intonation chords, bells on a scale whose top note is 852 Hz.
+  private static R = 213;
   private static CHORDS = [
-    [146.83, 185.0, 220.0, 277.18, 329.63], // Dmaj9
-    [123.47, 146.83, 185.0, 220.0, 277.18], // Bm9
-    [98.0, 123.47, 146.83, 185.0, 220.0], // Gmaj9
-    [110.0, 146.83, 164.81, 220.0, 246.94], // A6sus
-  ];
-  private static BELLS = [587.33, 659.25, 739.99, 880.0, 987.77, 1174.66];
+    [1, 5 / 4, 3 / 2, 2, 5 / 2], [5 / 6, 1, 5 / 4, 5 / 3, 2], [2 / 3, 5 / 6, 1, 4 / 3, 5 / 3], [3 / 4, 1, 9 / 8, 3 / 2, 2],
+  ].map(c => c.map(r => r * AudioEngine.R));
+  private static BELLS = [1, 9 / 8, 5 / 4, 3 / 2, 5 / 3, 2].map(r => r * 426);
 
   private voice(freq: number, start: number, length: number, gain: number, type: OscillatorType, attack: number) {
     if (!this.ctx || !this.musicBus) return;
@@ -123,8 +123,9 @@ export class AudioEngine {
     const chord = AudioEngine.CHORDS[this.chordIndex++ % AudioEngine.CHORDS.length];
     const octave = deep ? 0.5 : 1;
     for (const f of chord) {
-      this.voice(f * octave, start, length, 0.022, 'triangle', 2.8);
-      this.voice(f * octave * 2, start + 0.3, length, 0.008, 'sine', 3.2);
+      this.voice(f * octave, start, length + 2, 0.02, 'triangle', 3.5);
+      this.voice(f * octave * 1.003, start + 0.4, length + 2, 0.014, 'sine', 4);
+      this.voice(f * octave * 2, start + 0.8, length, 0.006, 'sine', 4.5);
     }
     const bells = deep ? 2 : 4;
     for (let i = 0; i < bells; i++) {
