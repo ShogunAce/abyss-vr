@@ -212,3 +212,45 @@ The seabed is a 150×150-segment heightfield, capped at 1.5 m below eye level.
 - All reef pieces share the ocean's depth uniforms: they darken and fog with depth, and some corals faintly fluoresce at midnight.
 - They live in the travel frame (they move with hand-directed travel) and fade in with the room-to-ocean reveal.
 - Cost: 8 extra instanced draws.
+
+## Visual, physics and hand-tracking upgrade (2026-11-18)
+
+**Light and colour**
+- One shared shader library (`src/visuals/glsl.ts`): value noise, fbm and an animated two-layer caustic web.
+- Caustics now land on sand, rocks, coral and the backs of creatures, not just the floor.
+- Depth palettes are richer: turquoise shallows, cobalt open blue, indigo twilight.
+- Coral uses wrap lighting, darkened bases, a wet rim, backlit translucency on thin tissue (fans, seagrass, kelp, anemones) and a saturation lift that survives the water's blue cast.
+
+**Procedural surfaces (no texture files)**
+- **Sand:** noise-warped ripples lit by their slope, grain, shell fragments, damp troughs, algae turf on mounds.
+- **Rocks:** layered limestone with crevices, barnacle specks, coralline crust, turf and orange/violet encrusting sponge.
+- **Coral:** polyps on branching and table coral, ridged brain coral, pitted sponges with bright lips, striped anemones, bumpy starfish.
+
+**Ecosystem**
+- New instanced types: kelp forest (72 three-blade stands ringing the garden), sea whips (46), sea urchins (40).
+- The whole reef sways in one travelling tidal surge, plus a little local flutter. Bending shortens stalks instead of stretching them.
+- A second fish school of 72 anthias, tangs and basslets (one draw) lives over the reef mound ahead. It reacts to the shark and thins with depth.
+
+**Creatures**
+- New skin system in `creatureMaterial`:
+  - fish scales and lateral line
+  - reptile scales
+  - turtle scutes (Voronoi plates with dark streaks over a pale plastron)
+  - shark denticles and five gill slits
+  - a mixed reef-fish palette
+- Translucent ribbed fins and eye catchlights.
+- Shark: sharper snout and pelvic fins.
+- Turtle: domed carapace, flat plastron, beaked head and neck. The body lifts and pitches with each flipper stroke.
+- Jelly: radial canals and a frilled margin.
+- Anglerfish: an open lower jaw lined with needle teeth.
+
+**The sphere** was a flat blue disc underwater (a standard material with no ocean lighting). It is now a pearl portal shader with a slowly swirling interior and a fresnel rim. It shrinks 30% in the ocean so it never dominates the view.
+
+**Physics and hands**
+- Fish schools have a soft seabed floor.
+- About 900 suspended particles (a dense near field) are stirred by your hands: pushed aside and dragged along in the hand's wake.
+- Palm tracking uses a One Euro filter (steady at rest, low lag in motion). Index fingertips get their own One Euro filters, so fingertip touch on the sphere is jitter-free.
+- The pinch-and-hold travel direction is low-pass filtered, so tremor never makes the glide wobble.
+- New unit tests cover the One Euro filter and the flock floor (29 total).
+
+**Cost** (emulator, both eyes, sunlit): 104 draws and about 386k triangles, up from 96 and 293k. Sand and rock noise was trimmed to a few lookups per pixel for Quest's fill rate. If the Quest drops below 72 fps, trim in this order: urchins → sea whips → seagrass count → kelp count.

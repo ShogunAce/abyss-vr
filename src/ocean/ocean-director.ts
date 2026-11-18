@@ -44,9 +44,9 @@ export const BANDS: ReadonlyArray<{ id: BandId; label: string; range: [number, n
 // Environment anchors, blended continuously by depth (linear-space colours).
 type Anchor = { depth: number; shallow: Rgb; blue: Rgb; deep: Rgb; light: number; visibility: number; current: number; wildlife: number; glow: number };
 const ANCHORS: Anchor[] = [
-  { depth: 0.1, shallow: [0.09, 0.46, 0.49], blue: [0.012, 0.18, 0.23], deep: [0.005, 0.038, 0.075], light: 1, visibility: 1, current: 0.35, wildlife: 1, glow: 0 },
-  { depth: 0.42, shallow: [0.025, 0.2, 0.33], blue: [0.006, 0.085, 0.18], deep: [0.002, 0.02, 0.06], light: 0.62, visibility: 0.85, current: 0.5, wildlife: 0.75, glow: 0.05 },
-  { depth: 0.7, shallow: [0.012, 0.045, 0.12], blue: [0.005, 0.02, 0.07], deep: [0.001, 0.006, 0.025], light: 0.22, visibility: 0.55, current: 0.3, wildlife: 0.35, glow: 0.35 },
+  { depth: 0.1, shallow: [0.1, 0.56, 0.6], blue: [0.012, 0.24, 0.33], deep: [0.004, 0.05, 0.11], light: 1, visibility: 1, current: 0.35, wildlife: 1, glow: 0 },
+  { depth: 0.42, shallow: [0.03, 0.26, 0.48], blue: [0.006, 0.11, 0.27], deep: [0.002, 0.025, 0.09], light: 0.62, visibility: 0.85, current: 0.5, wildlife: 0.75, glow: 0.05 },
+  { depth: 0.7, shallow: [0.03, 0.05, 0.17], blue: [0.012, 0.02, 0.1], deep: [0.002, 0.005, 0.035], light: 0.22, visibility: 0.55, current: 0.3, wildlife: 0.35, glow: 0.35 },
   { depth: 0.95, shallow: [0.003, 0.008, 0.026], blue: [0.001, 0.003, 0.012], deep: [0, 0.001, 0.004], light: 0.04, visibility: 0.35, current: 0.15, wildlife: 0.2, glow: 1 },
 ];
 

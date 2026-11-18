@@ -5,6 +5,7 @@ import {
   Float32BufferAttribute, Group, InstancedBufferAttribute, InstancedMesh, LatheGeometry, LineSegments, Mesh, MeshBasicMaterial,
   Points, ShaderMaterial, SphereGeometry, Sprite, SpriteMaterial, TorusGeometry, Vector2, Vector3,
 } from '@iwsdk/core';
+import { noiseGlsl } from './glsl.js';
 
 export type Uniform<T> = { value: T };
 /** Shared, written once per frame by OceanSystem. */
@@ -79,6 +80,8 @@ export type CreatureOptions = {
   /** Iridescent sheen colour (shifts with view angle). */
   sheen?: Rgb;
 };
+// Skin patterns: 0 plain, 1 polygonal reptile scales, 2 fish scales + lateral line, 3 turtle scutes,
+// 4 shark (fine denticles + gill slits), 5 mixed reef-fish palette (anthias / tang / basslet by variant).
 
 export function creatureMaterial(o: CreatureOptions) {
   return new ShaderMaterial({
@@ -123,44 +126,95 @@ export function creatureMaterial(o: CreatureOptions) {
     fragmentShader: `
       ${envGlsl}
       uniform vec3 uTop; uniform vec3 uBelly; uniform vec3 uEmissive; uniform vec3 uFin; uniform vec3 uSheen; uniform vec3 uEye;
-      uniform float uHeight; uniform float uEmissiveLevel; uniform float uHighlight; uniform float uOpacity; uniform float uPattern;
+      uniform float uHeight; uniform float uLength; uniform float uEmissiveLevel; uniform float uHighlight; uniform float uOpacity; uniform float uPattern;
       varying vec3 vLocal; varying vec3 vNormalW; varying vec3 vWorld; varying float vTag; varying float vVariant;
+      ${noiseGlsl}
+      // Voronoi cells: x = distance to nearest centre, y = border width (second minus first), z = cell id hash.
+      vec3 cells(vec2 g) {
+        vec2 ip = floor(g), fp = fract(g); float d1 = 8.0, d2 = 8.0; vec2 cell = ip;
+        for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+          vec2 o = vec2(float(i), float(j));
+          vec2 r = o + vec2(hash21(ip + o), hash21(ip + o + 7.3)) * 0.8 + 0.1 - fp;
+          float d = dot(r, r);
+          if (d < d1) { d2 = d1; d1 = d; cell = ip + o; } else if (d < d2) { d2 = d; }
+        }
+        return vec3(sqrt(d1), sqrt(d2) - sqrt(d1), hash21(cell));
+      }
       void main() {
         vec3 n = normalize(vNormalW);
         if (!gl_FrontFacing) n = -n;
         // Countershading with a small per-fish hue/brightness variation.
         vec3 top = uTop * (0.85 + 0.3 * vVariant) + vec3(0.0, 0.06, -0.04) * (vVariant - 0.5);
-        vec3 base = mix(uBelly, top, smoothstep(-uHeight * 0.35, uHeight * 0.3, vLocal.y));
-        if (uPattern > 0.5) {
-          float s = sin(vLocal.x * 34.0 + sin(vLocal.z * 21.0)) * sin(vLocal.z * 27.0);
-          base *= 0.78 + 0.3 * smoothstep(0.1, 0.9, s);
+        vec3 belly = uBelly;
+        if (uPattern > 4.5) {
+          // Mixed reef fish: orange anthias, yellow tang, purple-and-gold basslet.
+          if (vVariant < 0.45) { top = vec3(1.0, 0.42, 0.12); belly = vec3(1.0, 0.68, 0.55); }
+          else if (vVariant < 0.75) { top = vec3(1.0, 0.82, 0.05); belly = vec3(1.0, 0.92, 0.35); }
+          else { float front = smoothstep(-0.01, 0.01, vLocal.z); top = mix(vec3(1.0, 0.78, 0.08), vec3(0.58, 0.18, 0.92), front); belly = top * 1.1; }
         }
-        if (vTag > 0.5) base = vTag > 1.5 ? vec3(0.03) : uFin * (0.8 + 0.25 * vVariant);
-        // Eye: dark pupil with a pale ring near the head.
+        vec3 base = mix(belly, top, smoothstep(-uHeight * 0.35, uHeight * 0.3, vLocal.y));
+        if (uPattern > 0.5 && uPattern < 1.5) {          // reptile skin: pale-edged polygonal scales
+          vec3 c = cells(vLocal.xz * 40.0 + vLocal.y * 25.0);
+          base *= 0.8 + 0.3 * c.z;
+          base = mix(base * 1.45 + 0.05, base, smoothstep(0.0, 0.12, c.y));
+        } else if (uPattern > 1.5 && uPattern < 2.5 || uPattern > 4.5) { // fish scales + lateral line
+          vec2 sc = vec2(vLocal.z, vLocal.y) / (uLength * 0.05);
+          sc.x += 0.5 * mod(floor(sc.y), 2.0);
+          float edge = smoothstep(0.28, 0.5, length(fract(sc) - 0.5));
+          base *= 0.92 + 0.14 * (1.0 - edge);
+          float lateral = smoothstep(0.004, 0.0, abs(vLocal.y - uHeight * 0.18 + sin(vLocal.z / uLength * 3.0) * uHeight * 0.05));
+          base *= 1.0 - 0.25 * lateral * step(0.5, 1.0 - vTag);
+        } else if (uPattern > 2.5 && uPattern < 3.5) {   // turtle scutes: amber plates with dark radiating streaks
+          if (vLocal.y > 0.0) {
+            vec3 c = cells(vLocal.xz / 0.11);
+            float streak = 0.5 + 0.5 * sin(c.x * 40.0 + c.z * 20.0 + vLocal.x * 30.0);
+            base = mix(vec3(0.16, 0.1, 0.04), vec3(0.62, 0.42, 0.16) * (0.8 + 0.4 * c.z), smoothstep(0.5, 0.05, c.x) * 0.7 + 0.3 * streak);
+            base *= smoothstep(0.0, 0.06, c.y) * 0.6 + 0.4;
+          } else { base = vec3(0.86, 0.8, 0.52); }
+        } else if (uPattern > 3.5 && uPattern < 4.5) {   // shark: denticle grain and five gill slits
+          base *= 0.94 + 0.08 * vnoise(vLocal.zy * 300.0);
+          float gz = (uEye.x - 0.1 - vLocal.z) / 0.045;
+          if (gz > 0.0 && gz < 5.0 && abs(vLocal.x) > 0.04 && abs(vLocal.y - 0.0) < 0.075 - gz * 0.004)
+            base *= 1.0 - 0.6 * smoothstep(0.12, 0.0, abs(fract(gz) - 0.5) - 0.32);
+        }
+        float finAlpha = 1.0;
+        if (vTag > 0.5) {
+          if (vTag > 2.5) base = vec3(0.9, 0.88, 0.8);                    // teeth
+          else if (vTag > 1.5) base = vec3(0.03);                          // dark fin tips
+          else {
+            base = mix(uFin * (0.8 + 0.25 * vVariant), top, uPattern > 4.5 ? 0.6 : 0.0);
+            base *= 0.75 + 0.35 * smoothstep(-0.2, 0.8, sin(dot(vLocal.yz, vec2(1.0, 0.55)) / (uLength * 0.012))); // fin rays
+            finAlpha = 0.78;
+          }
+        }
+        // Eye: dark pupil, pale iris ring and a bright catchlight.
         if (uEye.z > 0.0) {
-          float e = length(vec2(vLocal.z - uEye.x, vLocal.y - uEye.y));
+          vec2 eo = vec2(vLocal.z - uEye.x, vLocal.y - uEye.y);
+          float e = length(eo);
           if (e < uEye.z * 1.45) base = mix(vec3(0.85, 0.8, 0.55), base, smoothstep(uEye.z * 1.2, uEye.z * 1.45, e));
           if (e < uEye.z) base = vec3(0.01, 0.01, 0.015);
+          if (length(eo - uEye.z * vec2(0.3, 0.35)) < uEye.z * 0.28) base = vec3(1.6);
         }
         vec3 L = normalize(vec3(-0.25, 1.0, 0.25));
         vec3 V = normalize(cameraPosition - vWorld);
-        float key = max(dot(n, L), 0.0);
+        float key = max((dot(n, L) + 0.25) / 1.25, 0.0);
         float hemi = 0.5 + 0.5 * n.y;
         float ndv = max(dot(n, V), 0.0);
         float rim = pow(1.0 - ndv, 2.6);
         float light = 0.1 + 0.9 * uLight;
-        vec3 col = base * (0.22 + 0.62 * key + 0.28 * hemi) * light;
-        // Wet specular highlight and view-dependent iridescence.
+        vec3 col = base * (0.2 + 0.62 * key + 0.28 * hemi) * light;
+        // Wet specular highlight, view-dependent iridescence and sunlight caustics on the back.
         float spec = pow(max(dot(n, normalize(L + V)), 0.0), 48.0);
-        col += vec3(0.9, 1.0, 1.0) * spec * 0.22 * uLight * (vTag > 0.5 ? 0.3 : 1.0);
+        col += vec3(0.9, 1.0, 1.0) * spec * 0.25 * uLight * (vTag > 0.5 ? 0.3 : 1.0);
         col += uSheen * pow(1.0 - ndv, 2.2) * 0.35 * light * (0.6 + 0.8 * vVariant);
-        col += top * 0.2 * uLight * key * pow(0.5 + 0.5 * sin(vWorld.x * 7.0 + uTime * 1.3 + sin(vWorld.z * 5.0)), 6.0);
-        col += rim * light * 0.08 * mix(top, vec3(0.6, 0.9, 0.95), 0.5);
+        col += base * caustics(vWorld.xz * 1.1, uTime) * 0.55 * uLight * max(n.y, 0.0) * uFogAmount;
+        col += base * finAlpha * pow(max(dot(-V, L), 0.0), 4.0) * (1.0 - finAlpha) * 2.5 * uLight; // light through fins
+        col += rim * light * 0.1 * mix(top, vec3(0.6, 0.9, 0.95), 0.5);
         col += uEmissive * uEmissiveLevel;
         col += vec3(0.47, 0.85, 0.86) * (rim * 1.2 + 0.08) * uHighlight;
         float fogF = (1.0 - exp(-length(vWorld - cameraPosition) * uFog)) * uFogAmount;
         col = mix(col, uFogColor, fogF);
-        gl_FragColor = vec4(col, uOpacity);
+        gl_FragColor = vec4(col, uOpacity * finAlpha);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
       }`,
@@ -170,7 +224,7 @@ export function creatureMaterial(o: CreatureOptions) {
 }
 
 // ---------- fish school ----------
-export function createFishSchool(count: number) {
+export function createFishSchool(count: number, reefMix = false) {
   const L = 0.15, H = 0.06;
   const zt = (t: number) => -L / 2 + t * L;
   const geometry = mergeParts([
@@ -190,9 +244,11 @@ export function createFishSchool(count: number) {
   const material = creatureMaterial({
     top: [0.0, 0.38, 0.58], belly: [0.32, 0.78, 0.72], fin: [0.2, 0.62, 0.78], sheen: [0.1, 0.75, 0.6],
     length: L, height: H, swim: 0.3, emissive: [0.2, 0.75, 0.8], instanced: true, eye: [L / 2 - 0.022, 0.007, 0.0055],
+    pattern: reefMix ? 5 : 2,
   });
+  if (reefMix) material.uniforms.uSheen.value.setRGB(0.45, 0.25, 0.4);
   const mesh = new InstancedMesh(geometry, material, count);
-  mesh.name = 'Blue-green chromis school';
+  mesh.name = reefMix ? 'Reef fish' : 'Blue-green chromis school';
   const phase = new InstancedBufferAttribute(new Float32Array(count), 1);
   geometry.setAttribute('aPhase', phase);
   const variant = new Float32Array(count);
@@ -208,7 +264,7 @@ export function createShark() {
   const L = 1.8, H = 0.34;
   const z = (t: number) => -L / 2 + t * L;
   const geometry = mergeParts([
-    { geometry: body([[0, 0.03], [0.1, 0.045], [0.3, 0.11], [0.55, 0.17], [0.75, 0.16], [0.9, 0.11], [0.97, 0.06], [1, 0.01]], L, 0.85, 16) },
+    { geometry: body([[0, 0.03], [0.1, 0.045], [0.3, 0.11], [0.52, 0.17], [0.7, 0.168], [0.84, 0.13], [0.93, 0.085], [0.98, 0.04], [1, 0.004]], L, 0.85, 18) },
     { geometry: fin([[0, 0.14, z(0.62)], [0, 0.42, z(0.5)], [0, 0.15, z(0.43)]]), tag: 1 }, // dorsal
     { geometry: fin([[0, 0.05, z(0.25)], [0, 0.09, z(0.2)], [0, 0.04, z(0.17)]]), tag: 1 }, // second dorsal
     { geometry: fin([[0, 0.02, z(0.04)], [0, 0.3, z(-0.12)], [0, 0.04, z(-0.02)], [0, -0.13, z(-0.08)], [0, -0.03, z(0.02)]]), tag: 1 }, // tail
@@ -217,8 +273,10 @@ export function createShark() {
     { geometry: fin([[0.1, -0.06, z(0.68)], [0.42, -0.2, z(0.5)], [0.12, -0.08, z(0.55)]]), tag: 1 }, // pectoral R
     { geometry: fin([[-0.1, -0.06, z(0.68)], [-0.42, -0.2, z(0.5)], [-0.12, -0.08, z(0.55)]]), tag: 1 }, // pectoral L
     { geometry: fin([[0, -0.1, z(0.3)], [0, -0.17, z(0.25)], [0, -0.08, z(0.22)]]), tag: 1 }, // anal
+    { geometry: fin([[0.05, -0.1, z(0.4)], [0.16, -0.17, z(0.33)], [0.06, -0.11, z(0.34)]]), tag: 1 }, // pelvic R
+    { geometry: fin([[-0.05, -0.1, z(0.4)], [-0.16, -0.17, z(0.33)], [-0.06, -0.11, z(0.34)]]), tag: 1 }, // pelvic L
   ]);
-  const material = creatureMaterial({ top: [0.24, 0.29, 0.33], belly: [0.84, 0.85, 0.84], fin: [0.27, 0.31, 0.35], sheen: [0.12, 0.18, 0.22], length: L, height: H, swim: 0.11, eye: [L / 2 - 0.16, 0.045, 0.016] });
+  const material = creatureMaterial({ top: [0.24, 0.29, 0.33], belly: [0.84, 0.85, 0.84], fin: [0.27, 0.31, 0.35], sheen: [0.12, 0.18, 0.22], length: L, height: H, swim: 0.11, eye: [L / 2 - 0.16, 0.045, 0.016], pattern: 4 });
   const mesh = new Mesh(geometry, material);
   mesh.name = 'Grey reef shark';
   mesh.renderOrder = 11;
@@ -228,13 +286,25 @@ export function createShark() {
 // ---------- green sea turtle ----------
 export function createTurtle() {
   const group = new Group(); group.name = 'Green sea turtle';
-  const material = creatureMaterial({ top: [0.27, 0.24, 0.13], belly: [0.72, 0.66, 0.45], length: 0.9, height: 0.25, swim: 0, pattern: 1 });
-  const skin = creatureMaterial({ top: [0.3, 0.32, 0.22], belly: [0.62, 0.62, 0.48], length: 0.9, height: 0.2, swim: 0, pattern: 1 });
-  const shellGeometry = new SphereGeometry(1, 28, 16);
-  shellGeometry.scale(0.36, 0.13, 0.46);
+  const material = creatureMaterial({ top: [0.42, 0.3, 0.12], belly: [0.86, 0.8, 0.52], length: 0.9, height: 0.25, swim: 0, pattern: 3 });
+  const skin = creatureMaterial({ top: [0.34, 0.33, 0.2], belly: [0.78, 0.74, 0.55], length: 0.9, height: 0.2, swim: 0, pattern: 1, eye: [0.03, 0.03, 0.011] });
+  const shellGeometry = new SphereGeometry(1, 32, 18);
+  const sp = shellGeometry.getAttribute('position');
+  for (let i = 0; i < sp.count; i++) {
+    const y = sp.getY(i), zz = sp.getZ(i);
+    // Domed carapace tapering to the rear; the plastron underneath is nearly flat.
+    sp.setY(i, y > 0 ? y * (1 - 0.15 * Math.max(0, -zz)) : y * 0.35);
+  }
+  shellGeometry.computeVertexNormals();
+  shellGeometry.scale(0.36, 0.14, 0.46);
   const shell = new Mesh(shellGeometry, material); shell.name = 'Turtle shell';
-  const head = new Mesh(new SphereGeometry(0.075, 16, 12), skin); head.scale.set(1, 0.85, 1.35); head.position.set(0, 0.02, 0.5);
-  group.add(shell, head);
+  const headGeometry = new SphereGeometry(0.075, 18, 12);
+  const hp = headGeometry.getAttribute('position');
+  for (let i = 0; i < hp.count; i++) { const zz = hp.getZ(i); if (zz > 0) { hp.setY(i, hp.getY(i) * (1 - zz * 4)); hp.setX(i, hp.getX(i) * (1 - zz * 3)); } }
+  headGeometry.computeVertexNormals();
+  const head = new Mesh(headGeometry, skin); head.scale.set(1, 0.85, 1.35); head.position.set(0, 0.02, 0.52);
+  const neck = new Mesh(new CylinderGeometry(0.05, 0.06, 0.14, 12, 1, true), skin); neck.rotation.x = Math.PI / 2; neck.position.set(0, 0.01, 0.44);
+  group.add(shell, neck, head);
   const flippers: Mesh[] = [];
   const flipperGeometry = new SphereGeometry(1, 14, 8); flipperGeometry.scale(0.3, 0.025, 0.1); flipperGeometry.translate(0.28, 0, 0);
   const rearGeometry = new SphereGeometry(1, 12, 8); rearGeometry.scale(0.12, 0.02, 0.07); rearGeometry.translate(0.1, 0, 0);
@@ -254,9 +324,9 @@ export function jellyMaterial(tint: Rgb, baseAlpha: number, seed: number, tentac
     uniforms: { ...sharedEnv(), uTint: { value: new Color(...tint) }, uAlpha: { value: baseAlpha }, uSeed: { value: seed }, uStim: { value: 0 }, uHighlight: { value: 0 }, uPresence: { value: 1 } },
     vertexShader: `
       uniform float uTime; uniform float uSeed;
-      varying vec3 vNormalW; varying vec3 vWorld; varying float vY;
+      varying vec3 vNormalW; varying vec3 vWorld; varying float vY; varying vec2 vXZ;
       void main() {
-        vec3 p = position;
+        vec3 p = position; vXZ = position.xz;
         float c = pow(0.5 + 0.5 * sin(uTime * 1.5 + uSeed), 3.0);
         ${tentacle
           ? 'p.x += sin(uTime * 1.2 + p.y * 7.0 + uSeed) * 0.04 * -p.y; p.z += cos(uTime * 0.9 + p.y * 5.0 + uSeed) * 0.03 * -p.y; p.y *= 1.0 + 0.08 * c;'
@@ -269,14 +339,16 @@ export function jellyMaterial(tint: Rgb, baseAlpha: number, seed: number, tentac
     fragmentShader: `
       ${envGlsl}
       uniform vec3 uTint; uniform float uAlpha; uniform float uStim; uniform float uHighlight; uniform float uPresence;
-      varying vec3 vNormalW; varying vec3 vWorld; varying float vY;
+      varying vec3 vNormalW; varying vec3 vWorld; varying float vY; varying vec2 vXZ;
       void main() {
         vec3 V = normalize(cameraPosition - vWorld);
         float rim = ${tentacle ? '0.6' : 'pow(1.0 - abs(dot(normalize(vNormalW), V)), 1.8)'};
         float light = 0.15 + 0.85 * uLight;
         vec3 glowCol = mix(vec3(0.47, 0.85, 0.86), vec3(0.62, 0.51, 0.83), 0.5 + 0.5 * sin(vY * 20.0));
         float glow = clamp(uGlow * 0.35 + uStim, 0.0, 1.5);
-        vec3 col = uTint * light * (0.5 + rim) + glowCol * glow * rim + vec3(0.47, 0.85, 0.86) * uHighlight * rim;
+        float ang = atan(vXZ.y, vXZ.x), r = length(vXZ);
+        float canals = ${tentacle ? '0.0' : 'smoothstep(0.9, 1.0, abs(cos(ang * 8.0))) * smoothstep(0.03, 0.12, r) + smoothstep(0.004, 0.0, abs(r - 0.15 - 0.006 * sin(ang * 64.0))) * 0.8'};
+        vec3 col = uTint * light * (0.5 + rim + canals * 0.6) + glowCol * glow * (rim + canals) + vec3(0.47, 0.85, 0.86) * uHighlight * rim;
         float fogF = (1.0 - exp(-length(vWorld - cameraPosition) * uFog)) * uFogAmount;
         col = mix(col, uFogColor, fogF * 0.8);
         gl_FragColor = vec4(col, (uAlpha * (0.35 + rim) + glow * 0.25 * rim) * uPresence);
@@ -350,9 +422,18 @@ export function createAnglerfish() {
   const L = 0.32;
   const geometry = mergeParts([
     { geometry: body([[0, 0.01], [0.2, 0.05], [0.5, 0.1], [0.75, 0.11], [0.92, 0.09], [1, 0.05]], L, 0.85, 14) },
-    { geometry: fin([[0, 0.02, -L / 2 + 0.02], [0, 0.07, -L / 2 - 0.07], [0, -0.06, -L / 2 - 0.07]]) },
+    { geometry: fin([[0, 0.02, -L / 2 + 0.02], [0, 0.07, -L / 2 - 0.07], [0, -0.06, -L / 2 - 0.07]]), tag: 1 },
+    // Underslung lower jaw, open, lined with needle teeth.
+    { geometry: fin([[0.07, -0.03, L / 2 - 0.02], [0, -0.075, L / 2 + 0.06], [-0.07, -0.03, L / 2 - 0.02]]) },
+    ...Array.from({ length: 12 }, (_, i) => {
+      const a = (i / 11 - 0.5) * 2.2, t = new ConeGeometry(0.004, 0.035, 4);
+      const lower = i % 2 === 0;
+      t.rotateX(lower ? 0 : Math.PI);
+      t.translate(Math.sin(a) * 0.06, lower ? -0.045 : 0.025, L / 2 + 0.02 + Math.cos(a) * 0.035);
+      return { geometry: t, tag: 3 };
+    }),
   ]);
-  const material = creatureMaterial({ top: [0.07, 0.05, 0.06], belly: [0.12, 0.09, 0.09], length: L, height: 0.2, swim: 0.15 });
+  const material = creatureMaterial({ top: [0.09, 0.06, 0.07], belly: [0.16, 0.11, 0.1], fin: [0.12, 0.08, 0.09], length: L, height: 0.2, swim: 0.15, pattern: 1, eye: [L / 2 - 0.05, 0.05, 0.008] });
   const fish = new Mesh(geometry, material);
   const rodMaterial = creatureMaterial({ top: [0.12, 0.1, 0.1], belly: [0.12, 0.1, 0.1], length: 1, height: 1, swim: 0 });
   const rod = new Mesh(new CylinderGeometry(0.003, 0.004, 0.2, 5), rodMaterial);
@@ -494,6 +575,40 @@ export function createPulseShell() {
   const mesh = new Mesh(new SphereGeometry(1, 40, 24), material);
   mesh.name = 'Light pulse'; mesh.visible = false; mesh.renderOrder = 26; mesh.frustumCulled = false;
   return { mesh, material };
+}
+
+// ---------- portal pearl (the opening sphere) ----------
+/** A luminous pearl with a slowly swirling interior and a bright fresnel rim.
+ *  Exposes color / emissive / emissiveIntensity like MeshStandardMaterial for the sphere system. */
+export class PortalMaterial extends ShaderMaterial {
+  constructor() {
+    super({
+      uniforms: { uColor: { value: new Color(0x1677ff) }, uEmissive: { value: new Color(0x096bff) }, uIntensity: { value: 1.4 }, uClock: { value: 0 } },
+      vertexShader: 'varying vec3 vN; varying vec3 vP; void main(){ vN = normalize(normalMatrix*normal); vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }',
+      fragmentShader: `
+        uniform vec3 uColor; uniform vec3 uEmissive; uniform float uIntensity; uniform float uClock;
+        varying vec3 vN; varying vec3 vP;
+        void main() {
+          vec3 n = normalize(vN);
+          float f = pow(1.0 - abs(n.z), 2.2);
+          vec3 q = normalize(vP);
+          float swirl = 0.5 + 0.5 * sin(atan(q.z, q.x) * 3.0 + q.y * 5.0 + uClock * 1.1 + sin(q.y * 7.0 - uClock * 0.7) * 1.5);
+          float bands = 0.5 + 0.5 * sin(q.y * 14.0 + swirl * 3.0 - uClock * 0.8);
+          vec3 core = mix(uColor * 0.25, mix(uColor, vec3(0.75, 1.0, 1.0), 0.35), swirl * (0.55 + 0.45 * bands));
+          vec3 col = core * (0.5 + 0.5 * (1.0 - f)) + uEmissive * uIntensity * (0.18 + f * 0.9);
+          col += vec3(1.0) * pow(max(dot(n, normalize(vec3(-0.4, 0.55, 1.0))), 0.0), 60.0) * 0.9;
+          gl_FragColor = vec4(col, 0.6 + 0.4 * f);
+          #include <tonemapping_fragment>
+          #include <colorspace_fragment>
+        }`,
+      transparent: true,
+    });
+  }
+  get color() { return (this.uniforms.uColor.value as Color); }
+  get emissive() { return (this.uniforms.uEmissive.value as Color); }
+  get emissiveIntensity() { return this.uniforms.uIntensity.value as number; }
+  set emissiveIntensity(v: number) { this.uniforms.uIntensity.value = v; }
+  set clock(v: number) { this.uniforms.uClock.value = v; }
 }
 
 // ---------- NAMI ----------

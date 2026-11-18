@@ -1,6 +1,6 @@
 import { createSystem, Vector3 } from '@iwsdk/core';
 import { runtime } from '../runtime.js';
-import { arbitratePinch, type HandSample } from '../sim/gesture.js';
+import { arbitratePinch, OneEuro3, type HandSample } from '../sim/gesture.js';
 
 type Hand = 'left' | 'right';
 const HANDS: Hand[] = ['left', 'right'];
@@ -29,6 +29,9 @@ export class GestureSystem extends createSystem({}) {
   private roomPalmFor = 0;
   private features = '';
   private frame = 0;
+  private tipFilters = { left: new OneEuro3(), right: new OneEuro3() };
+  private dt = 0;
+  private travelSnap = true;
 
   private readJoint(frame: XRFrame, ref: XRReferenceSpace, hand: XRHand, name: XRHandJoint, out: Vector3) {
     const space = hand.get(name);
@@ -45,8 +48,9 @@ export class GestureSystem extends createSystem({}) {
     s.select = select.active;
     s.tracked = false;
     runtime.tips[hand].ok = false;
+    const filter = this.tipFilters[hand];
     const source = this.input.xr.getPrimaryInputSource(hand);
-    if (!source || !frame || !ref) return;
+    if (!source || !frame || !ref) { filter.reset(); return; }
     if (source.hand) {
       if (!this.readJoint(frame, ref, source.hand, 'wrist', this.wrist)) return;
       if (!this.readJoint(frame, ref, source.hand, 'middle-finger-metacarpal', this.palm)) return;
@@ -62,7 +66,10 @@ export class GestureSystem extends createSystem({}) {
       s.x = this.palm.x; s.y = this.palm.y; s.z = this.palm.z;
       s.extended = extended;
       s.pinchDistance = hasThumb ? this.thumb.distanceTo(this.index) : 1;
-      if (hasThumb) { const t = runtime.tips[hand]; t.ok = true; t.x = this.index.x; t.y = this.index.y; t.z = this.index.z; }
+      if (hasThumb) {
+        filter.update(this.index.x, this.index.y, this.index.z, this.dt);
+        const t = runtime.tips[hand]; t.ok = true; t.x = filter.x; t.y = filter.y; t.z = filter.z;
+      } else filter.reset();
       const spread = hasThumb && this.readJoint(frame, ref, source.hand, 'pinky-finger-tip', this.tip) ? this.index.distanceTo(this.tip) : 0;
       s.spread = spread;
       if ((this.frame & 3) === 0) this.features += `${hand[0]} ext${extended} pinch${s.pinchDistance.toFixed(3)} spread${spread.toFixed(3)} `;
@@ -75,6 +82,7 @@ export class GestureSystem extends createSystem({}) {
 
   update(delta: number) {
     runtime.clock += Math.min(Math.max(delta, 0), 0.1);
+    this.dt = Math.min(Math.max(delta, 0), 0.1);
     const active = this.world.renderer.xr.getSession() ?? null;
     if (active !== this.session) {
       this.session = active;
@@ -126,12 +134,16 @@ export class GestureSystem extends createSystem({}) {
           otherHandTravelling: runtime.travelHand !== null && runtime.travelHand !== hand,
         });
         runtime.pinchOwner[hand] = owner;
-        if (owner === 'travel') runtime.travelHand = hand;
+        if (owner === 'travel') { runtime.travelHand = hand; this.travelSnap = true; }
         if (owner !== 'none') runtime.log('pinch', `${hand} → ${owner}`);
       }
       if (runtime.travelHand === hand) {
         this.player.raySpaces[hand].getWorldDirection(this.dir).negate();
-        runtime.travelDir.x = this.dir.x; runtime.travelDir.y = this.dir.y; runtime.travelDir.z = this.dir.z;
+        // Smooth the pointing direction so hand tremor never makes the glide wobble.
+        const td = runtime.travelDir, k = this.travelSnap ? 1 : 1 - Math.exp(-delta * 5);
+        this.travelSnap = false;
+        td.x += (this.dir.x - td.x) * k; td.y += (this.dir.y - td.y) * k; td.z += (this.dir.z - td.z) * k;
+        const tl = Math.hypot(td.x, td.y, td.z) || 1; td.x /= tl; td.y /= tl; td.z /= tl;
         if (!g.tracked && !this.input.xr.getPrimaryInputSource(hand)) runtime.travelHand = null;
       }
       if (select.end || (!select.active && runtime.pinchOwner[hand] !== 'none')) {

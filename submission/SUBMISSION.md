@@ -18,7 +18,7 @@ ABYSS turns your room into a living ocean, then takes you down through it in a s
 
 1. **Your room.** In mixed reality (passthrough), a glowing sphere floats in front of you while bubbles rise and a few scout fish circle it. NAMI, a small guide light, invites you in.
 2. **Arrival.** Pinch the sphere, touch it with a fingertip, or hold up an open palm. Your room slowly dissolves into a sunlit reef over about eight seconds.
-3. **A living reef.** Sculpted sand dunes, rocks, branching and brain corals, sea fans, tube sponges, swaying anemones, seagrass and starfish. A school of 120 fish swims, banks and turns as one.
+3. **A living reef.** Sculpted sand dunes under dancing caustic light, encrusted rocks, branching and brain corals, sea fans, tube sponges, anemones, sea whips, urchins, starfish, seagrass and a ring of tall golden kelp, all swaying together in the tidal surge. A school of 120 chromis swims, banks and turns as one, while a second school of anthias, tangs and basslets lives over the reef. Even the floating particles swirl in the wake of your hands.
 4. **Your hands matter.** Hold a calm hand out and the fish drift toward it. Sweep your hand quickly and they scatter, then regroup.
 5. **Encounters.** A green sea turtle glides past. Point at it and pinch to "discover" it: a card shares facts about the species.
 6. **Open blue.** A grey reef shark arrives, notices you, investigates from a respectful distance and turns away, while the school flees on its own.
@@ -34,6 +34,7 @@ The **Depth Compass**, a small panel by your left hand, lets you jump between Su
 - **Pure, tested simulation core.** Boids flocking with a spatial hash, a shark behaviour state machine, an encounter scheduler, a bioluminescence wavefront, a pinch arbiter and the guide's caption logic live in plain TypeScript modules with no rendering code. They're covered by 27 unit tests run directly by Node.
 - **100% procedural content.** No downloaded models, textures or audio files. Every creature is built from lathe and extruded geometry. Every surface is a custom GLSL shader that shares depth, light, fog and caustic uniforms, so the whole ocean darkens and shifts colour together as you descend. The terrain is a heightfield, the reef is placed from a seeded generator, and the soundscape is synthesized live with the Web Audio API.
 - **Performance by design.** Every repeated thing (fish, corals, seagrass, light shafts, plankton) is a single instanced draw call, populations scale with depth, and per-frame allocation is treated as a bug.
+- **Hand tracking that feels steady.** Palm and fingertip positions run through One Euro filters (steady when your hand rests, low lag when it moves), and the travel direction is smoothed so hand tremor never makes the glide wobble.
 - **Testing without a headset.** We drove the whole experience end-to-end in **IWER** (the Immersive Web Emulator) with scripted hand poses, pinches and sweeps: 34 automated experience checks, plus ocean, journey and smoke suites. Then we tuned on a Quest 3.
 - **Shipping.** GitHub Actions typechecks, tests, builds and deploys to GitHub Pages on every push, so a fresh build is on the headset within minutes.
 
@@ -63,7 +64,7 @@ The **Depth Compass**, a small panel by your left hand, lets you jump between Su
 ## What's next for AbyssVR
 
 - **Room-aware ocean:** use Quest scene understanding (planes and meshes) so coral grows from your real floor and fish weave around your real furniture.
-- More species and biomes: kelp forests, hydrothermal vents, whale encounters.
+- More species and biomes: hydrothermal vents, seagrass meadows with rays, whale encounters.
 - Voice questions to NAMI ("what is that?") for a fully hands-free guide.
 - Shared dives: two people in the same ocean, pointing things out to each other.
 - An installable Horizon Store build (PWA), and a classroom mode with ocean-science lessons.

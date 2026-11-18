@@ -17,6 +17,31 @@ export type HandSample = {
 
 export type Motion = 'still' | 'slow' | 'fast';
 
+/** One Euro filter smoothing factor: low cutoff (less jitter) at rest, rising with speed (less lag). */
+export function oneEuroAlpha(dt: number, speed: number, minCutoff = 2.0, beta = 6.0) {
+  const cutoff = minCutoff + beta * speed;
+  const r = 2 * Math.PI * cutoff * dt;
+  return r / (1 + r);
+}
+
+/** One Euro filter for a 3D point (fingertips). */
+export class OneEuro3 {
+  x = 0; y = 0; z = 0; speed = 0; ok = false;
+  minCutoff: number; beta: number;
+  // Plain fields (no parameter properties): Node's type stripping runs this module in tests.
+  constructor(minCutoff = 2.5, beta = 8) { this.minCutoff = minCutoff; this.beta = beta; }
+  reset() { this.ok = false; this.speed = 0; }
+  update(x: number, y: number, z: number, dt: number) {
+    if (!this.ok || dt <= 0 || Math.hypot(x - this.x, y - this.y, z - this.z) > GESTURE.maxJump) {
+      this.x = x; this.y = y; this.z = z; this.ok = true; this.speed = 0; return;
+    }
+    const raw = Math.hypot(x - this.x, y - this.y, z - this.z) / dt;
+    this.speed += (raw - this.speed) * Math.min(1, dt * 20);
+    const a = oneEuroAlpha(dt, this.speed, this.minCutoff, this.beta);
+    this.x += (x - this.x) * a; this.y += (y - this.y) * a; this.z += (z - this.z) * a;
+  }
+}
+
 export const GESTURE = {
   /** Ignore gestures for this long after tracking (re)appears: prevents trigger storms. */
   settleTime: 0.3,
@@ -81,7 +106,8 @@ export class HandGesture {
       this.vx = this.vy = this.vz = 0; this.speed = 0; this.motion = 'still';
       return;
     }
-    const follow = 1 - Math.exp(-dt * 30);
+    // One Euro: removes tracking jitter when the hand rests, follows quick motions closely.
+    const follow = oneEuroAlpha(dt, this.speed);
     const nx = this.x + (sample.x - this.x) * follow;
     const ny = this.y + (sample.y - this.y) * follow;
     const nz = this.z + (sample.z - this.z) * follow;

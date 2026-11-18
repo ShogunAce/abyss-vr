@@ -133,7 +133,7 @@
     {
       "label": "Revealed squid can be inspected",
       "pass": true,
-      "detail": "2 → 3; hovered giant-squid; log 128.5s reveal: revealed | 128.5s nami: reveal | 128.9s gesture: right fast sweep | 128.9s pinch: right → target | 129.2s discovery: giant-squid (new) | 129.2s pinch: right → target; targets ABYSS sphere,Discovery card,Moon jelly#38,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Deep-sea anglerfish,Giant squid"
+      "detail": "2 → 3; hovered giant-squid; log 121.8s nami: caption cleared | 126.7s reveal: revealed | 126.7s nami: reveal | 127.1s pinch: right → target | 127.4s discovery: giant-squid (new) | 127.4s pinch: right → target; targets ABYSS sphere,Discovery card,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Moon jelly#44,Deep-sea anglerfish,Giant squid"
     },
     {
       "label": "At least three species discovered",
@@ -171,5 +171,5 @@
       "detail": ""
     }
   ],
-  "calls": 349
+  "calls": 347
 }

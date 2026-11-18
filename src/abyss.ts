@@ -1,6 +1,7 @@
 import { CanvasTexture, createSystem, Hovered, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, Pressed, ShaderMaterial, SphereGeometry, Sprite, SpriteMaterial, Vector3 } from '@iwsdk/core';
 import { AbyssSphere } from './abyss-component.js';
 import { immersionPhase, smoothReveal, stepImmersion } from './transition.js';
+import { PortalMaterial } from './visuals/creature-models.js';
 import { runtime } from './runtime.js';
 import { audio } from './audio/audio-engine.js';
 
@@ -13,7 +14,7 @@ export class AbyssSystem extends createSystem({
   private sphere!: Mesh;
   private ring!: Object3D;
   private particles!: Object3D;
-  private material!: MeshStandardMaterial;
+  private material!: PortalMaterial;
   private ocean!: Object3D;
   private oceanMaterials: ShaderMaterial[] = [];
   private immersion = 0;
@@ -72,7 +73,8 @@ export class AbyssSystem extends createSystem({
       }
       renderable.material = copy;
     });
-    this.material = (this.sphere.material as MeshStandardMaterial).clone();
+    // Luminous pearl portal (replaces the flat standard material, which read as a blue disc underwater).
+    this.material = new PortalMaterial();
     this.sphere.material = this.material;
     this.ring.visible = false;
     this.canvas.width = 768;
@@ -217,7 +219,9 @@ export class AbyssSystem extends createSystem({
     this.material.emissiveIntensity = 1.4 + this.hover * 1.2;
     this.pulse = Math.max(0, this.pulse - delta);
     const strength = Math.sin(this.pulse / 0.65 * Math.PI);
-    this.sphere.scale.setScalar(1 + strength * 0.16 + this.hover * 0.07);
+    // In the ocean the portal steps back: smaller, so it never dominates the view.
+    this.material.clock = this.elapsed;
+    this.sphere.scale.setScalar((1 + strength * 0.16 + this.hover * 0.07) * (1 - 0.3 * this.immersion));
     this.ring.visible = this.pulse > 0;
     this.ring.scale.setScalar(1 + (1 - this.pulse / 0.65) * 0.5);
     if (this.pulse === 0) {

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { HandGesture, arbitratePinch } from '../src/sim/gesture.ts';
+import { HandGesture, OneEuro3, arbitratePinch } from '../src/sim/gesture.ts';
 import { Flock } from '../src/sim/flock.ts';
 import { SharkBrain, SHARK } from '../src/sim/shark.ts';
 import { EncounterScheduler } from '../src/sim/encounters.ts';
@@ -184,4 +184,24 @@ test('NAMI: rate-limited, once-only lines, high priority interrupts, dismiss and
   assert.ok(n.notify('shark', 3), 'high priority interrupts');
   n.dismiss(); assert.equal(n.current, null);
   n.setMuted(true); assert.equal(n.notify('midnight', 100), false);
+});
+
+test('One Euro: steady at rest (jitter suppressed), follows fast motion closely', () => {
+  const f = new OneEuro3();
+  f.update(0, 1, 0, 1 / 72);
+  let maxDev = 0;
+  for (let i = 0; i < 200; i++) { f.update((i % 2 ? 1 : -1) * 0.002, 1, 0, 1 / 72); maxDev = Math.max(maxDev, Math.abs(f.x)); }
+  assert.ok(maxDev < 0.0015, `rest jitter ${maxDev}`);
+  for (let i = 1; i <= 36; i++) f.update(i * 0.02, 1, 0, 1 / 72); // 1.44 m/s sweep for 0.5 s
+  assert.ok(Math.abs(f.x - 0.72) < 0.06, `lag ${0.72 - f.x}`);
+});
+
+test('flock floor keeps fish above it', () => {
+  const flock = new Flock(40, 3);
+  flock.home.x = 0; flock.home.y = -2; flock.home.z = -2; flock.home.radius = 1;
+  flock.floor.active = true; flock.floor.y = -1.6;
+  for (let i = 0; i < 600; i++) flock.update(1 / 60);
+  let min = Infinity;
+  for (let i = 0; i < 40; i++) min = Math.min(min, flock.pos[i * 3 + 1]);
+  assert.ok(min > -1.75, `lowest fish ${min.toFixed(2)}`);
 });

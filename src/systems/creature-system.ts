@@ -13,6 +13,9 @@ import { createAnglerfish, createFishSchool, createJelly, createShark, createTur
 const FISH = 120;
 const SCOUTS = 8;
 const JELLIES = 6;
+const REEF_FISH = 72;
+/** Reef mound ahead (ocean-local, before travel): the reef fish live just above it. */
+const MOUND = { x: 0.3, y: -1.15, z: -4.9 };
 
 /** Toggle whether an entity can be ray-targeted (hidden creatures never catch rays). */
 export function setTargetable(entity: Entity, on: boolean) {
@@ -33,6 +36,8 @@ export class CreatureSystem extends createSystem({
   private anchor!: Object3D;
   private flock = new Flock(FISH, 11);
   private school!: ReturnType<typeof createFishSchool>;
+  private reefFlock = new Flock(REEF_FISH, 29);
+  private reef!: ReturnType<typeof createFishSchool>;
   private schoolEntity!: Entity;
   private shark!: ReturnType<typeof createShark>;
   private sharkEntity!: Entity;
@@ -89,6 +94,13 @@ export class CreatureSystem extends createSystem({
     };
     this.register('blue-green-chromis', this.school.material);
 
+    // A second, multicoloured school (anthias, tangs, basslets) that stays on the reef mound.
+    this.reef = createFishSchool(REEF_FISH, true);
+    this.world.createTransformEntity(this.reef.mesh, { parent: rootEntity });
+    this.reefFlock.home.radius = 1.5;
+    this.reefFlock.floor.active = true;
+    this.reefFlock.activeCount = 0;
+
     this.shark = createShark();
     this.shark.mesh.visible = false;
     this.sharkEntity = this.world.createTransformEntity(this.shark.mesh, { parent: rootEntity });
@@ -124,6 +136,7 @@ export class CreatureSystem extends createSystem({
 
     this.cleanupFuncs.push(() => {
       this.school.mesh.geometry.dispose(); this.school.material.dispose();
+      this.reef.mesh.geometry.dispose(); this.reef.material.dispose();
       this.shark.mesh.geometry.dispose(); this.shark.material.dispose();
     });
   }
@@ -141,6 +154,8 @@ export class CreatureSystem extends createSystem({
     this.flock.activeCount = SCOUTS;
     this.updateFrames();
     this.flock.scatterAround(this.anchorLocal.x, this.anchorLocal.y, this.anchorLocal.z, 0.35);
+    this.reefFlock.activeCount = 0;
+    this.reefFlock.scatterAround(MOUND.x, MOUND.y, MOUND.z, 2);
   }
 
   /** Viewer, anchor and forward direction in creature-root (ocean-local) space. */
@@ -189,6 +204,14 @@ export class CreatureSystem extends createSystem({
       h.active = g.ready && g.motion !== 'fast' && (inOcean || runtime.destination === 'room');
       h.x = g.x - this.root.position.x; h.y = g.y - this.root.position.y; h.z = g.z - this.root.position.z;
     }
+    // The open-water school never dips into the reef below the viewer.
+    f.floor.active = clearUi; f.floor.y = this.viewer.y - 1.25;
+    // Reef fish: home follows the mound as hand-directed travel shifts the reef.
+    const rf = this.reefFlock, travel = state.travel;
+    rf.home.x = MOUND.x - travel[0]; rf.home.y = MOUND.y; rf.home.z = MOUND.z - travel[1];
+    rf.floor.y = MOUND.y - 0.55;
+    rf.viewer.x = this.viewer.x; rf.viewer.y = this.viewer.y; rf.viewer.z = this.viewer.z;
+    rf.activeCount = immersion < 0.3 ? 0 : this.tier === 0 ? REEF_FISH : this.tier === 1 ? 28 : 0;
     if (runtime.sweepEvent) {
       const e = runtime.sweepEvent; runtime.sweepEvent = null;
       f.scatter(e.x - this.root.position.x, e.y - this.root.position.y, e.z - this.root.position.z);
@@ -219,6 +242,7 @@ export class CreatureSystem extends createSystem({
     }
     f.threat.active = sb.active && sb.presence > 0.3;
     f.threat.x = sb.x; f.threat.y = sb.y; f.threat.z = sb.z;
+    rf.threat.active = f.threat.active; rf.threat.x = sb.x; rf.threat.y = sb.y; rf.threat.z = sb.z;
     this.shark.mesh.visible = sb.presence > 0.01 && immersion > 0.5;
     if (this.shark.mesh.visible) {
       // Level body that banks gently into turns (no arbitrary roll).
@@ -237,6 +261,8 @@ export class CreatureSystem extends createSystem({
     this.fishScale += ((runtime.immersion > 0.3 ? 1 : 0.5) - this.fishScale) * Math.min(1, delta * 0.8);
     f.update(dt);
     this.writeSchool();
+    rf.update(dt);
+    this.writeReef();
 
     // ---- turtle: a slow sunlit pass across the front, 4.5 m away
     this.updateTurtle(dt, inOcean);
@@ -320,9 +346,10 @@ export class CreatureSystem extends createSystem({
     const rightX = -this.forward.z, rightZ = this.forward.x;
     g.position.set(
       this.viewer.x + this.forward.x * 4.2 + rightX * side,
-      this.viewer.y - 0.3 + Math.sin(u * Math.PI * 2) * 0.25,
+      // Each power stroke lifts the body a little; it settles between strokes.
+      this.viewer.y - 0.3 + Math.sin(u * Math.PI * 2) * 0.25 + Math.sin(this.turtleTime * 1.6 - 0.7) * 0.035,
       this.viewer.z + this.forward.z * 4.2 + rightZ * side);
-    g.rotation.set(0, Math.atan2(-rightX * this.turtleDir, -rightZ * this.turtleDir), Math.sin(this.turtleTime * 0.6) * 0.05);
+    g.rotation.set(-Math.cos(this.turtleTime * 1.6 - 0.7) * 0.05, Math.atan2(-rightX * this.turtleDir, -rightZ * this.turtleDir), Math.sin(this.turtleTime * 0.6) * 0.05);
     g.visible = true;
     const presence = Math.min(1, u * 8, (1 - u) * 8);
     for (const m of this.turtle.materials) m.uniforms.uOpacity.value = presence;
@@ -350,6 +377,28 @@ export class CreatureSystem extends createSystem({
     m.scale(this.scale);
     m.setPosition(px, py, pz);
     return m;
+  }
+
+  /** Reef fish: same compaction as the main school, not pickable (no species card). */
+  private writeReef() {
+    const f = this.reefFlock, mesh = this.reef.mesh as InstancedMesh, phase = this.reef.phase;
+    const variantAttr = mesh.geometry.getAttribute('aVariant') as InstancedBufferAttribute;
+    const variant = variantAttr.array as Float32Array;
+    let visible = 0;
+    for (let i = 0; i < f.capacity; i++) {
+      const presence = f.presence[i];
+      if (presence < 0.02) continue;
+      const ix = i * 3;
+      this.orient(this.matrix, f.pos[ix], f.pos[ix + 1], f.pos[ix + 2], f.dir[ix], f.dir[ix + 1], f.dir[ix + 2], f.bank[i], presence * (0.95 + (i % 5) * 0.09));
+      mesh.setMatrixAt(visible, this.matrix);
+      (phase.array as Float32Array)[visible] = f.phase[i];
+      variant[visible] = (i * 0.6180339) % 1;
+      visible++;
+    }
+    mesh.count = visible;
+    mesh.visible = visible > 0;
+    if (!visible) return;
+    mesh.instanceMatrix.needsUpdate = true; variantAttr.needsUpdate = true; phase.needsUpdate = true;
   }
 
   private writeSchool() {

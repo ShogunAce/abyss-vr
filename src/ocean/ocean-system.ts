@@ -197,8 +197,12 @@ export class OceanSystem extends createSystem({
     if (this.panelDirty && this.panelShown) { this.drawPanel(); this.panelDirty = false; }
   }
 
+  private oceanWorld = new Vector3();
   private applyToScene() {
     const s = this.director.state;
+    this.ocean.getWorldPosition(this.oceanWorld);
+    const hl = runtime.hands.left, hr = runtime.hands.right;
+    const wake = (g: typeof hl) => (g.ready && runtime.immersion > 0.5 ? Math.min(1, 0.25 + g.speed * 1.6) : 0);
     for (const material of this.materials) {
       const u = material.uniforms;
       if (u.uTime) u.uTime.value = s.time;
@@ -210,6 +214,11 @@ export class OceanSystem extends createSystem({
       if (u.uGlow) u.uGlow.value = s.bioluminescence;
       if (u.uDrift) u.uDrift.value.set(s.drift[0], s.drift[1], s.drift[2]);
       if (u.uTravel) u.uTravel.value.set(s.travel[0], 0, s.travel[1]);
+      if (u.uHandA) {
+        const o = this.oceanWorld;
+        u.uHandA.value.set(hl.x - o.x, hl.y - o.y, hl.z - o.z, wake(hl)); u.uHandVA.value.set(hl.vx, hl.vy, hl.vz);
+        u.uHandB.value.set(hr.x - o.x, hr.y - o.y, hr.z - o.z, wake(hr)); u.uHandVB.value.set(hr.vx, hr.vy, hr.vz);
+      }
     }
     this.frame?.position.set(-s.travel[0], 0, -s.travel[1]);
     // Shared creature environment: in the room (passthrough) creatures are lit normally and unfogged.

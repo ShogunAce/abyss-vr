@@ -52,6 +52,8 @@ export class Flock {
   /** Extra keep-out spheres (e.g. the sphere and Depth Compass), up to 4. */
   obstacles: Array<{ active: boolean; x: number; y: number; z: number; r: number }> = [0, 1, 2, 3].map(() => ({ active: false, x: 0, y: 0, z: 0, r: 0 }));
   activeCount: number;
+  /** Soft floor (e.g. above the reef): fish curve up before reaching it. */
+  floor = { active: false, y: -10 };
   home = { x: 0, y: 1.4, z: -2.2, radius: 1.4 };
   viewer = { x: 0, y: 1.5, z: 0 };
   hands: FlockInfluence[] = [{ active: false, x: 0, y: 0, z: 0 }, { active: false, x: 0, y: 0, z: 0 }];
@@ -202,6 +204,7 @@ export class Flock {
         const dx = px - o.x, dy = py - o.y, dz = pz - o.z, d = Math.hypot(dx, dy, dz);
         if (d < o.r && d > 1e-4) { const k = F.wViewer * (1 - d / o.r) / d; fx += dx * k; fy += dy * k; fz += dz * k; }
       }
+      if (this.floor.active && py < this.floor.y + 0.35) fy += (this.floor.y + 0.35 - py) * 8;
       const panic = (scattering || maxThreat > 0.05) ? 1 : 0;
       const maxForce = panic ? F.maxForce * 4 : F.maxForce;
       const fl = Math.hypot(fx, fy, fz);
