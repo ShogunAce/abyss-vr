@@ -126,3 +126,119 @@ Open the current Network URL (`npm run dev:status`) in Quest Browser, seated, th
 - [ ] Pause freezes the ocean while head tracking stays live. Resume, Reset and Drift work.
 - [ ] Exit XR and re-enter: starts in the room, then sunlit.
 - [ ] Frame rate feels smooth at Midnight and Sunlit (record FPS from `?debug=1` if possible).
+
+## Phases 2–5 — living ocean, encounters, reveal, NAMI, opening (2026-11-17/18)
+
+All results are from the managed dev server with the Quest 3 IWER emulator, unless marked **UNVERIFIED**.
+
+| Check | Result |
+| --- | --- |
+| `npm run typecheck` | PASS |
+| `npm test` | 26/26 PASS: 11 Ocean Director tests, 12 simulation tests and 3 transition tests (details below) |
+| `npm run build` | PASS (bundle-size warning only) |
+| `npm run test:ocean` (Phase 1) | 22/22 PASS |
+| `npm run test:smoke` (Phase 0) | 12/12 PASS |
+| `npm run test:journey` (Arrival) | 12/12 PASS |
+| `npm run test:experience` (full arc, real emulated hands) | 34/34 PASS. **Known intermittent:** the first pinch on the revealed squid sometimes registers no press even while the ray hovers it. One retry always worked; a pick volume was added. Watch this on Quest. |
+
+The 12 simulation unit tests (`tests/sims.test.mjs`) cover:
+- gestures: 0.1 m/s reads as slow; a 1 m/s sweep fires exactly once; noise never toggles; tracking reacquire and implausible jumps never fire; open palm needs a stable hold, and IWER's relaxed hand is rejected
+- arbiter priority
+- flock: attract, scatter, regroup; viewer keep-out; bounded steps
+- seed-42 shark at depth 0.45: all states, fish threat, comfort radius, completion, no duplicate spawn
+- scheduler reproducibility, eligibility and timeout
+- pulse at depth 0.95: palm glow, one pulse, wavefront order, reveal completes; no reveal in shallow water
+- NAMI rate limiting and dismiss
+
+`npm run test:experience` drives the full arc with real emulated hand input:
+1. relaxed hands don't start the ocean; NAMI welcomes; an open palm starts it
+2. a steady hand attracts the school; a fast sweep is detected and scatters it; the school regroups
+3. the showcase turtle appears; pinching it makes a discovery and card without triggering travel
+4. the showcase shark goes cruise → notice → investigate → turn away → done
+5. the school evades it with no user input
+6. the shark's minimum distance is 3.64 m (more than the 3.2 m comfort radius); it can be inspected with the left hand
+7. midnight: open palm is detected, NAMI prompts, no pulse until release and no travel while armed
+8. exactly one pulse; the wavefront reaches the squid and the reveal completes
+9. the squid can be inspected; 4 species discovered
+10. pause freezes the ocean; restart resets ocean, encounters and reveal
+11. hand loss is reported with no gesture storm on return; XR exits; no console errors
+
+### Bugs found and fixed during QC
+
+All of these would have shown up on the headset.
+
+1. **Render loop freeze at twilight.** The SDK pointer raycast the anglerfish's glow `Sprite`, which throws without `Raycaster.camera`, every frame. Fixed: decorative sprites have a no-op `raycast`.
+2. **Relaxed hand read as an open palm** (4 straight fingers), which auto-started the ocean. Fixed with thresholds measured on IWER poses: thumb gap > 11 cm and finger spread > 11.5 cm.
+3. **Tracking jumps counted as sweeps.** Fixed: movements over 4 m/s are treated as glitches.
+4. **Fish blocked UI pinches.** Fish attracted to a hand swim between the hand and the panel or sphere, so the pinch became a fish discovery. Fixed: school ray hits closer than 0.9 m are ignored, so UI wins, per the spec's "UI focus first".
+5. **NAMI caption and discovery card sat in pointing paths** right of the sphere. Moved above eye line.
+6. **Jellies drifted into the squid's corridor, and the shark could linger into midnight.** Jellies now keep to the flanks; the shark turns away when depth leaves its band (above 0.8).
+7. **Restart left the pulse count in diagnostics.** Fixed.
+
+### Performance
+
+Measured with `node scripts/perf-probe.mjs` (IWER, desktop GPU) and recorded in `artifacts/perf-results.json`. These are **not Quest numbers**.
+
+| State | Draw calls | Triangles | Points / lines |
+| --- | --- | --- | --- |
+| Room (passthrough) | 30 | 38.7k | 248 / 60 |
+| Sunlit | 78 (was 90) | 104k | 968 / 60 |
+| Open blue | 78 (was 90) | 104k | 968 / 60 |
+| Midnight | 98 (was 114) | 97k | 1148 / 2140 |
+| Reveal | 102 (was 120) | 103k | 1148 / 2140 |
+
+Optimizations made:
+- Sun shafts merged into one instanced draw.
+- Jelly tentacles excluded from raycasts.
+- Generous squid pick volume.
+- Per-frame allocations removed (palm lookup, diagnostic strings rebuilt at about 15 Hz, event-log string cached).
+- Idle uploads skipped (dormant organisms, empty school).
+
+Already in place:
+- One instanced draw for 56 fish and one draw for 90 organisms; no dynamic lights or shadows.
+- 60 Hz fixed-step boids with a spatial hash.
+
+At midnight the emulator holds 16.7 ms p50 / 16.8 ms p95 (vsync-capped, 0 dropped frames of 482).
+
+**Quest FPS: UNVERIFIED.** Measure on the headset; the spec requires at least 60 FPS. If it is short, reduce first: transparent overdraw from the water shell, jelly tentacle lines, organism count (90), then fish count (56).
+
+### Physical Quest checks — Phases 2–5 (manual, all UNVERIFIED)
+
+Open the Network URL from `npm run dev:status` in Quest Browser, sit down, select Enter XR, and put the controllers down.
+
+- [ ] NAMI's welcome caption is readable. Bubbles and small scout fish circle the sphere in your real room.
+- [ ] A relaxed hand never starts the ocean. A deliberate open palm (high five) held for about half a second does, and so does pinching the sphere.
+- [ ] A steady hand held toward the school draws fish closer. A quick sweep scatters them; they regroup. No startle from small hand jitter.
+- [ ] The turtle passes within the first minute in sunlit water. It highlights when pointed at; a pinch shows a readable card. Pinch the card to close it.
+- [ ] Open blue: the shark arrives in front, circles at a distance (never closer than about 3 m), the school flees, and it leaves. No lunges. It feels calm, not threatening.
+- [ ] The Depth Compass buttons work even while fish crowd around your hand.
+- [ ] Midnight: the jellies, the anglerfish's lure and the sparse glow read well. An open palm wakes nearby lights.
+- [ ] Open palm, then pinch and release: one pulse ring expands. The squid emerges slowly about 9 m away. It is impressive, not scary. Pinch it for its card. **Watch item:** note whether the first pinch on the squid registers.
+- [ ] Pause, Calm, Recenter, Text size, Sound, Room and Restart each do what they say.
+- [ ] Losing and returning your hands causes no stray scatter or pulse, and NAMI reports the loss.
+- [ ] Audio: the soft water hush deepens with depth, and the chimes are audible. With the Sound button off it is silent.
+- [ ] Frame rate in sunlit, open blue with the shark, and midnight during the reveal (enable `?debug=1` for FPS). Target at least 60.
+- [ ] Fact check: verify each species' wording against its `sourceUrl` in `src/data/species.ts`, then set `reviewStatus: 'checked'`.
+
+### Not implemented (deliberate scope cuts)
+
+- Clownfish and reef shelf.
+- Room-aware placement (scene understanding is enabled but unused).
+- Open-palm-toward-UI summon (the compass is always shown in the ocean).
+- Sound-reactive / microphone mode.
+- LLM / agentic NAMI.
+- Licensed glTF creatures (procedural stand-ins, with a documented swap path).
+- Bundled Manrope font.
+- Hosting and deployment (Phase 6).
+
+### Hosting
+
+Live at **https://shogunace.github.io/abyss-vr/**, from the public repo https://github.com/ShogunAce/abyss-vr. GitHub Actions (`.github/workflows/pages.yml`) runs typecheck, unit tests and build, then deploys `dist/` on every push to `main`.
+
+Verified: the page returns HTTP 200, and assets load under the `/abyss-vr/` subpath (the production build was also checked locally under the same subpath with zero console errors).
+
+CI fixes:
+- `npm_config_onnxruntime_node_install_cuda=skip` (a dev-tool dependency's CUDA download 404s on Linux)
+- `--experimental-strip-types` for the Node 22 test runner
+
+Not done: PWA manifest, icons and APK packaging. A Pages project site is a subpath, so a TWA would also need `assetlinks.json` at the `shogunace.github.io` origin root.

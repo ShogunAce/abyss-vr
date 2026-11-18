@@ -4,6 +4,7 @@ Your room becomes an ocean, and the ocean responds to you. ABYSS is a seated, ha
 
 ## Try it
 
+- **Live build (GitHub Pages):** https://shogunace.github.io/abyss-vr/. Open it in Quest Browser, select Enter XR, and put the controllers down. It redeploys automatically on every push to `main` (`.github/workflows/pages.yml`).
 - Laptop (IWER emulator): https://localhost:8081/
 - Quest on the same Wi-Fi: use the Network URL from `npm run dev:status` (it was https://10.0.0.222:8081/).
 - `?explore` switches off the deterministic showcase and uses a random seed. `?debug=1` puts detailed diagnostics on the spatial panel.

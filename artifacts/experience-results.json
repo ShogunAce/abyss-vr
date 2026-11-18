@@ -48,7 +48,7 @@
     {
       "label": "School regroups",
       "pass": true,
-      "detail": "schooling"
+      "detail": "attracted"
     },
     {
       "label": "Showcase turtle encounter begins in sunlit water",
@@ -132,9 +132,44 @@
     },
     {
       "label": "Revealed squid can be inspected",
-      "pass": false,
-      "detail": "2 → 2; hovered giant-squid; log 119.4s pulse: #1 released | 122.8s reveal: emerging | 122.9s nami: caption cleared | 127.8s reveal: revealed | 127.8s nami: reveal | 128.2s pinch: right → target; targets ABYSS sphere,NAMI caption,Moon jelly#38,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Deep-sea anglerfish,Giant squid"
+      "pass": true,
+      "detail": "2 → 3; hovered giant-squid; log 123.0s nami: caption cleared | 127.9s reveal: revealed | 127.9s nami: reveal | 128.3s pinch: right → target | 128.6s discovery: giant-squid (new) | 128.6s pinch: right → target; targets ABYSS sphere,Discovery card,Moon jelly#38,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Deep-sea anglerfish,Giant squid"
+    },
+    {
+      "label": "At least three species discovered",
+      "pass": true,
+      "detail": "3"
+    },
+    {
+      "label": "Pause freezes the ocean",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Restart resets ocean, encounters and reveal",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Hand loss is reported, app keeps running",
+      "pass": true,
+      "detail": "no hands tracked"
+    },
+    {
+      "label": "No gesture storm after tracking returns",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Exit XR works",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "No browser console errors",
+      "pass": true,
+      "detail": ""
     }
   ],
-  "calls": 311
+  "calls": 349
 }

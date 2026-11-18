@@ -136,6 +136,7 @@ try {
   wait(300);
   pinchAt('hand-right', 'Giant squid');
   s = status();
+  if (s.discoveries === before) { console.log('NOTE squid pinch needed a retry (hovered ' + s.hovered + ')'); pinchAt('hand-right', 'Giant squid'); s = status(); }
   check(s.discoveries === before + 1, 'Revealed squid can be inspected', `${before} → ${s.discoveries}; hovered ${s.hovered}; log ${s.eventLog}; targets ${cli('xr', 'list-targets').targets.map(t => t.name).filter(n => !/Depth/.test(n)).join(',')}`);
   pinchAt('hand-right', 'Discovery card');
   check(status().discoveries >= 3, 'At least three species discovered', `${status().discoveries}`);

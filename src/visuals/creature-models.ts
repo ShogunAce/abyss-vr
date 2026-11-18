@@ -2,7 +2,7 @@
 // Every creature reads shared environment uniforms so it darkens and fogs with depth.
 import {
   AdditiveBlending, BufferAttribute, BufferGeometry, CanvasTexture, Color, ConeGeometry, CylinderGeometry, DoubleSide,
-  Float32BufferAttribute, Group, InstancedBufferAttribute, InstancedMesh, LatheGeometry, LineSegments, Mesh,
+  Float32BufferAttribute, Group, InstancedBufferAttribute, InstancedMesh, LatheGeometry, LineSegments, Mesh, MeshBasicMaterial,
   Points, ShaderMaterial, SphereGeometry, Sprite, SpriteMaterial, TorusGeometry, Vector2,
 } from '@iwsdk/core';
 
@@ -394,7 +394,12 @@ export function createGiantSquid() {
     transparent: true,
   }));
   eye.position.set(-0.1, 0.08, 0.26);
-  group.add(mesh, eye);
+  // Generous pick volume around head and mantle: a ~9 m distant target must be easy to pinch.
+  // Rendered with colour/depth writes masked (the SDK pointer skips invisible materials).
+  const hitGeometry = new SphereGeometry(1, 12, 8); hitGeometry.scale(2.1, 0.75, 0.75); hitGeometry.translate(0.9, 0, 0);
+  const hit = new Mesh(hitGeometry, new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false }));
+  hit.name = 'Giant squid pick volume';
+  group.add(mesh, eye, hit);
   return { group, mesh, material, eye };
 }
 

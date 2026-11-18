@@ -1,7 +1,7 @@
 {
   "room": {
-    "calls": 10,
-    "triangles": 2948,
+    "calls": 30,
+    "triangles": 38684,
     "points": 248,
     "lines": 60,
     "programs": 28,
@@ -9,42 +9,42 @@
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 10,
-      "triangles": 2948,
+      "calls": 30,
+      "triangles": 38684,
       "points": 248,
       "lines": 60,
-      "geometries": 55,
+      "geometries": 51,
       "textures": 13,
       "programs": 28,
-      "meshCount": 54,
-      "materialCount": 39,
+      "meshCount": 87,
+      "materialCount": 43,
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
-          -0.7181116938591003,
-          0.827249868772924,
-          -1.540839970111847
+          -4.984327793121338,
+          0.9108441695570946,
+          -5.462948799133301
         ],
         "max": [
-          0.7406283617019653,
-          2.2469777576625347,
-          -0.5479038059711456
+          5.0326714515686035,
+          2.3469777815043926,
+          -0.2955435964426856
         ],
         "size": [
-          1.4587400555610657,
-          1.4197278888896108,
-          0.9929361641407013
+          10.016999244689941,
+          1.436133611947298,
+          5.167405202690615
         ]
       },
       "worldBounds": {
         "min": [
           -55,
-          -53.5,
+          -53.39999997615814,
           -55
         ],
         "max": [
           55,
-          56.5,
+          56.60000002384186,
           55
         ],
         "size": [
@@ -116,20 +116,20 @@
     }
   },
   "sunlit": {
-    "calls": 30,
-    "triangles": 38684,
-    "points": 248,
+    "calls": 78,
+    "triangles": 103736,
+    "points": 968,
     "lines": 60,
     "programs": 28,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 30,
-      "triangles": 38684,
-      "points": 248,
+      "calls": 78,
+      "triangles": 103736,
+      "points": 968,
       "lines": 60,
-      "geometries": 55,
+      "geometries": 51,
       "textures": 13,
       "programs": 28,
       "meshCount": 87,
@@ -137,19 +137,19 @@
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
-          -1.8046865463256836,
-          0.9220039742067456,
-          -2.944228172302246
+          -55,
+          -53.39999997615814,
+          -55
         ],
         "max": [
-          2.033334970474243,
-          2.3469777815043926,
-          -0.36167595134426794
+          55,
+          56.60000002384186,
+          55
         ],
         "size": [
-          3.8380215167999268,
-          1.424973807297647,
-          2.5825522209579783
+          110,
+          110,
+          110
         ]
       },
       "worldBounds": {
@@ -232,20 +232,20 @@
     }
   },
   "openBlue": {
-    "calls": 28,
-    "triangles": 38680,
-    "points": 248,
+    "calls": 78,
+    "triangles": 103736,
+    "points": 968,
     "lines": 60,
     "programs": 28,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 28,
-      "triangles": 38680,
-      "points": 248,
+      "calls": 78,
+      "triangles": 103736,
+      "points": 968,
       "lines": 60,
-      "geometries": 55,
+      "geometries": 51,
       "textures": 13,
       "programs": 28,
       "meshCount": 87,
@@ -253,19 +253,19 @@
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
-          -8.816930770874023,
-          0.9179844921454787,
-          -8.870591163635254
+          -55,
+          -53.39999997615814,
+          -55
         ],
         "max": [
-          8.904634475708008,
-          2.3469777815043926,
-          -0.31170871292515345
+          55,
+          56.60000002384186,
+          55
         ],
         "size": [
-          17.72156524658203,
-          1.428993289358914,
-          8.558882450710101
+          110,
+          110,
+          110
         ]
       },
       "worldBounds": {
@@ -348,20 +348,20 @@
     }
   },
   "midnight": {
-    "calls": 28,
-    "triangles": 38680,
-    "points": 248,
-    "lines": 60,
+    "calls": 98,
+    "triangles": 97166,
+    "points": 1148,
+    "lines": 2140,
     "programs": 28,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 28,
-      "triangles": 38680,
-      "points": 248,
-      "lines": 60,
-      "geometries": 55,
+      "calls": 98,
+      "triangles": 97166,
+      "points": 1148,
+      "lines": 2140,
+      "geometries": 51,
       "textures": 13,
       "programs": 28,
       "meshCount": 87,
@@ -369,19 +369,19 @@
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
-          -9.187254905700684,
-          0.9047514805570245,
-          -9.483392715454102
+          -55,
+          -53.39999997615814,
+          -55
         ],
         "max": [
-          9.858725547790527,
-          2.3469777815043926,
-          -0.19112094080406794
+          55,
+          56.60000002384186,
+          55
         ],
         "size": [
-          19.04598045349121,
-          1.4422263009473681,
-          9.292271774650034
+          110,
+          110,
+          110
         ]
       },
       "worldBounds": {
@@ -464,20 +464,20 @@
     }
   },
   "reveal": {
-    "calls": 104,
-    "triangles": 98626,
+    "calls": 102,
+    "triangles": 102678,
     "points": 1148,
-    "lines": 2660,
+    "lines": 2140,
     "programs": 28,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 104,
-      "triangles": 98626,
+      "calls": 102,
+      "triangles": 102678,
       "points": 1148,
-      "lines": 2660,
-      "geometries": 56,
+      "lines": 2140,
+      "geometries": 51,
       "textures": 13,
       "programs": 28,
       "meshCount": 87,

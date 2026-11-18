@@ -10,10 +10,19 @@
         "result": {
           "deviceName": "Meta Quest 3",
           "isRuntimeInstalled": true,
-          "sessionActive": false,
-          "sessionOffered": true,
-          "sessionMode": null,
-          "enabledFeatures": [],
+          "sessionActive": true,
+          "sessionOffered": false,
+          "sessionMode": "immersive-ar",
+          "enabledFeatures": [
+            "local-floor",
+            "bounded-floor",
+            "hand-tracking",
+            "anchors",
+            "plane-detection",
+            "mesh-detection",
+            "viewer",
+            "local"
+          ],
           "visibilityState": "visible",
           "runtimeKind": "emulated",
           "browser": {
@@ -22,9 +31,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 4,
-              "revision": 171,
+              "revision": 190,
               "stateEnteredAt": "2026-11-18T01:51:22.068Z",
-              "lastObservedAt": "2026-11-18T03:31:26.080Z",
+              "lastObservedAt": "2026-11-18T04:45:12.856Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -164,7 +173,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwlgtmbl-69nl4z",
                 "role": "app",
-                "tabGeneration": 20
+                "tabGeneration": 25
               },
               {
                 "commandReady": true,
@@ -173,12 +182,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwlgtgns-kdn45f",
                 "role": "editor",
-                "sceneSessionId": "scene-xjxqk3wj9je",
-                "tabGeneration": 3
+                "sceneSessionId": "scene-zwx85l4r2i",
+                "tabGeneration": 4
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-18T03:31:25.900Z",
-            "lastCommandReadyAt": "2026-11-18T03:31:26.079Z",
+            "lastBridgeConnectedAt": "2026-11-18T04:45:12.621Z",
+            "lastCommandReadyAt": "2026-11-18T04:45:12.856Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -202,10 +211,19 @@
         "result": {
           "deviceName": "Meta Quest 3",
           "isRuntimeInstalled": true,
-          "sessionActive": false,
-          "sessionOffered": true,
-          "sessionMode": null,
-          "enabledFeatures": [],
+          "sessionActive": true,
+          "sessionOffered": false,
+          "sessionMode": "immersive-ar",
+          "enabledFeatures": [
+            "local-floor",
+            "bounded-floor",
+            "hand-tracking",
+            "anchors",
+            "plane-detection",
+            "mesh-detection",
+            "viewer",
+            "local"
+          ],
           "visibilityState": "visible",
           "runtimeKind": "emulated",
           "browser": {
@@ -214,9 +232,9 @@
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
               "browserEpoch": 4,
-              "revision": 171,
+              "revision": 190,
               "stateEnteredAt": "2026-11-18T01:51:22.068Z",
-              "lastObservedAt": "2026-11-18T03:31:26.080Z",
+              "lastObservedAt": "2026-11-18T04:45:12.856Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -356,7 +374,7 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwlgtmbl-69nl4z",
                 "role": "app",
-                "tabGeneration": 20
+                "tabGeneration": 25
               },
               {
                 "commandReady": true,
@@ -365,12 +383,12 @@
                 "deviceClass": "managed",
                 "pageId": "tab-mwlgtgns-kdn45f",
                 "role": "editor",
-                "sceneSessionId": "scene-xjxqk3wj9je",
-                "tabGeneration": 3
+                "sceneSessionId": "scene-zwx85l4r2i",
+                "tabGeneration": 4
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-18T03:31:25.900Z",
-            "lastCommandReadyAt": "2026-11-18T03:31:26.079Z",
+            "lastBridgeConnectedAt": "2026-11-18T04:45:12.621Z",
+            "lastCommandReadyAt": "2026-11-18T04:45:12.856Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
@@ -379,6 +397,20 @@
           },
           "browserConnected": true,
           "browserCommandReady": true
+        }
+      }
+    }
+  },
+  {
+    "domain": "xr",
+    "action": "exit",
+    "result": {
+      "ok": true,
+      "data": {
+        "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
+        "operation": "xr.exit",
+        "result": {
+          "success": true
         }
       }
     }
@@ -493,7 +525,7 @@
         "operation": "ecs.pause",
         "result": {
           "paused": true,
-          "frame": 2859,
+          "frame": 45961,
           "systemCount": 19
         }
       }
@@ -581,10 +613,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "welcome",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.0s session: XR started | 0.9s nami: welcome",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "127.8s nami: reveal | 128.2s pinch: right → target | 135.4s nami: caption cleared | 0.0s session: XR ended | 0.0s session: XR started | 1.5s nami: welcome",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -654,14 +687,14 @@
           "device": "hand-right",
           "position": {
             "x": 0.25,
-            "y": 1.5,
-            "z": -0.4000000059604645
+            "y": 1,
+            "z": -0.30000001192092896
           },
           "orientation": {
-            "x": -0.059828486293554306,
-            "y": 0.3397354483604431,
-            "z": 0.021660899743437767,
-            "w": 0.9383662343025208
+            "x": 0.35737693309783936,
+            "y": 0.2559213936328888,
+            "z": -0.10249435901641846,
+            "w": 0.8923457264900208
           }
         }
       }
@@ -700,7 +733,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 3,
-          "totalFrame": 3405
+          "totalFrame": 46492
         }
       }
     }
@@ -738,7 +771,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 3,
-          "totalFrame": 3619
+          "totalFrame": 46713
         }
       }
     }
@@ -757,7 +790,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 3814
+          "totalFrame": 46913
         }
       }
     }
@@ -776,7 +809,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 4010
+          "totalFrame": 47111
         }
       }
     }
@@ -795,7 +828,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 4205
+          "totalFrame": 47307
         }
       }
     }
@@ -814,7 +847,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 4400
+          "totalFrame": 47502
         }
       }
     }
@@ -833,7 +866,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 4596
+          "totalFrame": 47701
         }
       }
     }
@@ -852,7 +885,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 4790
+          "totalFrame": 47902
         }
       }
     }
@@ -1021,10 +1054,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.0s session: XR started | 0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "135.4s nami: caption cleared | 0.0s session: XR ended | 0.0s session: XR started | 1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -1215,14 +1249,14 @@
             {
               "name": "Blue-green chromis school",
               "position": {
-                "x": 0.2906037307369055,
-                "y": 1.4326190497262004,
-                "z": -1.0832015102378494
+                "x": -0.4995687005659588,
+                "y": 1.3511614295727248,
+                "z": -1.1771548751434178
               },
               "size": {
-                "x": 1.1400716951161756,
-                "y": 0.7893429952595914,
-                "z": 1.6338475930863314
+                "x": 2.384652032515434,
+                "y": 0.8324186957727776,
+                "z": 1.7783334109978868
               }
             }
           ]
@@ -1250,14 +1284,14 @@
           "device": "hand-right",
           "position": {
             "x": 0.25,
-            "y": 1.5,
-            "z": -0.4000000059604645
+            "y": 1,
+            "z": -0.30000001192092896
           },
           "orientation": {
-            "x": -0.07834719121456146,
-            "y": 0.550475001335144,
-            "z": 0.05199049413204193,
-            "w": 0.8295395970344543
+            "x": 0.2540508210659027,
+            "y": 0.4651454985141754,
+            "z": -0.1413293331861496,
+            "w": 0.8361362814903259
           }
         }
       }
@@ -1296,7 +1330,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 3,
-          "totalFrame": 5428
+          "totalFrame": 48546
         }
       }
     }
@@ -1334,7 +1368,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 3,
-          "totalFrame": 5643
+          "totalFrame": 48761
         }
       }
     }
@@ -1421,10 +1455,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.0s session: XR started | 0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "0.0s session: XR ended | 0.0s session: XR started | 1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -1446,7 +1481,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 5943
+          "totalFrame": 49069
         }
       }
     }
@@ -1465,7 +1500,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 6078
+          "totalFrame": 49212
         }
       }
     }
@@ -1552,10 +1587,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.0s session: XR started | 0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "0.0s session: XR started | 1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -1645,10 +1681,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.0s session: XR started | 0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "0.0s session: XR started | 1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -1670,7 +1707,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 6429
+          "totalFrame": 49598
         }
       }
     }
@@ -1757,10 +1794,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -1850,10 +1888,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -1875,7 +1914,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 6778
+          "totalFrame": 49955
         }
       }
     }
@@ -1962,10 +2001,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2055,10 +2095,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2080,7 +2121,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 7131
+          "totalFrame": 50310
         }
       }
     }
@@ -2167,10 +2208,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2260,10 +2302,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2285,7 +2328,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 7491
+          "totalFrame": 50693
         }
       }
     }
@@ -2372,10 +2415,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2465,10 +2509,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2490,7 +2535,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 7841
+          "totalFrame": 51332
         }
       }
     }
@@ -2577,10 +2622,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2670,10 +2716,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2695,7 +2742,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 8192
+          "totalFrame": 51702
         }
       }
     }
@@ -2782,10 +2829,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2875,10 +2923,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -2900,7 +2949,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 8547
+          "totalFrame": 52176
         }
       }
     }
@@ -2987,10 +3036,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -3080,10 +3130,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -3105,7 +3156,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 8897
+          "totalFrame": 52541
         }
       }
     }
@@ -3192,10 +3243,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -3285,10 +3337,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -3378,10 +3431,11 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "entered",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "0.9s nami: welcome | 6.5s pinch: right → target | 10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue",
-                "sharkMinDistance": 0
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "1.5s nami: welcome | 7.2s pinch: right → target | 11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue",
+                "hovered": "",
+                "sharkMinDistance": 3.635730028152466
               }
             }
           ]
@@ -3427,7 +3481,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 9492
+          "totalFrame": 53146
         }
       }
     }
@@ -3514,9 +3568,10 @@
                 "schoolState": "attracted",
                 "encounter": "shark_pass",
                 "namiLine": "shark",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "10.6s nami: caption cleared | 15.6s pinch: right → target | 16.0s nami: entered | 17.8s band: openBlue | 21.8s encounter: shark_pass start | 21.8s nami: shark",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "11.2s nami: caption cleared | 16.3s pinch: right → target | 16.7s nami: entered | 18.5s band: openBlue | 22.5s encounter: shark_pass start | 22.5s nami: shark",
+                "hovered": "",
                 "sharkMinDistance": 21.60342788696289
               }
             }
@@ -3539,7 +3594,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 9794
+          "totalFrame": 53458
         }
       }
     }
@@ -3558,7 +3613,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 9992
+          "totalFrame": 53656
         }
       }
     }
@@ -3577,7 +3632,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10187
+          "totalFrame": 53854
         }
       }
     }
@@ -3596,7 +3651,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10386
+          "totalFrame": 54054
         }
       }
     }
@@ -3615,7 +3670,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10582
+          "totalFrame": 54254
         }
       }
     }
@@ -3634,7 +3689,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10785
+          "totalFrame": 54451
         }
       }
     }
@@ -3653,7 +3708,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 10986
+          "totalFrame": 54650
         }
       }
     }
@@ -3672,7 +3727,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 11182
+          "totalFrame": 54848
         }
       }
     }
@@ -3691,7 +3746,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 11377
+          "totalFrame": 55047
         }
       }
     }
@@ -3710,7 +3765,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 11573
+          "totalFrame": 55261
         }
       }
     }
@@ -3729,7 +3784,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 11770
+          "totalFrame": 55459
         }
       }
     }
@@ -3748,7 +3803,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 11969
+          "totalFrame": 55657
         }
       }
     }
@@ -3767,7 +3822,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 12164
+          "totalFrame": 55857
         }
       }
     }
@@ -3786,7 +3841,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 12360
+          "totalFrame": 56056
         }
       }
     }
@@ -3805,7 +3860,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 12556
+          "totalFrame": 56259
         }
       }
     }
@@ -3824,7 +3879,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 12752
+          "totalFrame": 56459
         }
       }
     }
@@ -3843,7 +3898,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 60,
-          "totalFrame": 12917
+          "totalFrame": 56629
         }
       }
     }
@@ -3930,9 +3985,10 @@
                 "schoolState": "evading",
                 "encounter": "shark_pass",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "17.8s band: openBlue | 21.8s encounter: shark_pass start | 21.8s nami: shark | 30.3s nami: caption cleared | 39.4s shark: notice | 41.3s shark: investigate",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "18.5s band: openBlue | 22.5s encounter: shark_pass start | 22.5s nami: shark | 31.0s nami: caption cleared | 40.1s shark: notice | 42.0s shark: investigate",
+                "hovered": "",
                 "sharkMinDistance": 3.6388790607452393
               }
             }
@@ -3955,7 +4011,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 13220
+          "totalFrame": 56958
         }
       }
     }
@@ -3974,7 +4030,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 13416
+          "totalFrame": 57167
         }
       }
     }
@@ -3993,7 +4049,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 13612
+          "totalFrame": 57378
         }
       }
     }
@@ -4012,7 +4068,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 13811
+          "totalFrame": 57577
         }
       }
     }
@@ -4031,7 +4087,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 14012
+          "totalFrame": 57889
         }
       }
     }
@@ -4050,7 +4106,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 14210
+          "totalFrame": 58220
         }
       }
     }
@@ -4069,7 +4125,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 14407
+          "totalFrame": 58430
         }
       }
     }
@@ -4088,7 +4144,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 14604
+          "totalFrame": 58631
         }
       }
     }
@@ -4107,7 +4163,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 14800
+          "totalFrame": 58941
         }
       }
     }
@@ -4126,7 +4182,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 14997
+          "totalFrame": 59277
         }
       }
     }
@@ -4145,7 +4201,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 15194
+          "totalFrame": 59480
         }
       }
     }
@@ -4164,7 +4220,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 15390
+          "totalFrame": 59683
         }
       }
     }
@@ -4183,7 +4239,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 15585
+          "totalFrame": 59994
         }
       }
     }
@@ -4202,7 +4258,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 15783
+          "totalFrame": 60311
         }
       }
     }
@@ -4221,7 +4277,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 15978
+          "totalFrame": 60514
         }
       }
     }
@@ -4240,7 +4296,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 16175
+          "totalFrame": 60723
         }
       }
     }
@@ -4259,7 +4315,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 16371
+          "totalFrame": 60929
         }
       }
     }
@@ -4278,7 +4334,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 16567
+          "totalFrame": 61136
         }
       }
     }
@@ -4297,7 +4353,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 16764
+          "totalFrame": 61362
         }
       }
     }
@@ -4316,7 +4372,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 16961
+          "totalFrame": 61573
         }
       }
     }
@@ -4335,7 +4391,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 17157
+          "totalFrame": 61790
         }
       }
     }
@@ -4354,7 +4410,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 17354
+          "totalFrame": 61999
         }
       }
     }
@@ -4373,7 +4429,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 17549
+          "totalFrame": 62314
         }
       }
     }
@@ -4392,7 +4448,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 17744
+          "totalFrame": 62647
         }
       }
     }
@@ -4411,7 +4467,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 17944
+          "totalFrame": 62862
         }
       }
     }
@@ -4430,7 +4486,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 18145
+          "totalFrame": 63073
         }
       }
     }
@@ -4449,7 +4505,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 18350
+          "totalFrame": 63292
         }
       }
     }
@@ -4468,7 +4524,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 18546
+          "totalFrame": 63518
         }
       }
     }
@@ -4487,7 +4543,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 18742
+          "totalFrame": 63721
         }
       }
     }
@@ -4506,7 +4562,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 18943
+          "totalFrame": 63922
         }
       }
     }
@@ -4525,7 +4581,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 19139
+          "totalFrame": 64122
         }
       }
     }
@@ -4544,7 +4600,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 19334
+          "totalFrame": 64327
         }
       }
     }
@@ -4563,7 +4619,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 19531
+          "totalFrame": 64529
         }
       }
     }
@@ -4582,7 +4638,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 19730
+          "totalFrame": 64854
         }
       }
     }
@@ -4601,7 +4657,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 19927
+          "totalFrame": 65181
         }
       }
     }
@@ -4620,7 +4676,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 20123
+          "totalFrame": 65510
         }
       }
     }
@@ -4639,7 +4695,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 20320
+          "totalFrame": 65841
         }
       }
     }
@@ -4658,7 +4714,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 20516
+          "totalFrame": 66039
         }
       }
     }
@@ -4677,7 +4733,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 20712
+          "totalFrame": 66240
         }
       }
     }
@@ -4696,7 +4752,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 20908
+          "totalFrame": 66652
         }
       }
     }
@@ -4715,7 +4771,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 21104
+          "totalFrame": 66977
         }
       }
     }
@@ -4734,7 +4790,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 21300
+          "totalFrame": 67361
         }
       }
     }
@@ -4753,7 +4809,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 21495
+          "totalFrame": 67713
         }
       }
     }
@@ -4772,7 +4828,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 21695
+          "totalFrame": 67942
         }
       }
     }
@@ -4791,7 +4847,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 21893
+          "totalFrame": 68255
         }
       }
     }
@@ -4810,7 +4866,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 22090
+          "totalFrame": 68462
         }
       }
     }
@@ -4829,7 +4885,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 22285
+          "totalFrame": 68666
         }
       }
     }
@@ -4848,7 +4904,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 22479
+          "totalFrame": 68875
         }
       }
     }
@@ -4867,7 +4923,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 22682
+          "totalFrame": 69075
         }
       }
     }
@@ -4886,7 +4942,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 22877
+          "totalFrame": 69287
         }
       }
     }
@@ -4905,7 +4961,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 23073
+          "totalFrame": 69506
         }
       }
     }
@@ -4924,7 +4980,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 23269
+          "totalFrame": 69839
         }
       }
     }
@@ -4943,7 +4999,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 23467
+          "totalFrame": 70043
         }
       }
     }
@@ -4962,7 +5018,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 23667
+          "totalFrame": 70360
         }
       }
     }
@@ -4981,7 +5037,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 23866
+          "totalFrame": 70692
         }
       }
     }
@@ -5000,7 +5056,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 24064
+          "totalFrame": 70897
         }
       }
     }
@@ -5019,7 +5075,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 24262
+          "totalFrame": 71099
         }
       }
     }
@@ -5038,7 +5094,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 24457
+          "totalFrame": 71312
         }
       }
     }
@@ -5057,7 +5113,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 24654
+          "totalFrame": 71516
         }
       }
     }
@@ -5076,7 +5132,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 24851
+          "totalFrame": 71836
         }
       }
     }
@@ -5163,9 +5219,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "69.8s encounter: shark_pass complete | 69.8s nami: sharkGone | 74.8s encounter: turtle_pass start | 74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "70.5s encounter: shark_pass complete | 70.5s nami: sharkGone | 75.5s encounter: turtle_pass start | 75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -5256,9 +5313,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "69.8s encounter: shark_pass complete | 69.8s nami: sharkGone | 74.8s encounter: turtle_pass start | 74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "70.5s encounter: shark_pass complete | 70.5s nami: sharkGone | 75.5s encounter: turtle_pass start | 75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -5450,14 +5508,14 @@
             {
               "name": "Blue-green chromis school",
               "position": {
-                "x": 0.2906037307369055,
-                "y": 1.4326190497262004,
-                "z": -1.0832015102378494
+                "x": -0.4995687005659588,
+                "y": 1.3511614295727248,
+                "z": -1.1771548751434178
               },
               "size": {
-                "x": 1.1400716951161756,
-                "y": 0.7893429952595914,
-                "z": 1.6338475930863314
+                "x": 2.384652032515434,
+                "y": 0.8324186957727776,
+                "z": 1.7783334109978868
               }
             }
           ]
@@ -5531,7 +5589,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 3,
-          "totalFrame": 25519
+          "totalFrame": 72810
         }
       }
     }
@@ -5569,7 +5627,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 3,
-          "totalFrame": 25844
+          "totalFrame": 73096
         }
       }
     }
@@ -5656,9 +5714,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "69.8s nami: sharkGone | 74.8s encounter: turtle_pass start | 74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "70.5s nami: sharkGone | 75.5s encounter: turtle_pass start | 75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -5720,14 +5779,14 @@
           "device": "hand-right",
           "position": {
             "x": 0.25,
-            "y": 1.5,
-            "z": -0.4000000059604645
+            "y": 1,
+            "z": -0.30000001192092896
           },
           "orientation": {
-            "x": 0.020783495157957077,
-            "y": 0.8846728801727295,
-            "z": 0.03962111845612526,
-            "w": -0.4640604555606842
+            "x": -0.014449534006416798,
+            "y": 0.8792697191238403,
+            "z": -0.02672751620411873,
+            "w": -0.4753541946411133
           }
         }
       }
@@ -5766,7 +5825,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 60,
-          "totalFrame": 26435
+          "totalFrame": 74083
         }
       }
     }
@@ -5838,8 +5897,8 @@
                 "reducedMotion": false,
                 "ambientLight": 0.874545156955719,
                 "interactionMode": "travel",
-                "travelX": 0.2879556119441986,
-                "travelZ": 0.19895115494728088,
+                "travelX": 0.2928455173969269,
+                "travelZ": 0.19168071448802948,
                 "oceanInstances": 1,
                 "panelVisible": true,
                 "lastEvent": "band: sunlit",
@@ -5853,9 +5912,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -5897,7 +5957,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 2,
-          "totalFrame": 26756
+          "totalFrame": 74539
         }
       }
     }
@@ -5969,8 +6029,8 @@
                 "reducedMotion": false,
                 "ambientLight": 0.8782041668891907,
                 "interactionMode": "world",
-                "travelX": 0.2879556119441986,
-                "travelZ": 0.19895115494728088,
+                "travelX": 0.2928455173969269,
+                "travelZ": 0.19168071448802948,
                 "oceanInstances": 1,
                 "panelVisible": true,
                 "lastEvent": "mode: world",
@@ -5984,9 +6044,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -6009,7 +6070,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 60,
-          "totalFrame": 27028
+          "totalFrame": 74967
         }
       }
     }
@@ -6081,8 +6142,8 @@
                 "reducedMotion": false,
                 "ambientLight": 0.9424269199371338,
                 "interactionMode": "world",
-                "travelX": 0.2879556119441986,
-                "travelZ": 0.19895115494728088,
+                "travelX": 0.2928455173969269,
+                "travelZ": 0.19168071448802948,
                 "oceanInstances": 1,
                 "panelVisible": true,
                 "lastEvent": "mode: world",
@@ -6096,9 +6157,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -6178,7 +6240,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 1,
-          "totalFrame": 27454
+          "totalFrame": 75410
         }
       }
     }
@@ -6250,8 +6312,8 @@
                 "reducedMotion": false,
                 "ambientLight": 0.9424269199371338,
                 "interactionMode": "world",
-                "travelX": 0.2879556119441986,
-                "travelZ": 0.19895115494728088,
+                "travelX": 0.2928455173969269,
+                "travelZ": 0.19168071448802948,
                 "oceanInstances": 1,
                 "panelVisible": true,
                 "lastEvent": "pause: simulation frozen",
@@ -6265,9 +6327,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -6314,7 +6377,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 27862
+          "totalFrame": 76067
         }
       }
     }
@@ -6333,7 +6396,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 27997
+          "totalFrame": 76376
         }
       }
     }
@@ -6405,8 +6468,8 @@
                 "reducedMotion": false,
                 "ambientLight": 0.9424269199371338,
                 "interactionMode": "world",
-                "travelX": 0.2879556119441986,
-                "travelZ": 0.19895115494728088,
+                "travelX": 0.2928455173969269,
+                "travelZ": 0.19168071448802948,
                 "oceanInstances": 1,
                 "panelVisible": true,
                 "lastEvent": "target: user 1.00 (midnight)",
@@ -6420,9 +6483,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -6469,7 +6533,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 60,
-          "totalFrame": 28375
+          "totalFrame": 77123
         }
       }
     }
@@ -6541,8 +6605,8 @@
                 "reducedMotion": false,
                 "ambientLight": 0.8301948308944702,
                 "interactionMode": "world",
-                "travelX": 0.2879556119441986,
-                "travelZ": 0.19895115494728088,
+                "travelX": 0.2928455173969269,
+                "travelZ": 0.19168071448802948,
                 "oceanInstances": 1,
                 "panelVisible": true,
                 "lastEvent": "resume: simulation running",
@@ -6556,9 +6620,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "74.8s nami: turtle | 83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "75.5s nami: turtle | 83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -6605,7 +6670,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 2,
-          "totalFrame": 28700
+          "totalFrame": 77467
         }
       }
     }
@@ -6692,9 +6757,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit | 0.0s restart: ocean, encounters and reveal reset",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit | 0.0s restart: ocean, encounters and reveal reset",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -6741,7 +6807,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 29120
+          "totalFrame": 77931
         }
       }
     }
@@ -6760,7 +6826,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 29256
+          "totalFrame": 78180
         }
       }
     }
@@ -6847,9 +6913,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "",
-                "sweeps": 0,
-                "scatters": 0,
-                "eventLog": "83.1s nami: caption cleared | 114.8s encounter: turtle_pass complete | 137.2s pinch: left → target | 137.3s pinch: right → travel | 137.9s band: sunlit | 0.0s restart: ocean, encounters and reveal reset",
+                "sweeps": 1,
+                "scatters": 1,
+                "eventLog": "83.8s nami: caption cleared | 115.5s encounter: turtle_pass complete | 137.9s pinch: left → target | 138.0s pinch: right → travel | 138.6s band: sunlit | 0.0s restart: ocean, encounters and reveal reset",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -6868,7 +6935,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 26610
+          "framesWhilePaused": 32435
         }
       }
     }
@@ -6911,7 +6978,7 @@
         "operation": "ecs.pause",
         "result": {
           "paused": true,
-          "frame": 29780,
+          "frame": 78720,
           "systemCount": 19
         }
       }
@@ -6931,7 +6998,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 2,
-          "totalFrame": 29889
+          "totalFrame": 78838
         }
       }
     }
@@ -7018,9 +7085,10 @@
                 "schoolState": "attracted",
                 "encounter": "none",
                 "namiLine": "welcome",
-                "sweeps": 0,
-                "scatters": 0,
+                "sweeps": 1,
+                "scatters": 1,
                 "eventLog": "2.2s band: openBlue | 2.2s nami: openBlue | 0.0s session: XR ended | 0.0s nami: caption cleared | 0.0s session: XR started | 1.5s nami: welcome",
+                "hovered": "",
                 "sharkMinDistance": 3.633174419403076
               }
             }
@@ -7039,7 +7107,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 317
+          "framesWhilePaused": 331
         }
       }
     }
@@ -8361,7 +8429,150 @@
             "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
           },
           {
-            "timestamp": 1794973194587,
+            "timestamp": 1794974226597,
+            "level": "warn",
+            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
+            "args": [
+              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "repeatCount": 8
+          },
+          {
+            "timestamp": 1794974268473,
+            "level": "error",
+            "message": "GET https://localhost:8081/?__iwsdk_preview_reload=mwllc1li: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/?__iwsdk_preview_reload=mwllc1li: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwlkd6cq",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "document",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwllc1li"
+          },
+          {
+            "timestamp": 1794974268549,
+            "level": "error",
+            "message": "GET https://localhost:8081/?__iwsdk_preview_reload=mwlkd6cq: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/?__iwsdk_preview_reload=mwlkd6cq: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwlkd6cq",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "document",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwlkd6cq"
+          },
+          {
+            "timestamp": 1794974268839,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794974270008,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794974276162,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794974276217,
+            "level": "info",
+            "message": "Frame navigated: about:blank",
+            "args": [
+              "Frame navigated: about:blank"
+            ],
+            "frameUrl": "about:blank",
+            "kind": "navigation",
+            "url": "about:blank",
+            "repeatCount": 2
+          },
+          {
+            "timestamp": 1794974276327,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/",
+            "args": [
+              "Frame navigated: https://localhost:8081/"
+            ],
+            "frameUrl": "https://localhost:8081/",
+            "kind": "navigation",
+            "url": "https://localhost:8081/"
+          },
+          {
+            "timestamp": 1794974276563,
+            "level": "warn",
+            "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+            "args": [
+              "\"THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794974278045,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794974278638,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794974551135,
             "level": "warn",
             "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
             "args": [
@@ -8373,6 +8584,200 @@
             "lineNumber": 296,
             "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
             "repeatCount": 2
+          },
+          {
+            "timestamp": 1794974713539,
+            "level": "error",
+            "message": "GET https://localhost:8081/?__iwsdk_preview_reload=mwllll10: net::ERR_ABORTED",
+            "args": [
+              "GET https://localhost:8081/?__iwsdk_preview_reload=mwllll10: net::ERR_ABORTED"
+            ],
+            "failure": "net::ERR_ABORTED",
+            "frameUrl": "https://localhost:8081/",
+            "kind": "requestfailed",
+            "method": "GET",
+            "resourceType": "document",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwllll10"
+          },
+          {
+            "timestamp": 1794974713655,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwllll12",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwllll12"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwllll12",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwllll12"
+          },
+          {
+            "timestamp": 1794974714435,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794974714939,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794974761401,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwllll12",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwllll12"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwllll12",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwllll12"
+          },
+          {
+            "timestamp": 1794974762091,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794974762594,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794976352210,
+            "level": "warn",
+            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
+            "args": [
+              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "repeatCount": 4
+          },
+          {
+            "timestamp": 1794977096948,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j"
+          },
+          {
+            "timestamp": 1794977097803,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794977098349,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794977111429,
+            "level": "info",
+            "message": "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j",
+            "args": [
+              "Frame navigated: https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j"
+            ],
+            "frameUrl": "https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j",
+            "kind": "navigation",
+            "url": "https://localhost:8081/?__iwsdk_preview_reload=mwln0o0j"
+          },
+          {
+            "timestamp": 1794977112140,
+            "level": "log",
+            "message": "[IWSDK Dev] Configuration: {device: metaQuest3, activation: localhost, verbose: false, sem: Object, ai: null}",
+            "args": [
+              "\"[IWSDK Dev] Configuration:\"",
+              "{\"device\":\"metaQuest3\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"sunlit_living_room\"},\"ai\":null,\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":false,\"devUI\":true,\"browserAutomation\":false,\"viewport\":null,\"screenshotSize\":{\"width\":640,\"height\":640}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+            ],
+            "columnNumber": 1084215,
+            "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+            "kind": "console",
+            "lineNumber": 983,
+            "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+          },
+          {
+            "timestamp": 1794977112571,
+            "level": "log",
+            "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0\nThree.js r185\nEliCS v3.4.2",
+            "args": [
+              "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0\\nThree.js r185\\nEliCS v3.4.2\""
+            ],
+            "columnNumber": 8,
+            "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 122,
+            "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=31729a6f"
+          },
+          {
+            "timestamp": 1794978437020,
+            "level": "warn",
+            "message": "THREE.WebGLRenderer: Can't change size while VR device is presenting.",
+            "args": [
+              "\"THREE.WebGLRenderer: Can't change size while VR device is presenting.\""
+            ],
+            "columnNumber": 14,
+            "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "kind": "console",
+            "lineNumber": 296,
+            "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=31729a6f",
+            "repeatCount": 3
           }
         ]
       }
@@ -8388,7 +8793,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 731
+          "framesWhilePaused": 1004
         }
       }
     }
