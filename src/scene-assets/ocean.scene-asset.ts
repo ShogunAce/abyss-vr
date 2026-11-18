@@ -219,7 +219,7 @@ export function createOcean() {
   moteGeometry.setAttribute('position', new Float32BufferAttribute(motePositions, 3));
   const moteMaterial = new ShaderMaterial({
     uniforms: { uTime: { value: 0 }, uReveal: { value: 0 }, uDrift: { value: new Vector3() }, uTravel: { value: new Vector3() }, uHandA: { value: new Vector4() }, uHandB: { value: new Vector4() }, uHandVA: { value: new Vector3() }, uHandVB: { value: new Vector3() }, ...environmentUniforms() }, transparent: true, depthWrite: false,
-    vertexShader: `uniform float uTime; uniform vec3 uDrift; uniform vec3 uTravel; uniform vec4 uHandA; uniform vec4 uHandB; uniform vec3 uHandVA; uniform vec3 uHandVB; varying float vAlpha;
+    vertexShader: `uniform float uTime; uniform vec3 uDrift; uniform vec3 uTravel; uniform vec4 uHandA; uniform vec4 uHandB; uniform vec3 uHandVA; uniform vec3 uHandVB; varying float vAlpha; varying float vSpark;
     // Hands stir the water: nearby particles are pushed aside and dragged along in the hand's wake.
     vec3 wake(vec3 p, vec4 h, vec3 v) { vec3 d = p - h.xyz; float f = exp(-dot(d, d) / 0.06) * h.w; return d * f * 1.6 + v * f * 0.22; }
     void main() {
@@ -228,11 +228,14 @@ export function createOcean() {
       p.xz = mod(p.xz + 16.0, 32.0) - 16.0;
       p.y = mod(p.y + 2.8, 8.0) - 2.8;
       p.x += sin(uTime * 0.11 + p.z) * 0.08; p.y += sin(uTime * 0.15 + p.x) * 0.1;
+      // Living light: plankton flash where a hand disturbs them (dinoflagellates do this for real).
+      vec3 da = p - uHandA.xyz, db = p - uHandB.xyz;
+      vSpark = clamp(exp(-dot(da, da) / 0.05) * uHandA.w * 1.6 + exp(-dot(db, db) / 0.05) * uHandB.w * 1.6, 0.0, 1.0);
       p += wake(p, uHandA, uHandVA) + wake(p, uHandB, uHandVB);
       vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv;
       gl_PointSize = clamp(9.0 / max(0.45, -mv.z), 1.0, 6.0); vAlpha = 0.25 + 0.3 * sin(position.x * 7.0) * sin(position.x * 7.0);
     }`,
-    fragmentShader: `uniform float uReveal; ${environmentGlsl} varying float vAlpha; void main() {
+    fragmentShader: `uniform float uReveal; ${environmentGlsl} varying float vAlpha; varying float vSpark; void main() {
       float soft = 1.0 - smoothstep(0.05, 0.5, length(gl_PointCoord - 0.5));
       // Sunlit motes scatter daylight; deep motes become sparse cyan/violet bioluminescence.
       vec3 lit = vec3(0.46, 0.87, 0.82) * (0.25 + 0.75 * uLight);
@@ -240,6 +243,9 @@ export function createOcean() {
       float sparse = step(0.62, fract(vAlpha * 7.3));
       vec3 col = mix(lit, glow, uGlow * sparse);
       float alpha = soft * vAlpha * uReveal * mix(1.0, 0.4 + 1.6 * sparse, uGlow);
+      float spark = vSpark * smoothstep(0.15, 0.6, uGlow);
+      col = mix(col, vec3(0.55, 1.0, 0.95) * 1.6, spark);
+      alpha = max(alpha, soft * spark * uReveal);
       gl_FragColor = vec4(col, alpha);
     }`,
   });

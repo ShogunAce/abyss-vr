@@ -1,4 +1,6 @@
-import { CanvasTexture, createSystem, type Entity, Mesh, MeshBasicMaterial, Object3D, PlaneGeometry, Pressed, RayInteractable } from '@iwsdk/core';
+import { CanvasTexture, createSystem, type Entity, Group, Mesh, MeshBasicMaterial, Object3D, PlaneGeometry, Pressed, RayInteractable, SphereGeometry } from '@iwsdk/core';
+import { MARKERS } from '../data/markers.js';
+import { registerDraggable } from './drag-system.js';
 import { audio } from '../audio/audio-engine.js';
 import { SPECIES, speciesById } from '../data/species.js';
 import { Inspectable, OceanControl } from '../ocean/ocean-components.js';
@@ -41,13 +43,16 @@ export class GuideSystem extends createSystem({
   private audioClock = 0;
   private enteredFor = 0;
 
-  private makePanel(name: string, w: number, h: number, metres: number, action: string): Panel {
+  private guideGroup = new Group();
+  private orbHit!: Entity;
+
+  private makePanel(name: string, w: number, h: number, metres: number, action: string, parent?: Entity): Panel {
     const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
     const ctx = canvas.getContext('2d')!;
     const texture = new CanvasTexture(canvas);
     const mesh = new Mesh(new PlaneGeometry(metres, metres * h / w), new MeshBasicMaterial({ map: texture, transparent: true, depthWrite: false }));
     mesh.name = name; mesh.visible = false; mesh.renderOrder = 41;
-    const entity = this.world.createTransformEntity(mesh, { parent: this.world.requireSceneEntity('experience') });
+    const entity = this.world.createTransformEntity(mesh, { parent: parent ?? this.world.requireSceneEntity('experience') });
     entity.addComponent(OceanControl, { action });
     return { mesh, canvas, ctx, texture, entity, w, h };
   }
@@ -57,10 +62,18 @@ export class GuideSystem extends createSystem({
     const experience = this.world.requireSceneEntity('experience');
     // Layout keeps pinchable text above eye line, out of the rays aimed at the sphere, panel and creatures.
     // NAMI and captions live to the left, above the Depth Compass, never in the centre of view.
-    this.nami.group.position.set(-0.28, 0.14, 0.12);
-    this.world.createTransformEntity(this.nami.group, { parent: experience });
-    this.caption = this.makePanel('NAMI caption', 720, 190, 0.34, 'nami-dismiss');
-    this.caption.mesh.position.set(-0.38, 0.2, 0.16); this.caption.mesh.rotation.set(0.05, 0.55, 0);
+    // The guide (NAMI orb + her captions) is one movable group: pinch the orb and move it anywhere.
+    this.guideGroup.name = 'Guide';
+    this.guideGroup.position.set(-0.36, 0.13, 0.15); this.guideGroup.rotation.set(0.05, 0.55, 0);
+    const guideEntity = this.world.createTransformEntity(this.guideGroup, { parent: experience });
+    registerDraggable('guide', this.guideGroup);
+    this.world.createTransformEntity(this.nami.group, { parent: guideEntity });
+    const hit = new Mesh(new SphereGeometry(0.05, 10, 8), new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false }));
+    hit.name = 'NAMI orb (pinch to move)';
+    this.orbHit = this.world.createTransformEntity(hit, { parent: guideEntity });
+    this.orbHit.addComponent(OceanControl, { action: 'drag:guide' });
+    this.caption = this.makePanel('NAMI caption', 720, 190, 0.34, 'nami-dismiss', guideEntity);
+    this.caption.mesh.position.set(-0.02, 0.1, 0);
     this.card = this.makePanel('Discovery card', 720, 470, 0.36, 'card-close');
     this.card.mesh.position.set(0.34, 0.26, 0.06); this.card.mesh.rotation.set(0.1, -0.45, 0);
     this.bubbles.points.position.set(0, -0.05, 0);
@@ -76,7 +89,7 @@ export class GuideSystem extends createSystem({
         runtime.log('comfort', `guide ${runtime.prefs.guide ? 'on' : 'off'}`);
       },
       'nami-mute': () => { runtime.prefs.namiMuted = !runtime.prefs.namiMuted; runtime.nami.setMuted(runtime.prefs.namiMuted); runtime.savePrefs(); },
-      'clear-discoveries': () => { runtime.discovered.clear(); try { localStorage.removeItem('abyss.discoveries.v1'); } catch { /* ignore */ } },
+      'clear-discoveries': () => { runtime.clearProgress(); runtime.log('journal', 'progress cleared'); },
     });
 
     this.cleanupFuncs.push(this.queries.pressedCreatures.subscribe('qualify', entity => {
@@ -121,6 +134,29 @@ export class GuideSystem extends createSystem({
     this.card.texture.needsUpdate = true;
   }
 
+  private showMarker(id: string) {
+    const m = MARKERS.find(x => x.id === id);
+    if (!m) return;
+    const { ctx, w, h } = this.card;
+    this.cardSpecies = id;
+    this.cardUntil = runtime.clock + 30;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(7,24,36,0.92)'; ctx.beginPath(); ctx.roundRect(0, 0, w, h, 26); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,214,120,0.55)'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#FFD678'; ctx.font = '600 20px Manrope, system-ui, sans-serif';
+    ctx.fillText(`DIVE MARKER ${runtime.markers.size}/${MARKERS.length}`, 30, 44);
+    ctx.fillStyle = PALETTE.neutral; ctx.font = '600 40px Manrope, system-ui, sans-serif'; ctx.fillText(m.title, 30, 96);
+    ctx.fillStyle = '#a8d6d7'; ctx.font = '600 24px Manrope, system-ui, sans-serif'; ctx.fillText(m.depthLabel, 30, 130);
+    ctx.fillStyle = PALETTE.neutral; ctx.font = '26px Manrope, system-ui, sans-serif';
+    const used = wrap(ctx, m.fact, 30, 178, w - 60, 34, 5);
+    ctx.fillStyle = '#9fc4c9'; ctx.font = '21px Manrope, system-ui, sans-serif';
+    wrap(ctx, m.more, 30, 186 + used * 34, w - 60, 28, 3);
+    ctx.fillStyle = '#7fa3ab'; ctx.font = '18px Manrope, system-ui, sans-serif';
+    ctx.fillText(`Source: ${m.sourceName}`, 30, h - 52);
+    ctx.fillStyle = PALETTE.cyan; ctx.fillText('Pinch this card to close', 30, h - 24);
+    this.card.texture.needsUpdate = true;
+  }
+
   private drawCaption(text: string) {
     const { ctx, w, h } = this.caption;
     ctx.clearRect(0, 0, w, h);
@@ -141,10 +177,16 @@ export class GuideSystem extends createSystem({
     this.enteredFor = runtime.immersion >= 0.999 ? this.enteredFor + delta : 0;
     if (this.enteredFor > 1.5) runtime.nami.notify('entered', t);
 
-    // NAMI orb: gentle bob, brighter while speaking.
-    const talking = runtime.nami.current !== null;
-    this.nami.group.position.y = 0.14 + Math.sin(t * 1.1) * 0.01;
-    this.nami.group.visible = runtime.prefs.guide && (runtime.sessionActive || runtime.immersion > 0);
+    if (runtime.pendingMarker) { this.showMarker(runtime.pendingMarker); runtime.pendingMarker = ''; }
+
+    // NAMI orb: gentle bob, brighter while speaking (and while being moved).
+    const talking = runtime.nami.current !== null || runtime.dragging === 'guide';
+    this.nami.group.position.y = Math.sin(t * 1.1) * 0.01;
+    const guideShown = runtime.prefs.guide && (runtime.sessionActive || runtime.immersion > 0);
+    this.nami.group.visible = guideShown;
+    if (guideShown !== this.orbHit.hasComponent(RayInteractable)) {
+      if (guideShown) this.orbHit.addComponent(RayInteractable); else this.orbHit.removeComponent(RayInteractable);
+    }
     ((this.nami.core.material as unknown as { uniforms: { uTalk: { value: number } } }).uniforms.uTalk).value = talking ? 0.6 + 0.4 * Math.sin(t * 6) : 0;
     this.nami.halo.material.opacity = talking ? 0.9 : 0.5;
 

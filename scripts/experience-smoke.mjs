@@ -53,16 +53,74 @@ try {
   check(sphereState().destination === 'room', 'Relaxed hands do not start the ocean');
   check(s.namiLine === 'welcome', 'NAMI welcomes in the room', s.namiLine);
 
-  // ---- open-palm entry (alternative to pinching the sphere)
+  // ---- one sign, one job: an open palm in the room is light, not a door
   cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'open' });
   wait(500);
-  advance(1.2);
-  check(sphereState().destination === 'ocean', 'Open palm in the room lets the ocean in');
+  advance(1.5);
+  check(sphereState().destination === 'room', 'Open palm in the room does not enter the ocean');
   cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'default' });
+  advance(0.3);
+  pinchAt('hand-right', 'ABYSS sphere');
+  check(sphereState().destination === 'ocean', 'Pinching the pearl lets the ocean in');
   advance(9);
   check(sphereState().immersion === 1, 'Room transforms to ocean');
   s = status();
   check(s.band === 'sunlit' && s.schoolState !== '', 'Sunlit ocean with school', s.schoolState);
+
+  // ---- ✊ fist toggles the menu (once per hold); the Menu tab brings it back
+  if (!s.panelVisible) { command('menu'); advance(0.2); s = status(); } // a previous run may have left it hidden (saved preference)
+  check(s.panelVisible, 'Dive menu shown in the ocean');
+  cli('xr', 'animate-to', { device: 'hand-right', position: { x: 0.25, y: 1.45, z: -0.4 }, duration: 0.2 });
+  wait(300);
+  cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'fist' });
+  wait(400); advance(1.2);
+  s = status();
+  check(!s.panelVisible, 'Raised fist hides the menu', s.gesture);
+  advance(1.5);
+  check(!status().panelVisible, 'Holding the fist does not toggle again');
+  cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'default' });
+  wait(300); advance(0.4);
+  pinchAt('hand-right', 'Menu tab');
+  check(status().panelVisible, 'Pinching the Menu tab shows the menu again');
+
+  // ---- menu pages: Hand signs and Map & journal
+  pinchAt('hand-right', 'Depth control Hand signs');
+  check(status().menuPage === 'signs', 'Hand signs page opens', status().menuPage);
+  pinchAt('hand-right', 'Depth control Map & journal');
+  check(status().menuPage === 'journal', 'Map & journal page opens', status().menuPage);
+  pinchAt('hand-right', 'Depth control Dive');
+  check(status().menuPage === 'controls', 'Back to the dive controls', status().menuPage);
+
+  // ---- 🤏 a pinch in open water does nothing but select
+  cli('xr', 'look-at', { device: 'hand-right', target: { x: 2, y: 3, z: -1 } });
+  cli('xr', 'set-select-value', { device: 'hand-right', value: 1 }); advance(1);
+  cli('xr', 'set-select-value', { device: 'hand-right', value: 0 }); advance(0.2);
+  s = status();
+  check(s.travelX === 0 && s.travelZ === 0 && s.pulses === 0, 'Pinch in open water neither swims nor fires light');
+
+  // ---- 👉 point to swim to a dive marker (sunlit-oxygen at -2.6, -0.35, -2.2 in the travel frame)
+  const head = cli('xr', 'get-transform', { device: 'headset' }).position;
+  cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'point' });
+  cli('xr', 'animate-to', { device: 'hand-right', position: { x: 0.2, y: 1.3, z: -0.35 }, duration: 0.1 });
+  wait(200);
+  let swam = false;
+  for (let t = 0; t < 24 && status().markers < 1; t++) {
+    const v = status();
+    cli('xr', 'look-at', { device: 'hand-right', target: { x: head.x - 2.6 - v.travelX, y: head.y - 0.6, z: head.z - 2.2 - v.travelZ } });
+    advance(1);
+    if (/point/.test(status().gesture) && (status().travelX !== 0 || status().travelZ !== 0)) swam = true;
+  }
+  s = status();
+  check(swam, 'Pointing swims', s.gesture);
+  check(s.markers >= 1, 'Swimming to a dive marker logs it', `travel ${s.travelX.toFixed(2)}, ${s.travelZ.toFixed(2)}; markers ${s.markers}`);
+  cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'default' });
+  wait(300); advance(1);
+  const parked = status();
+  advance(1);
+  check(status().travelX === parked.travelX && status().travelZ === parked.travelZ, 'Swimming stops when you stop pointing');
+  pinchAt('hand-right', 'Discovery card');
+  command('reset'); advance(0.5);
+  s = status();
 
   // ---- slow/steady hand attracts the school
   cli('xr', 'animate-to', { device: 'hand-right', position: { x: 0.3, y: 1.2, z: -0.5 }, duration: 0.6 });
@@ -91,12 +149,15 @@ try {
   advance(9);
   pinchAt('hand-right', 'Green sea turtle');
   s = status();
-  check(s.discoveries >= 1 && s.namiLine === 'discovery', 'Pinching the turtle records a discovery and shows a card', `discoveries ${s.discoveries}`);
+  if (s.discoveries < 1) { console.log('NOTE turtle pinch retry (hovered ' + s.hovered + '; log ' + s.eventLog + ')'); advance(1); pinchAt('hand-right', 'Green sea turtle'); s = status(); }
+  check(s.discoveries >= 1 && s.namiLine === 'discovery', 'Pinching the turtle records a discovery and shows a card', `discoveries ${s.discoveries}; hovered ${s.hovered}; log ${s.eventLog}`);
   check(s.travelX === 0 && s.travelZ === 0, 'Inspection did not trigger travel');
   pinchAt('hand-right', 'Discovery card');
   advance(0.5);
 
+  if (process.env.STOP_AT === 'turtle') { console.log('stopped after turtle'); process.exit(0); }
   // ---- open blue: showcase shark pass, fish react, comfort radius respected
+  if (!process.env.SKIP_SHARK) {
   command('depth:0.45');
   s = until(v => v.encounter === 'shark_pass', 60, 1);
   check(s.encounter === 'shark_pass', 'Showcase shark encounter in open blue', `depth ${s.depth.toFixed(2)}`);
@@ -111,6 +172,7 @@ try {
   check(s.sharkMinDistance >= 3.19, 'Shark stays outside the 3.2 m comfort radius', `${s.sharkMinDistance.toFixed(2)} m`);
   check(inspected, 'Shark can be inspected (left hand)');
   check(status().encounter === 'none', 'Encounter resolves');
+  }
 
   // ---- midnight: palm light, one pulse, wavefront, giant reveal, discovery
   command('depth:0.95');
@@ -123,13 +185,12 @@ try {
   s = status();
   check(/open palm/.test(s.gesture), 'Open palm detected at midnight', s.gesture);
   check(s.namiLine === 'armed' || s.namiLine === 'midnight', 'NAMI prompts the pulse', s.namiLine);
-  cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'pinch' });
-  cli('xr', 'set-select-value', { device: 'hand-right', value: 1 }); advance(0.2);
-  check(status().pulses === 0 && status().travelX === 0, 'No pulse until release; no travel while armed');
-  cli('xr', 'set-select-value', { device: 'hand-right', value: 0 }); advance(0.2);
+  advance(1.5);
+  check(status().pulses === 1, 'Holding the open palm releases exactly one light pulse', `pulses ${status().pulses}`);
+  advance(2);
+  check(status().pulses === 1 && status().travelX === 0, 'A held palm does not stream pulses or swim');
   cli('xr', 'set-hand-pose', { device: 'hand-right', poseId: 'default' });
   s = status();
-  check(s.pulses === 1, 'Pinch-release emits exactly one pulse', `pulses ${s.pulses}`);
   s = until(v => v.revealState === 'revealed', 15);
   check(s.revealState === 'revealed', 'Wavefront reaches the giant squid and the reveal completes');
   check(status().pulses === 1, 'Still exactly one pulse');

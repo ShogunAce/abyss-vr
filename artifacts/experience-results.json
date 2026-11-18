@@ -16,7 +16,12 @@
       "detail": "welcome"
     },
     {
-      "label": "Open palm in the room lets the ocean in",
+      "label": "Open palm in the room does not enter the ocean",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Pinching the pearl lets the ocean in",
       "pass": true,
       "detail": ""
     },
@@ -31,145 +36,10 @@
       "detail": "attracted"
     },
     {
-      "label": "Steady hand near the school attracts fish",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Fast sweep detected (cooldown-limited)",
-      "pass": true,
-      "detail": "0 → 1"
-    },
-    {
-      "label": "Each fast sweep scatters the school",
-      "pass": true,
-      "detail": "scatters 0 → 1, state schooling"
-    },
-    {
-      "label": "School regroups",
-      "pass": true,
-      "detail": "schooling"
-    },
-    {
-      "label": "Showcase turtle encounter begins in sunlit water",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Pinching the turtle records a discovery and shows a card",
-      "pass": true,
-      "detail": "discoveries 1"
-    },
-    {
-      "label": "Inspection did not trigger travel",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Showcase shark encounter in open blue",
-      "pass": true,
-      "detail": "depth 0.45"
-    },
-    {
-      "label": "Shark: cruise → notice → investigate → turn away → done",
-      "pass": true,
-      "detail": "cruise,notice,investigate,turnAway,done"
-    },
-    {
-      "label": "School evades the shark without user input",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Shark stays outside the 3.2 m comfort radius",
-      "pass": true,
-      "detail": "3.63 m"
-    },
-    {
-      "label": "Shark can be inspected (left hand)",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Encounter resolves",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Descended to midnight",
-      "pass": true,
-      "detail": "0.94"
-    },
-    {
-      "label": "Open palm detected at midnight",
-      "pass": true,
-      "detail": "L: hand/still R: open palm/still"
-    },
-    {
-      "label": "NAMI prompts the pulse",
-      "pass": true,
-      "detail": "midnight"
-    },
-    {
-      "label": "No pulse until release; no travel while armed",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Pinch-release emits exactly one pulse",
-      "pass": true,
-      "detail": "pulses 1"
-    },
-    {
-      "label": "Wavefront reaches the giant squid and the reveal completes",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Still exactly one pulse",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Revealed squid can be inspected",
-      "pass": true,
-      "detail": "2 → 3; hovered giant-squid; log 121.8s nami: caption cleared | 126.7s reveal: revealed | 126.7s nami: reveal | 127.1s pinch: right → target | 127.4s discovery: giant-squid (new) | 127.4s pinch: right → target; targets ABYSS sphere,Discovery card,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Moon jelly#44,Deep-sea anglerfish,Giant squid"
-    },
-    {
-      "label": "At least three species discovered",
-      "pass": true,
-      "detail": "3"
-    },
-    {
-      "label": "Pause freezes the ocean",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Restart resets ocean, encounters and reveal",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Hand loss is reported, app keeps running",
-      "pass": true,
-      "detail": "no hands tracked"
-    },
-    {
-      "label": "No gesture storm after tracking returns",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "Exit XR works",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "label": "No browser console errors",
-      "pass": true,
+      "label": "Dive menu shown in the ocean",
+      "pass": false,
       "detail": ""
     }
   ],
-  "calls": 347
+  "calls": 43
 }

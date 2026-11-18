@@ -8,8 +8,11 @@ import type { PinchOwner } from './sim/gesture.js';
 const params = new URLSearchParams(location.search);
 const DISCOVERY_KEY = 'abyss.discoveries.v1';
 const PREFS_KEY = 'abyss.prefs.v1';
+const MARKERS_KEY = 'abyss.markers.v1';
 
-type Prefs = { reducedMotion: boolean; textScale: number; sound: boolean; namiMuted: boolean; guide: boolean };
+/** Saved panel pose: anchor-local position + Euler rotation. */
+type Pose = number[];
+type Prefs = { reducedMotion: boolean; textScale: number; sound: boolean; namiMuted: boolean; guide: boolean; menu: boolean; menuPose: Pose | null; guidePose: Pose | null };
 
 function load<T>(key: string, fallback: T): T {
   try { const raw = localStorage.getItem(key); return raw ? { ...fallback, ...JSON.parse(raw) } : fallback; } catch { return fallback; }
@@ -26,12 +29,13 @@ export const runtime = {
   travelHand: null as 'left' | 'right' | null,
   /** World-space unit direction of the travelling ray (set by GestureSystem). */
   travelDir: { x: 0, y: 0, z: -1 },
-  pulseArmedUntil: 0,
   immersion: 0,
   destination: 'room' as 'room' | 'ocean',
   sessionActive: false,
   sessionTime: 0,
   requests: { recenter: false, enterOcean: false, returnRoom: false },
+  /** Panel currently being moved by a pinch (DragSystem). */
+  dragging: null as null | 'menu' | 'guide',
   /** Incremented on full restart and on every XR session change; systems compare to their last seen value. */
   generation: 0,
   /** Real (unpaused) seconds, advanced by GestureSystem; used for UI and NAMI timing. */
@@ -47,7 +51,11 @@ export const runtime = {
   tips: { left: { ok: false, x: 0, y: 0, z: 0 }, right: { ok: false, x: 0, y: 0, z: 0 } },
   discovered: new Set<string>(load<{ ids: string[] }>(DISCOVERY_KEY, { ids: [] }).ids),
   newDiscovery: '' as string,
-  prefs: load<Prefs>(PREFS_KEY, { reducedMotion: false, textScale: 1, sound: true, namiMuted: false, guide: true }),
+  /** Dive markers reached (persisted like discoveries). */
+  markers: new Set<string>(load<{ ids: string[] }>(MARKERS_KEY, { ids: [] }).ids),
+  /** A marker the viewer just reached; GuideSystem shows its card. */
+  pendingMarker: '' as string,
+  prefs: load<Prefs>(PREFS_KEY, { reducedMotion: false, textScale: 1, sound: true, namiMuted: false, guide: true, menu: true, menuPose: null, guidePose: null }),
   nami: new NamiGuide(),
   events: [] as string[],
   /** Increments on every log() so readers can cache derived strings. */
@@ -69,6 +77,18 @@ export const runtime = {
     return fresh;
   },
   savePrefs() { save(PREFS_KEY, this.prefs); },
+  reachMarker(id: string) {
+    const fresh = !this.markers.has(id);
+    this.markers.add(id);
+    save(MARKERS_KEY, { ids: [...this.markers] });
+    this.pendingMarker = id;
+    this.log('marker', `${id}${fresh ? ' (new)' : ''}`);
+    return fresh;
+  },
+  clearProgress() {
+    this.discovered.clear(); this.markers.clear();
+    try { localStorage.removeItem(DISCOVERY_KEY); localStorage.removeItem(MARKERS_KEY); } catch { /* ignore */ }
+  },
 };
 runtime.director.setReducedMotion(runtime.prefs.reducedMotion);
 runtime.nami.setMuted(runtime.prefs.namiMuted || !runtime.prefs.guide);

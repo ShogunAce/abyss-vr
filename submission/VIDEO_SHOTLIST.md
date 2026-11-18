@@ -15,14 +15,15 @@ Alternative: casting to a phone or PC (Meta Horizon app → Cast) and screen-rec
 | Time | Beat | What to do on camera | On-screen caption / voiceover |
 | --- | --- | --- | --- |
 | 0:00–0:10 | Title | Black → "ABYSS — The Living Ocean" | "Your room becomes an ocean. Your hands are the only controller." |
-| 0:10–0:25 | Room | Passthrough room, glowing sphere, scout fish, NAMI. Hover the sphere (it brightens), then pinch it. | "Seated. Hands only. Pinch the sphere, or hold up an open palm." |
-| 0:25–0:40 | Arrival | Hold still while the room dissolves into the sunlit reef. Slowly pan across the corals and sand. | "Everything you see is generated in code: no imported models or textures." |
-| 0:40–1:00 | Fish | Hold a calm hand out; the school gathers. Then sweep fast; they scatter and regroup. | "Calm hand: the fish come closer. Fast sweep: they scatter." |
-| 1:00–1:20 | Turtle | Turtle glides past. Point (it highlights) → pinch → discovery card → pinch to close. | "Point and pinch to discover species." |
-| 1:20–1:45 | Shark | Depth Compass → Open blue. Shark notices, investigates, turns away; the school flees. | "Encounters respect a comfort radius. The shark never comes too close." |
-| 1:45–2:00 | Descent | Depth Compass → Midnight. Light fades; jellies and the anglerfish lure. | "The world moves, never the player, so the dive stays comfortable." |
-| 2:00–2:25 | Reveal | Open palm (plankton glows) → pinch and release → pulse rolls out → giant squid appears. Pinch it. | "One pulse of light, and the dark comes alive." |
-| 2:25–2:40 | Close | Show the Depth Compass (Calm, Guide, Pause). End on the squid or the reef, then title card + URL. | "ABYSS. Runs in Quest Browser: shogunace.github.io/abyss-vr" |
+| 0:10–0:22 | Room | Passthrough room, glowing pearl, scout fish, NAMI. Touch the pearl with a fingertip. | "Seated. Hands only. Touch the pearl to dive." |
+| 0:22–0:35 | Arrival | Hold still while the room dissolves into the sunlit reef. Slowly pan across the corals and kelp. | "Everything you see is generated in code: no imported models or textures." |
+| 0:35–0:50 | Hand signs | Make a fist: the Dive menu appears. Pinch the **Hand signs** tab and hold it in view a moment. | "One sign, one job: pinch selects, point swims, palm makes light, fist opens the menu." |
+| 0:50–1:15 | Explore | Point a finger at a gold column of light and swim to it. The dive-marker card opens (sunlit zone). Open **Map & journal**. | "Point to swim. Find every dive marker and learn the real ocean at each depth." |
+| 1:15–1:30 | Fish + turtle | Calm hand → school gathers; quick sweep → scatter. Point and pinch the turtle → card. | "Calm hand: the fish come closer. Pinch to discover species." |
+| 1:30–1:50 | Shark | Menu → Open blue. Shark notices, investigates, turns away; the school flees. | "Encounters respect a comfort radius. The shark never comes too close." |
+| 1:50–2:05 | Descent | Menu → Midnight. Light fades; jellies and the anglerfish lure. Move your hands: the plankton sparks. | "The world moves, never you. In the dark, the water lights up at your touch." |
+| 2:05–2:30 | Reveal | Hold an open palm → one pulse rolls out → giant squid appears. Pinch it. | "One pulse of light, and the dark comes alive." |
+| 2:30–2:45 | Close | Pinch the menu bar and move it aside, fist to hide it. End on the squid, then title card + URL. | "ABYSS. Runs in Quest Browser: shogunace.github.io/abyss-vr" |
 
 ## Tips
 

@@ -12,20 +12,32 @@ Your room becomes an ocean, and the ocean responds to you. ABYSS is a seated, ha
 **The arc, 5–8 minutes, hands only:**
 
 1. **Room.** Select **Enter XR** and stay seated. NAMI, a small glowing guide, invites you in while bubbles rise and a few scout fish circle the glowing sphere in your room.
-2. **Arrival.** Pinch the sphere, or hold an open palm (a high five, fingers spread) for about half a second. Your room dissolves into a sunlit ocean over about 8 s.
+2. **Arrival.** Touch or pinch the glowing pearl. Your room dissolves into a sunlit ocean over about 8 s.
 3. **Fish.** Hold a steady or slowly moving hand toward the school and the fish gather around it. A quick sweep scatters them, and they regroup.
 4. **Turtle.** A green sea turtle glides past. Point at it (it highlights), then pinch to discover it. Pinch the card to close it.
-5. **Open blue.** Choose **Open blue** on the Depth Compass (the panel to your lower left). A reef shark arrives, investigates from a distance and turns away. Watch the school flee from it on their own. Pinch the shark to discover it.
-6. **Midnight.** Choose **Midnight**. Moon jellies and an anglerfish appear in the dark. Open your palm and organisms near your hand begin to glow.
-7. **The reveal.** While your palm has recently been open, pinch and release: one pulse of light expands outward. When it reaches the dark, a giant squid emerges as a glowing silhouette. Pinch it to discover it.
-8. **Exploring.** Pinch and hold while pointing at open water to glide gently in that direction; release to stop.
+5. **Open blue.** Choose **Open blue** in the Dive menu (the panel to your lower left; make a fist to show or hide it). A reef shark arrives, investigates from a distance and turns away. Watch the school flee from it on their own. Pinch the shark to discover it.
+6. **Midnight.** Choose **Midnight**. Moon jellies and an anglerfish appear in the dark. Open your palm and organisms near your hand begin to glow; plankton flash wherever your hands move.
+7. **The reveal.** Keep your palm open for about a second: one pulse of light expands outward. When it reaches the dark, a giant squid emerges as a glowing silhouette. Pinch it to discover it.
+8. **Exploring.** Point a finger to swim. Each zone has gold dive markers under a column of light; swim to one to log it and read about the real ocean at that depth. The menu's **Map & journal** page shows where you are, the markers, and which animals you've found.
 
-**Depth Compass buttons:**
-- Bands: Sunlit, Open blue, Twilight, Midnight
-- Drift, Pause, Calm (reduced motion), Restart
-- Recenter, Text size, Sound, Guide (shows or hides NAMI and captions)
+**Hand signs (each sign does exactly one thing):**
 
-Pinch NAMI's caption to dismiss it. Discoveries and comfort preferences are saved on the device.
+| Sign | Does |
+| --- | --- |
+| 🤏 Pinch (with the hand ray on something) | Select: creatures, buttons, cards, the pearl |
+| 👉 Point (index out, other fingers curled) | Swim: glide where your finger points; stop pointing to stop |
+| ✋ Open palm, held | Make light; held about 1 s it sends one pulse (the deep answers it) |
+| ✊ Fist, raised and held | Show or hide the Dive menu |
+| 👋 Quick sweep | Startle a fish school |
+| ☝️ Touch | Touch the pearl with a fingertip to dive |
+
+
+**Dive menu** (three pages):
+- **Dive:** Sunlit, Open blue, Twilight, Midnight · Drift, Pause, Calm (reduced motion), Restart · Recenter, Text size, Sound, Guide (shows or hides NAMI) · Reset layout, New expedition
+- **Hand signs:** the table above
+- **Map & journal:** top-down map of you and the dive markers, plus animals and markers found
+
+Move the menu by pinching its top bar and moving your hand; move NAMI by pinching her orb. Both are remembered. Hide the menu with **×** or a fist; a small **Menu** tab stays behind to bring it back. Pinch NAMI's caption to dismiss it. Discoveries and comfort preferences are saved on the device.
 
 The viewer is never moved. Travel and depth change the world, never the camera. There is no microphone use.
 

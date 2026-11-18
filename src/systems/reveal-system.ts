@@ -63,14 +63,16 @@ export class RevealSystem extends createSystem({}) {
     palm.open = -1;
     for (let i = 0; i < 2; i++) {
       const g = i === 0 ? runtime.hands.left : runtime.hands.right;
-      if (g.openPalm && g.ready && f.enabled > 0.3 && g.openFor > palm.open) { palm.x = g.x; palm.y = g.y; palm.z = g.z; palm.open = g.openFor; found = true; }
+      if (g.openPalm && g.ready && runtime.immersion > 0.5 && g.openFor > palm.open) { palm.x = g.x; palm.y = g.y; palm.z = g.z; palm.open = g.openFor; found = true; }
     }
-    f.palm.active = found;
+    // ✋ The palm makes light at every depth; only the dark water (the field) answers it.
+    f.palm.active = found && f.enabled > 0.3;
+    if (found && f.enabled > 0.3) runtime.nami.notify('armed', runtime.clock);
     if (found) {
       f.palm.x = palm.x - this.root.position.x; f.palm.y = palm.y - this.root.position.y; f.palm.z = palm.z - this.root.position.z;
       this.palmGlow.position.set(palm.x, palm.y, palm.z);
       this.palmGlow.scale.setScalar(0.22 + Math.min(1, palm.open) * 0.18 + Math.sin(runtime.clock * 3) * 0.015);
-      this.palmGlow.material.opacity = 0.55 * f.enabled;
+      this.palmGlow.material.opacity = 0.18 + 0.4 * f.enabled;
     }
     this.palmGlow.visible = found;
 

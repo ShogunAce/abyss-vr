@@ -1,5 +1,5 @@
 import {
-  BufferGeometry, CylinderGeometry, DoubleSide, Float32BufferAttribute, Group, IcosahedronGeometry,
+  BufferGeometry, CatmullRomCurve3, CylinderGeometry, DoubleSide, TubeGeometry, Float32BufferAttribute, Group, IcosahedronGeometry,
   InstancedBufferAttribute, InstancedMesh, Object3D, PlaneGeometry, Quaternion, ShaderMaterial, Shape,
   ShapeGeometry, SphereGeometry, Vector3,
 } from '@iwsdk/core';
@@ -47,30 +47,73 @@ function merge(parts: BufferGeometry[]) {
 }
 
 // ---------- coral geometry (base at y = 0, up = +Y) ----------
+/**
+ * Organic tube along a smooth curve: radius varies along its length (radiusAt(t))
+ * and around it (lumpy, never a perfect cylinder). Living things are not lathed.
+ */
+function organicTube(points: Vector3[], radiusAt: (t: number) => number, tubular: number, radial: number, lump: number, seed: number) {
+  const curve = new CatmullRomCurve3(points);
+  const g = new TubeGeometry(curve, tubular, 1, radial, false);
+  const pos = g.getAttribute('position');
+  const centre = new Vector3(), v = new Vector3();
+  for (let i = 0; i <= tubular; i++) {
+    const t = i / tubular;
+    curve.getPointAt(t, centre);
+    const r = radiusAt(t);
+    for (let j = 0; j <= radial; j++) {
+      const k = i * (radial + 1) + j;
+      const a = (j % radial) / radial * Math.PI * 2;
+      const wobble = 1 + lump * (Math.sin(a * 3 + seed + t * 7) * 0.6 + Math.sin(a * 5 - seed * 1.7 + t * 13) * 0.4);
+      v.fromBufferAttribute(pos, k).sub(centre).multiplyScalar(r * wobble).add(centre);
+      pos.setXYZ(k, v.x, v.y, v.z);
+    }
+  }
+  g.computeVertexNormals();
+  return g;
+}
+
+/** Bent path from a start point along a direction, curling slightly as it grows. */
+function bentPath(start: Vector3, dir: Vector3, len: number, bend: Vector3, steps = 3) {
+  const pts = [start.clone()];
+  const d = dir.clone();
+  for (let i = 1; i <= steps; i++) {
+    d.addScaledVector(bend, 1 / steps).normalize();
+    pts.push(pts[i - 1].clone().addScaledVector(d, len / steps));
+  }
+  return pts;
+}
+
+/** Staghorn-style branching coral: tapered, curving antlers with swollen growing tips. */
 function branchingCoral() {
   const parts: BufferGeometry[] = [];
   const rng = lcg(7);
-  const up = new Vector3(0, 1, 0);
   const branch = (start: Vector3, dir: Vector3, len: number, radius: number, depth: number) => {
-    const g = new CylinderGeometry(radius * 0.65, radius, len, 6, 1, true);
-    g.translate(0, len / 2, 0);
-    g.applyQuaternion(new Quaternion().setFromUnitVectors(up, dir));
-    g.translate(start.x, start.y, start.z);
-    parts.push(g);
-    const end = start.clone().addScaledVector(dir, len);
-    const cap = new SphereGeometry(radius * 0.7, 5, 3);
+    const bend = new Vector3((rng() - 0.5) * 0.5, 0.25, (rng() - 0.5) * 0.5);
+    const pts = bentPath(start, dir, len, bend);
+    const tip = depth === 0;
+    // Taper from the base, then a rounded swelling at growing tips.
+    parts.push(organicTube(pts, t => radius * (1 - 0.38 * t) * (tip && t > 0.85 ? 1.15 : 1), 4, 6, 0.12, rng() * 10));
+    const end = pts[pts.length - 1];
+    const cap = new SphereGeometry(radius * (tip ? 0.82 : 0.66), 6, 4);
     cap.translate(end.x, end.y, end.z);
     parts.push(cap);
     if (depth > 0) {
-      for (let k = 0; k < 2; k++) {
+      const endDir = end.clone().sub(pts[pts.length - 2]).normalize();
+      const count = depth === 2 ? 3 : 2;
+      for (let k = 0; k < count; k++) {
         const a = rng() * Math.PI * 2;
-        const next = dir.clone().add(new Vector3(Math.cos(a) * 0.75, 0.35, Math.sin(a) * 0.75)).normalize();
-        branch(start.clone().addScaledVector(dir, len * 0.85), next, len * 0.78, radius * 0.72, depth - 1);
+        const next = endDir.clone().add(new Vector3(Math.cos(a) * 0.8, 0.2, Math.sin(a) * 0.8)).normalize();
+        // Branch from just below the tip so the joint reads as grown, not glued.
+        const from = pts[pts.length - 2].clone().lerp(end, 0.7);
+        branch(from, next, len * (0.72 + rng() * 0.12), radius * 0.7, depth - 1);
       }
     }
   };
-  branch(new Vector3(0, 0, 0), new Vector3(0.15, 1, 0.05).normalize(), 0.2, 0.035, 2);
-  branch(new Vector3(0.05, 0, -0.04), new Vector3(-0.35, 1, -0.2).normalize(), 0.17, 0.03, 2);
+  // A flared foot anchors the colony to the reef.
+  const foot = new SphereGeometry(0.075, 8, 4, 0, Math.PI * 2, 0, Math.PI / 2); foot.scale(1, 0.45, 1);
+  parts.push(foot);
+  branch(new Vector3(0, 0, 0), new Vector3(0.15, 1, 0.05).normalize(), 0.2, 0.036, 2);
+  branch(new Vector3(0.05, 0, -0.04), new Vector3(-0.45, 1, -0.25).normalize(), 0.16, 0.03, 1);
   return merge(parts);
 }
 
@@ -83,8 +126,9 @@ function brainCoral() {
 function tableCoral() {
   const top = new CylinderGeometry(0.55, 0.5, 0.05, 22, 1);
   top.translate(0, 0.34, 0);
-  const stalk = new CylinderGeometry(0.06, 0.11, 0.33, 8, 1, true);
-  stalk.translate(0, 0.165, 0);
+  // Tapered, slightly lumpy stalk that flares into the plate and into the reef.
+  const stalk = organicTube([new Vector3(0, 0, 0), new Vector3(0.02, 0.12, 0.01), new Vector3(-0.01, 0.24, 0), new Vector3(0, 0.33, 0)],
+    t => 0.11 - 0.06 * Math.sin(t * Math.PI) - 0.02 * t + 0.03 * Math.pow(t, 6), 5, 9, 0.1, 1.3);
   return merge([top, stalk]);
 }
 
@@ -97,14 +141,30 @@ function fanCoral() {
   return merge([g]);
 }
 
+/** Tube sponge cluster: lumpy tubes that flare to a thick rolled lip, hollow inside, on a shared foot. */
 function tubeSponge() {
   const parts: BufferGeometry[] = [];
   const rng = lcg(31);
+  const foot = new SphereGeometry(0.11, 10, 4, 0, Math.PI * 2, 0, Math.PI / 2); foot.scale(1, 0.35, 1);
+  parts.push(foot);
   for (let i = 0; i < 4; i++) {
-    const h = 0.28 + rng() * 0.32, r = 0.045 + rng() * 0.03;
-    const g = new CylinderGeometry(r, r * 0.8, h, 10, 1, true);
-    g.translate((rng() - 0.5) * 0.14, h / 2, (rng() - 0.5) * 0.14);
-    parts.push(g);
+    const h = 0.26 + rng() * 0.34, r = 0.042 + rng() * 0.026;
+    const bx = (rng() - 0.5) * 0.13, bz = (rng() - 0.5) * 0.13;
+    const lean = new Vector3(bx * 1.6, 1, bz * 1.6).normalize();
+    const pts = bentPath(new Vector3(bx * 0.4, 0, bz * 0.4), lean, h, new Vector3((rng() - 0.5) * 0.4, 0, (rng() - 0.5) * 0.4), 3);
+    // Narrow root, fuller body, flared mouth.
+    const profile = (t: number) => r * (0.62 + 0.38 * Math.sin(Math.min(1, t * 1.6) * Math.PI / 2) - 0.12 * Math.sin(t * Math.PI * 2.2) + 0.55 * Math.pow(t, 3));
+    parts.push(organicTube(pts, profile, 6, 12, 0.17, i * 2.3));
+    // Inner wall: the hollow reads as a dark opening instead of a capped pipe.
+    const top = pts[pts.length - 1], below = pts[pts.length - 2].clone().lerp(top, 0.2);
+    const inner = organicTube([top.clone(), below], t => profile(1) * (0.78 - 0.1 * t), 1, 12, 0.17, i * 2.3);
+    parts.push(inner);
+    // Rolled lip around the mouth.
+    const dir = top.clone().sub(pts[pts.length - 2]).normalize();
+    const lip = new SphereGeometry(profile(1) * 1.04, 12, 3, 0, Math.PI * 2, Math.PI * 0.42, Math.PI * 0.16);
+    lip.applyQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), dir));
+    lip.translate(top.x - dir.x * 0.004, top.y - dir.y * 0.004, top.z - dir.z * 0.004);
+    parts.push(lip);
   }
   return merge(parts);
 }

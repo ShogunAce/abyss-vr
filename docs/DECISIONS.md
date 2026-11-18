@@ -254,3 +254,17 @@ The seabed is a 150×150-segment heightfield, capped at 1.5 m below eye level.
 - New unit tests cover the One Euro filter and the flock floor (29 total).
 
 **Cost** (emulator, both eyes, sunlit): 104 draws and about 386k triangles, up from 96 and 293k. Sand and rock noise was trimmed to a few lookups per pixel for Quest's fill rate. If the Quest drops below 72 fps, trim in this order: urchins → sea whips → seagrass count → kelp count.
+
+## Exploration and one-sign-one-job hand input (2026-11-18)
+
+**Why.** Headset feedback: the bones worked, but users had little to *do* (minimal learning, minimal traversal), signs were overloaded (an open palm entered the ocean, attracted fish *and* armed the pulse; a pinch selected, travelled *and* fired the pulse), and the guide and menu could not be moved or hidden. The name promises a descent, so the purpose became an expedition down the water column.
+
+**Sign vocabulary (each sign has exactly one job).** Pinch = select (only when the ray is on something). Point (index out, others curled, thumb apart) = swim toward where the finger points, with 0.18 s hold and 0.3 s release grace. Open palm = light; held 1.1 s it releases exactly one pulse per opening. Raised fist (above head height − 0.45 m) held 0.6 s = toggle the Dive menu, once per fist. Quick sweep = startle. Fingertip touch = dive. Point/palm/fist are mutually exclusive by extended-finger count (1/4/0). Fish attraction is a passive response to any slow hand, not a sign.
+
+**Exploration.** Eight dive markers (two per zone) are gold crystals under additive light columns, positioned in the travel frame within the 6 m radius. Swimming within 0.9 m logs one (persisted in `abyss.markers.v1`) and opens a card of curated, sourced facts (src/data/markers.ts). The Dive menu gained a Hand signs page and a Map & journal page (top-down map of you and the markers, animals and markers found). In deep water the suspended particles flash near moving hands (dinoflagellate-style living light; shader-only, no extra draws).
+
+**Panels.** Pinch the menu's top bar or NAMI's orb to move them along the hand ray; they face the viewer and their pose is saved. × or a fist hides the menu; a small Menu tab stays to reopen it. Reset layout restores the authored poses.
+
+**Coral.** Branching coral and tube sponges are now curved, tapered, lumpy tubes (variable-radius TubeGeometry) with swollen tips, flared lips and hollow mouths, instead of straight cylinders.
+
+**Cost.** Markers: up to 3 draws per visible marker (2 visible per zone). Coral triangles rose modestly; trim order unchanged (urchins → sea whips → seagrass → kelp).

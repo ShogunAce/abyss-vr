@@ -32,6 +32,8 @@ export const OceanStatus = createComponent('OceanStatus', {
   eventLog: { type: Types.String, default: '' },
   hovered: { type: Types.String, default: '' },
   sharkMinDistance: { type: Types.Float32, default: 0 },
+  markers: { type: Types.Int32, default: 0 },
+  menuPage: { type: Types.String, default: 'controls' },
 });
 
 // A selectable depth-panel control; `action` uses the same vocabulary as OceanStatus.command.

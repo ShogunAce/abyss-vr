@@ -13,6 +13,10 @@ export type HandSample = {
   spread?: number;
   /** Platform select (pinch) currently held. */
   select: boolean;
+  /** Index straight, middle/ring/pinky curled, thumb apart: the "point" sign. */
+  point?: boolean;
+  /** All four fingers curled, no pinch: the "fist" sign. */
+  fist?: boolean;
 };
 
 export type Motion = 'still' | 'slow' | 'fast';
@@ -58,6 +62,13 @@ export const GESTURE = {
   // (high five) abducts the thumb and spreads the fingers.
   openPinchDistance: 0.11,
   openSpread: 0.115,
+  /** Point (swim): short hold to start, brief grace on release so tracking flicker never stops a glide. */
+  pointHold: 0.18,
+  pointRelease: 0.3,
+  /** Fist (menu): deliberate hold, fires once per fist. */
+  fistHold: 0.6,
+  /** Open palm (light): held this long releases one pulse; reopen for another. */
+  palmPulse: 1.1,
 };
 
 export class HandGesture {
@@ -73,6 +84,17 @@ export class HandGesture {
   /** True for exactly one update when a fast sweep begins. */
   sweep = false;
   sweepCount = 0;
+  /** Point sign held (swim toward where the index finger points). */
+  pointing = false;
+  /** True for one update when a held fist completes (toggle the menu). */
+  fistToggle = false;
+  /** True for one update when an open palm has been held long enough to release a light pulse. */
+  palmPulse = false;
+  private pointRaw = 0;
+  private unpointRaw = 0;
+  private fistRaw = 0;
+  private fistFired = false;
+  private pulseFired = false;
   private openRaw = 0;
   private closedRaw = 0;
   private cooldown = 0;
@@ -84,11 +106,16 @@ export class HandGesture {
     this.vx = this.vy = this.vz = 0; this.speed = 0;
     this.motion = 'still'; this.openPalm = false; this.openFor = 0; this.sweep = false;
     this.openRaw = 0; this.closedRaw = 0;
+    this.pointing = false; this.pointRaw = 0; this.unpointRaw = 0;
+    this.fistToggle = false; this.fistRaw = 0; this.fistFired = false;
+    this.palmPulse = false; this.pulseFired = false;
   }
 
   update(sample: HandSample, delta: number) {
     const dt = Math.min(Math.max(Number.isFinite(delta) ? delta : 0, 0), 0.1);
     this.sweep = false;
+    this.fistToggle = false;
+    this.palmPulse = false;
     this.cooldown = Math.max(0, this.cooldown - dt);
     if (!sample.tracked) { this.reset(); return; }
     if (!this.tracked) {
@@ -131,21 +158,39 @@ export class HandGesture {
     if (!this.openPalm && this.openRaw >= GESTURE.openHold) this.openPalm = true;
     if (this.openPalm && this.closedRaw >= GESTURE.openRelease) this.openPalm = false;
     this.openFor = this.openPalm ? this.openFor + dt : 0;
+    if (!this.openPalm) this.pulseFired = false;
+    if (this.openPalm && !this.pulseFired && this.openFor >= GESTURE.palmPulse) { this.palmPulse = true; this.pulseFired = true; }
+
+    // Point: index out, others curled. Exclusive with open palm (4 fingers) and fist (0 fingers).
+    const point = !!sample.point && !sample.select;
+    if (point) { this.pointRaw += dt; this.unpointRaw = 0; } else { this.unpointRaw += dt; this.pointRaw = 0; }
+    if (!this.pointing && this.pointRaw >= GESTURE.pointHold) this.pointing = true;
+    if (this.pointing && this.unpointRaw >= GESTURE.pointRelease) this.pointing = false;
+
+    // Fist: held still-ish for fistHold, fires once until the hand opens again.
+    const fist = !!sample.fist && !sample.select && this.motion !== 'fast';
+    this.fistRaw = fist ? this.fistRaw + dt : 0;
+    if (!fist) this.fistFired = false;
+    if (fist && !this.fistFired && this.fistRaw >= GESTURE.fistHold) { this.fistToggle = true; this.fistFired = true; }
   }
 }
 
-export type PinchOwner = 'none' | 'target' | 'pulse' | 'travel';
+export type PinchOwner = 'none' | 'target';
 
 /**
- * Decides what a pinch that starts now will do for its whole duration.
- * Priority: UI/species targets under the ray > armed light pulse > travel.
+ * One sign, one job. A pinch only ever selects what the ray is on (a creature,
+ * a button, the pearl). Swimming is the point sign; light is the open palm.
  */
-export function arbitratePinch(input: {
-  rayOnTarget: boolean; immersed: boolean; paused: boolean; pulseArmed: boolean; otherHandTravelling: boolean;
-}): PinchOwner {
-  if (input.rayOnTarget) return 'target';
-  if (!input.immersed || input.paused) return 'none';
-  if (input.pulseArmed) return 'pulse';
-  if (input.otherHandTravelling) return 'none';
-  return 'travel';
+export function arbitratePinch(input: { rayOnTarget: boolean }): PinchOwner {
+  return input.rayOnTarget ? 'target' : 'none';
 }
+
+/** Hand signs shown in the menu's Hand signs page: each sign maps to exactly one action. */
+export const HAND_SIGNS = [
+  { id: 'pinch', icon: '🤏', name: 'Pinch', does: 'Select', detail: 'Point the ray at a creature, button or the pearl, then pinch thumb and index.' },
+  { id: 'point', icon: '👉', name: 'Point', does: 'Swim', detail: 'Index finger out, other fingers curled. You glide where you point.' },
+  { id: 'palm', icon: '✋', name: 'Open palm', does: 'Make light', detail: 'Spread your fingers and hold. In the dark it glows; hold 1 s to send a pulse.' },
+  { id: 'fist', icon: '✊', name: 'Fist', does: 'Menu', detail: 'Hold a raised fist for a moment to show or hide this menu.' },
+  { id: 'sweep', icon: '👋', name: 'Quick sweep', does: 'Startle', detail: 'Swipe fast through a school and watch it scatter and regroup.' },
+  { id: 'touch', icon: '☝️', name: 'Touch', does: 'Dive', detail: 'Touch the glowing pearl with a fingertip to let the ocean in.' },
+] as const;

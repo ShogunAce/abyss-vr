@@ -68,14 +68,42 @@ test('gesture: open palm needs a stable hold and releases with hysteresis', () =
   assert.equal(g.openPalm, false);
 });
 
-test('arbiter priority: targets > pulse > travel', () => {
-  const base = { rayOnTarget: false, immersed: true, paused: false, pulseArmed: false, otherHandTravelling: false };
-  assert.equal(arbitratePinch({ ...base, rayOnTarget: true, pulseArmed: true }), 'target');
-  assert.equal(arbitratePinch({ ...base, pulseArmed: true }), 'pulse');
-  assert.equal(arbitratePinch(base), 'travel');
-  assert.equal(arbitratePinch({ ...base, paused: true }), 'none');
-  assert.equal(arbitratePinch({ ...base, immersed: false }), 'none');
-  assert.equal(arbitratePinch({ ...base, otherHandTravelling: true }), 'none');
+test('one sign, one job: pinch only ever selects', () => {
+  assert.equal(arbitratePinch({ rayOnTarget: true }), 'target');
+  assert.equal(arbitratePinch({ rayOnTarget: false }), 'none', 'a pinch in open water neither swims nor fires light');
+});
+
+test('signs: point swims (with grace), fist toggles once per hold, palm pulses once per opening', () => {
+  const g = new HandGesture();
+  const dt = 1 / 72;
+  for (let i = 0; i < 30; i++) g.update(sample(0, 1, 0, { extended: 2 }), dt); // settle, neutral hand
+  for (let i = 0; i < 6; i++) g.update(sample(0, 1, 0, { point: true }), dt);
+  assert.equal(g.pointing, false, 'a flicker of pointing is ignored');
+  for (let i = 0; i < 20; i++) g.update(sample(0, 1, 0, { point: true }), dt);
+  assert.equal(g.pointing, true);
+  for (let i = 0; i < 5; i++) g.update(sample(0, 1, 0, { extended: 2 }), dt);
+  assert.equal(g.pointing, true, 'brief tracking dropout does not stop the glide');
+  for (let i = 0; i < 40; i++) g.update(sample(0, 1, 0, { extended: 2 }), dt);
+  assert.equal(g.pointing, false);
+  g.update(sample(0, 1, 0, { point: true, select: true }), dt);
+  for (let i = 0; i < 30; i++) g.update(sample(0, 1, 0, { point: true, select: true }), dt);
+  assert.equal(g.pointing, false, 'pointing while pinching is a pinch, not a swim');
+
+  let toggles = 0;
+  for (let i = 0; i < 150; i++) { g.update(sample(0, 1, 0, { extended: 0, fist: true }), dt); if (g.fistToggle) toggles++; }
+  assert.equal(toggles, 1, 'a held fist toggles exactly once');
+  for (let i = 0; i < 10; i++) g.update(sample(0, 1, 0, { extended: 2 }), dt);
+  for (let i = 0; i < 30; i++) { g.update(sample(0, 1, 0, { extended: 0, fist: true }), dt); if (g.fistToggle) toggles++; }
+  assert.equal(toggles, 1, 'a short fist does nothing');
+
+  let pulses = 0;
+  const open = { extended: 4, pinchDistance: 0.127, spread: 0.132 };
+  for (let i = 0; i < 300; i++) { g.update(sample(0, 1, 0, open), dt); if (g.palmPulse) pulses++; }
+  assert.equal(pulses, 1, 'holding the palm releases one pulse, not a stream');
+  for (let i = 0; i < 30; i++) g.update(sample(0, 1, 0, { extended: 2 }), dt);
+  for (let i = 0; i < 120; i++) { g.update(sample(0, 1, 0, open), dt); if (g.palmPulse) pulses++; }
+  assert.equal(pulses, 2, 'reopening the palm releases another');
+  assert.equal(g.pointing, false); assert.equal(g.fistToggle, false);
 });
 
 test('flock: slow hand attracts, fast sweep scatters, school regroups', () => {
