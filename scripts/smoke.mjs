@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 const cliPath = 'node_modules/@iwsdk/cli/bin/iwsdk.js';
 const evidence = [];
+const testStartedAt = Date.now(); // console checks only count errors logged during this run
 function cli(domain, action, input) {
   const args = [cliPath, domain, action];
   if (input) args.push('--input-json', JSON.stringify(input));
@@ -17,7 +18,9 @@ function check(condition, label) {
 try {
   let status = cli('xr', 'status');
   check(status.runtimeKind === 'emulated', 'Testing emulator only');
-  if (!status.sessionActive) cli('xr', 'enter');
+  // Always start from a fresh session (a leftover ocean state would change targets).
+  if (status.sessionActive) cli('xr', 'exit');
+  cli('xr', 'enter');
   cli('xr', 'set-input-mode', { mode: 'hand' });
   const entityIndex = cli('ecs', 'find', { withComponents: ['AbyssSphere'] }).entities[0].entityIndex;
   const read = () => cli('ecs', 'query', { entityIndex }).components.find(c => c.componentId === 'AbyssSphere').values;
@@ -58,7 +61,7 @@ try {
   const logs = cli('browser', 'logs', { count: 100 });
   // Requests cancelled by a page reload/navigation are not application errors.
   const navigationAbort = entry => entry.kind === 'requestfailed' && entry.failure === 'net::ERR_ABORTED';
-  check(!logs.some(entry => entry.level === 'error' && !navigationAbort(entry)), 'No browser console errors');
+  check(!logs.some(entry => entry.level === 'error' && entry.timestamp >= testStartedAt && !navigationAbort(entry)), 'No browser console errors');
   console.log('Emulated smoke test passed. Physical Quest remains unverified.');
 } finally {
   try {

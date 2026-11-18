@@ -1,0 +1,140 @@
+{
+  "results": [
+    {
+      "label": "Emulator selected",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Relaxed hands do not start the ocean",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "NAMI welcomes in the room",
+      "pass": true,
+      "detail": "welcome"
+    },
+    {
+      "label": "Open palm in the room lets the ocean in",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Room transforms to ocean",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Sunlit ocean with school",
+      "pass": true,
+      "detail": "attracted"
+    },
+    {
+      "label": "Steady hand near the school attracts fish",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Fast sweep detected (cooldown-limited)",
+      "pass": true,
+      "detail": "0 → 1"
+    },
+    {
+      "label": "Each fast sweep scatters the school",
+      "pass": true,
+      "detail": "scatters 0 → 1, state schooling"
+    },
+    {
+      "label": "School regroups",
+      "pass": true,
+      "detail": "schooling"
+    },
+    {
+      "label": "Showcase turtle encounter begins in sunlit water",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Pinching the turtle records a discovery and shows a card",
+      "pass": true,
+      "detail": "discoveries 1"
+    },
+    {
+      "label": "Inspection did not trigger travel",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Showcase shark encounter in open blue",
+      "pass": true,
+      "detail": "depth 0.45"
+    },
+    {
+      "label": "Shark: cruise → notice → investigate → turn away → done",
+      "pass": true,
+      "detail": "cruise,notice,investigate,turnAway,done"
+    },
+    {
+      "label": "School evades the shark without user input",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Shark stays outside the 3.2 m comfort radius",
+      "pass": true,
+      "detail": "3.64 m"
+    },
+    {
+      "label": "Shark can be inspected (left hand)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Encounter resolves",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Descended to midnight",
+      "pass": true,
+      "detail": "0.94"
+    },
+    {
+      "label": "Open palm detected at midnight",
+      "pass": true,
+      "detail": "L: hand/still R: open palm/still"
+    },
+    {
+      "label": "NAMI prompts the pulse",
+      "pass": true,
+      "detail": "midnight"
+    },
+    {
+      "label": "No pulse until release; no travel while armed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Pinch-release emits exactly one pulse",
+      "pass": true,
+      "detail": "pulses 1"
+    },
+    {
+      "label": "Wavefront reaches the giant squid and the reveal completes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Still exactly one pulse",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "Revealed squid can be inspected",
+      "pass": false,
+      "detail": "2 → 2; hovered giant-squid; log 119.4s pulse: #1 released | 122.8s reveal: emerging | 122.9s nami: caption cleared | 127.8s reveal: revealed | 127.8s nami: reveal | 128.2s pinch: right → target; targets ABYSS sphere,NAMI caption,Moon jelly#38,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Deep-sea anglerfish,Giant squid"
+    }
+  ],
+  "calls": 311
+}

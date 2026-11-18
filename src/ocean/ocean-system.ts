@@ -1,43 +1,38 @@
 import {
-  CanvasTexture, Color, ConeGeometry, createSystem, type Entity, Mesh, MeshBasicMaterial, Object3D,
+  CanvasTexture, ConeGeometry, createSystem, type Entity, Mesh, MeshBasicMaterial, Object3D,
   PlaneGeometry, Pressed, RayInteractable, ShaderMaterial, Vector3,
 } from '@iwsdk/core';
-import { AbyssSphere } from '../abyss-component.js';
-import { BANDS, OceanDirector } from './ocean-director.js';
+import { audio } from '../audio/audio-engine.js';
+import { runtime } from '../runtime.js';
+import { env } from '../visuals/creature-models.js';
+import { BANDS } from './ocean-director.js';
 import { OceanControl, OceanStatus } from './ocean-components.js';
 
-type Hand = 'left' | 'right';
-const HANDS: Hand[] = ['left', 'right'];
-
-// Depth panel layout in canvas pixels (640 × 360 → 0.32 m × 0.18 m).
-const PANEL_W = 640, PANEL_H = 360, PANEL_M = 0.32 / PANEL_W;
+// Depth Compass layout in canvas pixels (640 × 460 → 0.32 m × 0.23 m).
+const PANEL_W = 640, PANEL_H = 460, PANEL_M = 0.32 / PANEL_W;
 type Button = { action: string; label: string; x: number; y: number; w: number; h: number };
+const row = (y: number, items: Array<[string, string]>): Button[] => items.map(([action, label], i) => ({ action, label, x: 20 + i * 152, y, w: 140, h: 96 }));
 const BUTTONS: Button[] = [
-  ...BANDS.map((band, i) => ({ action: `depth:${band.preset}`, label: band.label, x: 20 + i * 152, y: 112, w: 140, h: 96 })),
-  { action: 'release', label: 'Drift', x: 20, y: 228, w: 140, h: 96 },
-  { action: 'toggle-pause', label: 'Pause', x: 172, y: 228, w: 140, h: 96 },
-  { action: 'toggle-reduced', label: 'Calm', x: 324, y: 228, w: 140, h: 96 },
-  { action: 'reset', label: 'Reset', x: 476, y: 228, w: 140, h: 96 },
+  ...row(112, BANDS.map(b => [`depth:${b.preset}`, b.label] as [string, string])),
+  ...row(228, [['release', 'Drift'], ['toggle-pause', 'Pause'], ['toggle-reduced', 'Calm'], ['reset', 'Restart']]),
+  ...row(344, [['recenter', 'Recenter'], ['text', 'Text size'], ['sound', 'Sound'], ['room', 'Room']]),
 ];
-const PALETTE = { navy: '#071824', sea: '#155B78', cyan: '#77D8DB', violet: '#9D82D4', neutral: '#E9E5DA' };
+export const PALETTE = { navy: '#071824', sea: '#155B78', cyan: '#77D8DB', violet: '#9D82D4', neutral: '#E9E5DA' };
 
 /**
  * Bridges the pure OceanDirector to the scene: environment uniforms, bounded
- * travel, the spatial depth panel, gesture arbitration, and diagnostics.
- * The camera is never moved; only scenery offsets change.
+ * travel, the spatial Depth Compass, and diagnostics. The camera never moves.
  */
 export class OceanSystem extends createSystem({
   status: { required: [OceanStatus] },
-  spheres: { required: [AbyssSphere] },
   pressedControls: { required: [OceanControl, Pressed] },
 }) {
-  private director = new OceanDirector(42);
+  private director = runtime.director;
   private ocean!: Object3D;
   private frame: Object3D | null = null;
   private materials: ShaderMaterial[] = [];
-  private session: XRSession | null = null;
+  private generation = -1;
   private panel!: Mesh;
-  private panelEntity!: Entity;
   private panelCanvas = document.createElement('canvas');
   private panelContext!: CanvasRenderingContext2D;
   private panelTexture!: CanvasTexture;
@@ -45,17 +40,13 @@ export class OceanSystem extends createSystem({
   private panelShown = false;
   private buttonEntities: Entity[] = [];
   private indicator!: Mesh;
-  private travelHand: Hand | null = null;
-  private menuHands = { left: false, right: false };
-  private immersion = 0;
   private oceanInstances = 1;
-  private shallow = new Color();
-  private blue = new Color();
-  private deep = new Color();
   private rayOrigin = new Vector3();
-  private rayDirection = new Vector3();
   private up = new Vector3(0, 1, 0);
+  private dir = new Vector3();
   private diagnosticsClock = 0;
+  private eventSeq = -1;
+  private eventLog = '';
   private diagnostics = document.getElementById('ocean-values');
 
   init() {
@@ -63,17 +54,19 @@ export class OceanSystem extends createSystem({
     this.ocean.traverse(object => { if (object.name === 'Ocean travel frame') this.frame = object; });
     this.countOceanInstances();
 
-    // Spatial depth panel, left of the sphere, angled toward the seated viewer.
     this.panelCanvas.width = PANEL_W; this.panelCanvas.height = PANEL_H;
     this.panelContext = this.panelCanvas.getContext('2d')!;
     this.panelTexture = new CanvasTexture(this.panelCanvas);
     const panelMaterial = new MeshBasicMaterial({ map: this.panelTexture, transparent: true, depthWrite: false });
     this.panel = new Mesh(new PlaneGeometry(PANEL_W * PANEL_M, PANEL_H * PANEL_M), panelMaterial);
     this.panel.name = 'Depth compass';
-    this.panel.position.set(-0.34, -0.06, 0.14);
-    this.panel.rotation.set(-0.12, 0.55, 0);
+    this.panel.position.set(-0.35, -0.08, 0.15);
+    this.panel.rotation.set(-0.15, 0.55, 0);
     this.panel.visible = false;
-    this.panelEntity = this.world.createTransformEntity(this.panel, { parent: this.world.requireSceneEntity('experience') });
+    this.panel.renderOrder = 40;
+    const panelEntity = this.world.createTransformEntity(this.panel, { parent: this.world.requireSceneEntity('experience') });
+    // Ray targets only. They must stay renderable: the SDK pointer ignores meshes whose material
+    // is invisible, so colour and depth writes are masked instead (near-zero fill cost).
     const hitMaterial = new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false });
     const hitGeometry = new PlaneGeometry(1, 1);
     for (const button of BUTTONS) {
@@ -81,22 +74,37 @@ export class OceanSystem extends createSystem({
       hit.name = `Depth control ${button.label}`;
       hit.scale.set(button.w * PANEL_M, button.h * PANEL_M, 1);
       hit.position.set((button.x + button.w / 2 - PANEL_W / 2) * PANEL_M, (PANEL_H / 2 - button.y - button.h / 2) * PANEL_M, 0.002);
-      const entity = this.world.createTransformEntity(hit, { parent: this.panelEntity });
+      const entity = this.world.createTransformEntity(hit, { parent: panelEntity });
       entity.addComponent(OceanControl, { action: button.action });
       this.buttonEntities.push(entity);
     }
 
-    // Current indicator: a small translucent cone along the pointing ray while travelling.
     this.indicator = new Mesh(new ConeGeometry(0.018, 0.06, 16), new MeshBasicMaterial({ color: PALETTE.cyan, transparent: true, opacity: 0.55, depthWrite: false }));
     this.indicator.name = 'Travel current indicator';
     this.indicator.visible = false;
     this.world.createTransformEntity(this.indicator);
 
+    const d = this.director;
+    Object.assign(runtime.commandHandlers, {
+      release: () => d.releaseDepth(),
+      'toggle-pause': () => d.setPaused(!d.state.paused),
+      pause: () => d.setPaused(true),
+      resume: () => d.setPaused(false),
+      'toggle-reduced': () => { d.setReducedMotion(!d.state.reducedMotion); runtime.prefs.reducedMotion = d.state.reducedMotion; runtime.savePrefs(); },
+      'reduced:on': () => { d.setReducedMotion(true); runtime.prefs.reducedMotion = true; runtime.savePrefs(); },
+      'reduced:off': () => { d.setReducedMotion(false); runtime.prefs.reducedMotion = false; runtime.savePrefs(); },
+      reset: () => { d.reset(); runtime.travelHand = null; runtime.generation++; this.countOceanInstances(); runtime.log('restart', 'ocean, encounters and reveal reset'); },
+      recenter: () => { runtime.requests.recenter = true; runtime.log('comfort', 'recenter'); },
+      text: () => { runtime.prefs.textScale = runtime.prefs.textScale > 1.1 ? 1 : 1.3; runtime.savePrefs(); runtime.log('comfort', `text ${runtime.prefs.textScale}`); },
+      sound: () => { runtime.prefs.sound = !runtime.prefs.sound; audio.setEnabled(runtime.prefs.sound); runtime.savePrefs(); runtime.log('comfort', `sound ${runtime.prefs.sound ? 'on' : 'off'}`); },
+      room: () => { runtime.requests.returnRoom = true; },
+    });
+
     this.cleanupFuncs.push(this.queries.pressedControls.subscribe('qualify', entity => {
+      audio.tap();
       this.runCommand(entity.getValue(OceanControl, 'action') ?? '');
     }));
 
-    // Desktop debug controls (spec: test depths 0, 0.35, 0.65, 1 and reset).
     const debug = document.getElementById('ocean-debug');
     const onDebug = (event: Event) => {
       const action = (event.target as HTMLElement).dataset?.action;
@@ -118,25 +126,15 @@ export class OceanSystem extends createSystem({
   }
 
   private runCommand(action: string) {
-    const d = this.director;
     if (action.startsWith('depth:')) {
       const value = Number(action.slice(6));
-      if (Number.isFinite(value)) d.selectDepth(value);
-    } else if (action === 'release') d.releaseDepth();
-    else if (action === 'toggle-pause') d.setPaused(!d.state.paused);
-    else if (action === 'pause') d.setPaused(true);
-    else if (action === 'resume') d.setPaused(false);
-    else if (action === 'toggle-reduced') d.setReducedMotion(!d.state.reducedMotion);
-    else if (action === 'reduced:on') d.setReducedMotion(true);
-    else if (action === 'reduced:off') d.setReducedMotion(false);
-    else if (action === 'reset') { d.reset(); this.travelHand = null; this.countOceanInstances(); }
-    else return;
+      if (Number.isFinite(value)) this.director.selectDepth(value);
+    } else if (!runtime.command(action)) return;
     this.panelDirty = true;
     this.diagnosticsClock = 1;
   }
 
   private collectMaterials() {
-    // AbyssSystem swaps in runtime material copies during its init; use whatever is live now.
     this.materials.length = 0;
     this.ocean.traverse(object => {
       const material = (object as Mesh).material;
@@ -149,78 +147,44 @@ export class OceanSystem extends createSystem({
     this.panelShown = shown;
     this.panel.visible = shown;
     this.panelDirty = true;
-    // Hidden controls must not catch rays.
     for (const entity of this.buttonEntities) {
       if (shown && !entity.hasComponent(RayInteractable)) entity.addComponent(RayInteractable);
       if (!shown && entity.hasComponent(RayInteractable)) entity.removeComponent(RayInteractable);
     }
   }
 
-  /**
-   * Gesture arbitration for pinches that start this frame:
-   * menu/targets (ray already on an interactable) win; otherwise, once fully
-   * immersed and unpaused, the pinch becomes travel until it is released.
-   */
-  private updateGestures(delta: number) {
-    const xr = this.input.xr;
-    const immersed = this.session !== null && this.immersion >= 0.999;
-    for (const hand of HANDS) {
-      const select = xr.getSelectState(hand);
-      if (select.start) {
-        if (xr.multiPointers[hand].getRayBusy()) this.menuHands[hand] = true;
-        else if (immersed && !this.director.state.paused && this.travelHand === null) this.travelHand = hand;
-      }
-      if (!select.active) {
-        this.menuHands[hand] = false;
-        if (this.travelHand === hand) this.travelHand = null;
-      }
-    }
-    if (this.travelHand && (!immersed || !xr.getPrimaryInputSource(this.travelHand))) this.travelHand = null;
-
-    let mode: 'world' | 'travel' | 'menu' = 'world';
-    if (this.menuHands.left || this.menuHands.right) mode = 'menu';
-    if (this.travelHand) {
-      mode = 'travel';
-      const space = this.player.raySpaces[this.travelHand];
-      space.getWorldPosition(this.rayOrigin);
-      space.getWorldDirection(this.rayDirection).negate(); // target rays point down -Z
-      this.director.travel(this.rayDirection.x, this.rayDirection.z, delta);
-      this.indicator.position.copy(this.rayOrigin).addScaledVector(this.rayDirection, 0.35);
-      this.indicator.quaternion.setFromUnitVectors(this.up, this.rayDirection);
-    }
-    this.indicator.visible = this.travelHand !== null;
-    this.director.setMode(mode);
-  }
-
   update(delta: number) {
-    const active = this.world.renderer.xr.getSession() ?? null;
-    if (active !== this.session) {
-      // Every XR session starts in the default sunlit ocean.
-      this.session = active;
-      this.director.reset();
-      this.travelHand = null;
-      this.menuHands.left = this.menuHands.right = false;
+    if (runtime.generation !== this.generation) {
+      // New XR session or restart: the director was reset by whoever bumped the generation.
+      this.generation = runtime.generation;
       this.panelDirty = true;
     }
     if (this.materials.length === 0) this.collectMaterials();
-
-    let destination = 'room';
-    for (const entity of this.queries.spheres.entities) {
-      this.immersion = entity.getValue(AbyssSphere, 'immersion') ?? 0;
-      destination = entity.getValue(AbyssSphere, 'destination') ?? 'room';
-    }
-    // The depth panel is offered once the ocean is the chosen destination.
-    this.setPanelShown(destination === 'ocean' || this.immersion > 0);
+    this.setPanelShown(runtime.destination === 'ocean' || runtime.immersion > 0);
+    this.panel.scale.setScalar(runtime.prefs.textScale);
 
     for (const entity of this.queries.status.entities) {
       const command = entity.getValue(OceanStatus, 'command');
       if (command) { entity.setValue(OceanStatus, 'command', ''); this.runCommand(command); }
     }
 
-    this.updateGestures(delta);
-    const before = this.director.state.band;
+    // Bounded hand-directed travel owned by GestureSystem's arbiter.
+    const s = this.director.state;
+    const hand = runtime.travelHand;
+    if (hand) {
+      this.director.travel(runtime.travelDir.x, runtime.travelDir.z, delta);
+      this.player.raySpaces[hand].getWorldPosition(this.rayOrigin);
+      this.dir.set(runtime.travelDir.x, runtime.travelDir.y, runtime.travelDir.z);
+      this.indicator.position.copy(this.rayOrigin).addScaledVector(this.dir, 0.35);
+      this.indicator.quaternion.setFromUnitVectors(this.up, this.dir);
+    }
+    this.indicator.visible = hand !== null;
+    const owners = runtime.pinchOwner;
+    this.director.setMode(hand ? 'travel' : owners.left === 'target' || owners.right === 'target' ? 'menu' : 'world');
+
+    const before = s.band;
     this.director.update(delta);
-    if (before !== this.director.state.band) this.panelDirty = true;
+    if (before !== s.band) { this.panelDirty = true; runtime.log('band', s.band); runtime.nami.notify(s.band, runtime.clock); }
     this.applyToScene();
     this.writeStatus();
 
@@ -235,22 +199,28 @@ export class OceanSystem extends createSystem({
 
   private applyToScene() {
     const s = this.director.state;
-    this.shallow.setRGB(s.waterShallow[0], s.waterShallow[1], s.waterShallow[2]);
-    this.blue.setRGB(s.waterBlue[0], s.waterBlue[1], s.waterBlue[2]);
-    this.deep.setRGB(s.waterDeep[0], s.waterDeep[1], s.waterDeep[2]);
     for (const material of this.materials) {
       const u = material.uniforms;
       if (u.uTime) u.uTime.value = s.time;
-      if (u.uShallow) (u.uShallow.value as Color).copy(this.shallow);
-      if (u.uBlue) (u.uBlue.value as Color).copy(this.blue);
-      if (u.uDeep) (u.uDeep.value as Color).copy(this.deep);
+      if (u.uShallow) u.uShallow.value.setRGB(s.waterShallow[0], s.waterShallow[1], s.waterShallow[2]);
+      if (u.uBlue) u.uBlue.value.setRGB(s.waterBlue[0], s.waterBlue[1], s.waterBlue[2]);
+      if (u.uDeep) u.uDeep.value.setRGB(s.waterDeep[0], s.waterDeep[1], s.waterDeep[2]);
       if (u.uLight) u.uLight.value = s.ambientLight;
       if (u.uFog) u.uFog.value = s.fogDensity;
       if (u.uGlow) u.uGlow.value = s.bioluminescence;
-      if (u.uDrift) (u.uDrift.value as Vector3).set(s.drift[0], s.drift[1], s.drift[2]);
-      if (u.uTravel) (u.uTravel.value as Vector3).set(s.travel[0], 0, s.travel[1]);
+      if (u.uDrift) u.uDrift.value.set(s.drift[0], s.drift[1], s.drift[2]);
+      if (u.uTravel) u.uTravel.value.set(s.travel[0], 0, s.travel[1]);
     }
     this.frame?.position.set(-s.travel[0], 0, -s.travel[1]);
+    // Shared creature environment: in the room (passthrough) creatures are lit normally and unfogged.
+    const k = runtime.immersion;
+    env.uTime.value = s.time;
+    env.uLight.value = 1 + (s.ambientLight - 1) * k;
+    env.uFog.value = s.fogDensity;
+    env.uFogAmount.value = k;
+    env.uGlow.value = s.bioluminescence * k;
+    env.uFogColor.value.setRGB(
+      s.waterBlue[0] * 0.75 + s.waterDeep[0] * 0.25, s.waterBlue[1] * 0.75 + s.waterDeep[1] * 0.25, s.waterBlue[2] * 0.75 + s.waterDeep[2] * 0.25);
   }
 
   private writeStatus() {
@@ -270,6 +240,22 @@ export class OceanSystem extends createSystem({
       entity.setValue(OceanStatus, 'oceanInstances', this.oceanInstances);
       entity.setValue(OceanStatus, 'panelVisible', this.panelShown);
       if (last) entity.setValue(OceanStatus, 'lastEvent', `${last.type}: ${last.detail}`);
+      const r = runtime.stats;
+      entity.setValue(OceanStatus, 'gesture', r.gesture);
+      entity.setValue(OceanStatus, 'handFeatures', r.handFeatures);
+      entity.setValue(OceanStatus, 'discoveries', runtime.discovered.size);
+      entity.setValue(OceanStatus, 'pulses', r.pulses);
+      entity.setValue(OceanStatus, 'revealState', r.revealState);
+      entity.setValue(OceanStatus, 'sharkState', r.sharkState);
+      entity.setValue(OceanStatus, 'schoolState', r.schoolState);
+      entity.setValue(OceanStatus, 'encounter', r.encounter);
+      entity.setValue(OceanStatus, 'namiLine', runtime.nami.current?.id ?? '');
+      entity.setValue(OceanStatus, 'sweeps', r.sweeps);
+      entity.setValue(OceanStatus, 'scatters', r.scatters);
+      entity.setValue(OceanStatus, 'hovered', runtime.hoveredSpecies);
+      if (runtime.eventSeq !== this.eventSeq) { this.eventSeq = runtime.eventSeq; this.eventLog = runtime.events.slice(-6).join(' | '); }
+      entity.setValue(OceanStatus, 'eventLog', this.eventLog);
+      entity.setValue(OceanStatus, 'sharkMinDistance', Number.isFinite(r.sharkMinDistance) ? r.sharkMinDistance : 0);
     }
   }
 
@@ -286,14 +272,15 @@ export class OceanSystem extends createSystem({
     ctx.fillStyle = PALETTE.neutral; ctx.font = '28px Manrope, system-ui, sans-serif';
     const lock = s.depthLocked ? 'held' : 'drifting';
     ctx.fillText(`${this.bandLabel(s.band)} · ${s.depth.toFixed(2)} → ${s.targetDepth.toFixed(2)} ${lock}`, 26, 86);
-    // Depth gauge along the top edge.
     ctx.fillStyle = 'rgba(119,216,219,0.25)'; ctx.fillRect(26, 98, PANEL_W - 52, 3);
     ctx.fillStyle = PALETTE.cyan; ctx.fillRect(26, 98, (PANEL_W - 52) * s.depth, 3);
     for (const button of BUTTONS) {
       const selected = (button.action.startsWith('depth:') && s.depthLocked && Math.abs(Number(button.action.slice(6)) - s.targetDepth) < 1e-3)
         || (button.action === 'release' && !s.depthLocked)
         || (button.action === 'toggle-pause' && s.paused)
-        || (button.action === 'toggle-reduced' && s.reducedMotion);
+        || (button.action === 'toggle-reduced' && s.reducedMotion)
+        || (button.action === 'text' && runtime.prefs.textScale > 1.1)
+        || (button.action === 'sound' && runtime.prefs.sound);
       ctx.fillStyle = selected ? PALETTE.sea : 'rgba(21,91,120,0.28)';
       ctx.strokeStyle = selected ? PALETTE.cyan : 'rgba(119,216,219,0.35)';
       ctx.lineWidth = 2;
@@ -310,13 +297,19 @@ export class OceanSystem extends createSystem({
   private refreshDiagnostics() {
     if (!this.diagnostics) return;
     const s = this.director.state;
+    const r = runtime.stats;
     const last = this.director.lastEvent;
     this.diagnostics.textContent = [
-      `Depth: ${s.depth.toFixed(3)} → ${s.targetDepth.toFixed(3)} (${s.depthLocked ? 'user locked' : 'auto'})`,
-      `Band: ${this.bandLabel(s.band)} · light ${s.ambientLight.toFixed(2)} · vis ${s.visibility.toFixed(2)}`,
-      `Mode: ${s.interactionMode}${s.paused ? ' · PAUSED' : ''}${s.reducedMotion ? ' · calm' : ''}`,
-      `Travel: ${s.travel[0].toFixed(2)}, ${s.travel[1].toFixed(2)} m · ocean instances ${this.oceanInstances}`,
+      `Depth: ${s.depth.toFixed(3)} → ${s.targetDepth.toFixed(3)} (${s.depthLocked ? 'user locked' : 'auto'}) · ${this.bandLabel(s.band)}`,
+      `Light ${s.ambientLight.toFixed(2)} · vis ${s.visibility.toFixed(2)} · mode ${s.interactionMode}${s.paused ? ' · PAUSED' : ''}${s.reducedMotion ? ' · calm' : ''}`,
+      `Travel ${s.travel[0].toFixed(2)}, ${s.travel[1].toFixed(2)} m · oceans ${this.oceanInstances} · ${runtime.showcase ? 'showcase seed 42' : 'explore'}`,
+      `Gesture: ${r.gesture} · ${r.handSpeed.toFixed(2)} m/s`,
+      `School: ${r.schoolState} · ${r.fishCount} fish · threat ${r.threat.toFixed(2)}`,
+      `Encounter: ${r.encounter} · shark ${r.sharkState} ${r.sharkDistance ? r.sharkDistance.toFixed(1) + ' m' : ''}`,
+      `Pulses ${r.pulses} · responses ${r.organismResponses} · reveal ${r.revealState}`,
+      `Discovered ${runtime.discovered.size}/6 · NAMI: ${runtime.nami.lastEvent}`,
       `Ocean event: ${last ? `${last.type} ${last.detail}` : 'none'}`,
+      ...runtime.events.slice(-4),
     ].join('\n');
   }
 }

@@ -21,10 +21,10 @@
               "state": "running",
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
-              "browserEpoch": 2,
-              "revision": 50,
-              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T23:14:49.832Z",
+              "browserEpoch": 4,
+              "revision": 171,
+              "stateEnteredAt": "2026-11-18T01:51:22.068Z",
+              "lastObservedAt": "2026-11-18T03:31:26.080Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -85,38 +85,104 @@
                   "state": "running",
                   "at": "2026-11-17T22:15:43.885Z",
                   "reason": "stable"
+                },
+                {
+                  "revision": 87,
+                  "state": "closing",
+                  "at": "2026-11-18T01:50:24.443Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 90,
+                  "state": "failed",
+                  "at": "2026-11-18T01:50:25.080Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 91,
+                  "state": "launching",
+                  "at": "2026-11-18T01:50:25.942Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 92,
+                  "state": "launching",
+                  "at": "2026-11-18T01:50:25.946Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 93,
+                  "state": "running",
+                  "at": "2026-11-18T01:50:27.591Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 95,
+                  "state": "closing",
+                  "at": "2026-11-18T01:50:33.688Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 97,
+                  "state": "failed",
+                  "at": "2026-11-18T01:50:33.971Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 98,
+                  "state": "launching",
+                  "at": "2026-11-18T01:51:20.953Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 99,
+                  "state": "launching",
+                  "at": "2026-11-18T01:51:20.956Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 100,
+                  "state": "running",
+                  "at": "2026-11-18T01:51:22.068Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 106,
+                  "state": "running",
+                  "at": "2026-11-18T01:51:52.077Z",
+                  "reason": "stable"
                 }
               ],
-              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+              "attemptId": "cdc20e5b-26f6-47f0-8b23-3c60335c2746"
             },
             "status": "connected",
             "clients": [
               {
                 "commandReady": true,
                 "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
-                "browserEpoch": 2,
+                "browserEpoch": 4,
                 "deviceClass": "managed",
-                "pageId": "tab-mwl93oe8-gyi8js",
+                "pageId": "tab-mwlgtmbl-69nl4z",
                 "role": "app",
-                "tabGeneration": 7
+                "tabGeneration": 20
               },
               {
                 "commandReady": true,
                 "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
-                "browserEpoch": 2,
+                "browserEpoch": 4,
                 "deviceClass": "managed",
-                "pageId": "tab-mwl93ini-lszvgu",
+                "pageId": "tab-mwlgtgns-kdn45f",
                 "role": "editor",
-                "sceneSessionId": "scene-h4fhuavrnvm",
+                "sceneSessionId": "scene-xjxqk3wj9je",
                 "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
-            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
+            "lastBridgeConnectedAt": "2026-11-18T03:31:25.900Z",
+            "lastCommandReadyAt": "2026-11-18T03:31:26.079Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
-            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "lastTransitionAt": "2026-11-18T01:51:22.068Z",
             "audioMuted": false
           },
           "browserConnected": true,
@@ -253,8 +319,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 12,
-                "lastEvent": "XR hand select #12",
+                "interactions": 5,
+                "lastEvent": "XR hand select #5",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -298,6 +364,19 @@
                 "x": 0.17000000178813934,
                 "y": 0.17000000178813934,
                 "z": 0.17000000178813934
+              }
+            },
+            {
+              "name": "NAMI caption",
+              "position": {
+                "x": 0,
+                "y": 1.7500000596046448,
+                "z": -0.7199999876320362
+              },
+              "size": {
+                "x": 0.3400000333786011,
+                "y": 0.089077005829024,
+                "z": 0.010740845992579962
               }
             }
           ]
@@ -348,8 +427,8 @@
         "operation": "ecs.pause",
         "result": {
           "paused": true,
-          "frame": 114896,
-          "systemCount": 15
+          "frame": 37050,
+          "systemCount": 19
         }
       }
     }
@@ -387,7 +466,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 115118
+          "totalFrame": 37263
         }
       }
     }
@@ -451,8 +530,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 13,
-                "lastEvent": "XR hand select #13",
+                "interactions": 6,
+                "lastEvent": "XR hand select #6",
                 "pulse": 0.5833333134651184,
                 "immersion": 0.008333333767950535,
                 "destination": "ocean",
@@ -493,7 +572,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 115420
+          "totalFrame": 37563
         }
       }
     }
@@ -512,7 +591,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 115625
+          "totalFrame": 37756
         }
       }
     }
@@ -531,7 +610,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 56,
-          "totalFrame": 115788
+          "totalFrame": 37917
         }
       }
     }
@@ -595,8 +674,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 13,
-                "lastEvent": "XR hand select #13",
+                "interactions": 6,
+                "lastEvent": "XR hand select #6",
                 "pulse": 0,
                 "immersion": 0.5,
                 "destination": "ocean",
@@ -633,13 +712,13 @@
         "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
         "operation": "browser.screenshot",
         "result": {
-          "generation": 7,
-          "id": "tab-mwl93oe8-gyi8js",
+          "generation": 20,
+          "id": "tab-mwlgtmbl-69nl4z",
           "outerUrl": "https://localhost:8081/",
-          "url": "https://localhost:8081/",
+          "url": "https://localhost:8081/?__iwsdk_preview_reload=mwlkd6cq",
           "workspaceFramed": true,
           "downscaled": true,
-          "height": 460,
+          "height": 461,
           "mimeType": "image/png",
           "width": 640
         },
@@ -680,7 +759,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 116267
+          "totalFrame": 38391
         }
       }
     }
@@ -718,7 +797,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 116485
+          "totalFrame": 38607
         }
       }
     }
@@ -782,8 +861,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 14,
-                "lastEvent": "XR hand select #14",
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
                 "pulse": 0.5833333134651184,
                 "immersion": 0.49351853132247925,
                 "destination": "room",
@@ -843,7 +922,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 116901
+          "totalFrame": 39023
         }
       }
     }
@@ -862,7 +941,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 60,
-          "totalFrame": 117067
+          "totalFrame": 39196
         }
       }
     }
@@ -926,8 +1005,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 14,
-                "lastEvent": "XR hand select #14",
+                "interactions": 7,
+                "lastEvent": "XR hand select #7",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1015,7 +1094,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 4,
-          "totalFrame": 117507
+          "totalFrame": 39619
         }
       }
     }
@@ -1053,7 +1132,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 117813
+          "totalFrame": 39924
         }
       }
     }
@@ -1072,7 +1151,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 118009
+          "totalFrame": 40118
         }
       }
     }
@@ -1091,7 +1170,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 118208
+          "totalFrame": 40314
         }
       }
     }
@@ -1110,7 +1189,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 118409
+          "totalFrame": 40508
         }
       }
     }
@@ -1129,7 +1208,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 90,
-          "totalFrame": 118609
+          "totalFrame": 40705
         }
       }
     }
@@ -1148,7 +1227,7 @@
         "operation": "ecs.step",
         "result": {
           "framesAdvanced": 30,
-          "totalFrame": 118746
+          "totalFrame": 40839
         }
       }
     }
@@ -1212,8 +1291,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 15,
-                "lastEvent": "XR hand select #15",
+                "interactions": 8,
+                "lastEvent": "XR hand select #8",
                 "pulse": 0,
                 "immersion": 1,
                 "destination": "ocean",
@@ -1294,8 +1373,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 15,
-                "lastEvent": "XR hand select #15",
+                "interactions": 8,
+                "lastEvent": "XR hand select #8",
                 "pulse": 0,
                 "immersion": 1,
                 "destination": "ocean",
@@ -1327,13 +1406,13 @@
         "workspaceRoot": "C:\\Users\\coled\\Projects\\AbyssVR",
         "operation": "browser.screenshot",
         "result": {
-          "generation": 7,
-          "id": "tab-mwl93oe8-gyi8js",
+          "generation": 20,
+          "id": "tab-mwlgtmbl-69nl4z",
           "outerUrl": "https://localhost:8081/",
-          "url": "https://localhost:8081/",
+          "url": "https://localhost:8081/?__iwsdk_preview_reload=mwlkd6cq",
           "workspaceFramed": true,
           "downscaled": true,
-          "height": 460,
+          "height": 461,
           "mimeType": "image/png",
           "width": 640
         },
@@ -1368,105 +1447,170 @@
             {
               "name": "Depth control Sunlit",
               "position": {
-                "x": -0.4369949518684409,
-                "y": 1.4073280353467648,
-                "z": -0.499827556839581
+                "x": -0.4469949407877737,
+                "y": 1.4138444182088155,
+                "z": -0.49411033895953005
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
               }
             },
             {
               "name": "Depth control Open blue",
               "position": {
-                "x": -0.3722030864514029,
-                "y": 1.4025725600557253,
-                "z": -0.5392661146545812
+                "x": -0.38220307636735557,
+                "y": 1.407908103492877,
+                "z": -0.5333885098926755
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
               }
             },
             {
               "name": "Depth control Twilight",
               "position": {
-                "x": -0.30741122103436486,
-                "y": 1.3978170847646856,
-                "z": -0.5787046724695812
+                "x": -0.31741121194693744,
+                "y": 1.4019717887769387,
+                "z": -0.572666680825821
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
               }
             },
             {
               "name": "Depth control Midnight",
               "position": {
-                "x": -0.2426193587932282,
-                "y": 1.3930616097067452,
-                "z": -0.6181432283514224
+                "x": -0.2526193507024207,
+                "y": 1.3960354743519805,
+                "z": -0.6119448498336691
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
               }
             },
             {
               "name": "Depth control Drift",
               "position": {
-                "x": -0.43699495197471,
-                "y": 1.3497451342807898,
-                "z": -0.4928842487097602
+                "x": -0.4469949407916993,
+                "y": 1.3564956954671108,
+                "z": -0.4854429273308237
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515281
               }
             },
             {
               "name": "Depth control Pause",
               "position": {
-                "x": -0.372203086557672,
-                "y": 1.3449896589897503,
-                "z": -0.5323228065247604
+                "x": -0.38220307637128126,
+                "y": 1.3505593807511724,
+                "z": -0.5247210982639691
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
               }
             },
             {
               "name": "Depth control Calm",
               "position": {
-                "x": -0.30741122114063396,
-                "y": 1.3402341836987106,
-                "z": -0.5717613643397604
+                "x": -0.31741121195086314,
+                "y": 1.344623066035234,
+                "z": -0.5639992691971145
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
               }
             },
             {
-              "name": "Depth control Reset",
+              "name": "Depth control Restart",
               "position": {
-                "x": -0.24261935889949732,
-                "y": 1.3354787086407702,
-                "z": -0.6111999202216016
+                "x": -0.25261935070634634,
+                "y": 1.3386867516102758,
+                "z": -0.6032774382049627
               },
               "size": {
-                "x": 0.059676724597050645,
-                "y": 0.05203486410941016,
-                "z": 0.042071178087834005
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
+              }
+            },
+            {
+              "name": "Depth control Recenter",
+              "position": {
+                "x": -0.446994940795625,
+                "y": 1.299146972725406,
+                "z": -0.4767755157021173
+              },
+              "size": {
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
+              }
+            },
+            {
+              "name": "Depth control Text size",
+              "position": {
+                "x": -0.3822030763752069,
+                "y": 1.2932106580094676,
+                "z": -0.5160536866352627
+              },
+              "size": {
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
+              }
+            },
+            {
+              "name": "Depth control Sound",
+              "position": {
+                "x": -0.31741121195478883,
+                "y": 1.2872743432935292,
+                "z": -0.5553318575684082
+              },
+              "size": {
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
+              }
+            },
+            {
+              "name": "Depth control Room",
+              "position": {
+                "x": -0.25261935071027203,
+                "y": 1.2813380288685712,
+                "z": -0.5946100265762564
+              },
+              "size": {
+                "x": 0.05967672359441312,
+                "y": 0.05292867670986956,
+                "z": 0.04335029776515276
+              }
+            },
+            {
+              "name": "Blue-green chromis school",
+              "position": {
+                "x": 0.2906037307369055,
+                "y": 1.4326190497262004,
+                "z": -1.0832015102378494
+              },
+              "size": {
+                "x": 1.1400716951161756,
+                "y": 0.7893429952595914,
+                "z": 1.6338475930863314
               }
             }
           ]
@@ -1484,7 +1628,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 4437
+          "framesWhilePaused": 4350
         }
       }
     }
@@ -1562,8 +1706,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 15,
-                "lastEvent": "XR hand select #15",
+                "interactions": 8,
+                "lastEvent": "XR hand select #8",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1639,8 +1783,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 15,
-                "lastEvent": "XR hand select #15",
+                "interactions": 8,
+                "lastEvent": "XR hand select #8",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1730,8 +1874,8 @@
             {
               "componentId": "AbyssSphere",
               "values": {
-                "interactions": 15,
-                "lastEvent": "XR hand select #15",
+                "interactions": 8,
+                "lastEvent": "XR hand select #8",
                 "pulse": 0,
                 "immersion": 0,
                 "destination": "room",
@@ -1784,10 +1928,10 @@
               "state": "running",
               "policy": "eager",
               "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
-              "browserEpoch": 2,
-              "revision": 50,
-              "stateEnteredAt": "2026-11-17T22:15:13.876Z",
-              "lastObservedAt": "2026-11-17T23:14:49.832Z",
+              "browserEpoch": 4,
+              "revision": 171,
+              "stateEnteredAt": "2026-11-18T01:51:22.068Z",
+              "lastObservedAt": "2026-11-18T03:31:26.080Z",
               "failures": 0,
               "cleanupConfirmed": true,
               "attemptLimit": 3,
@@ -1848,38 +1992,104 @@
                   "state": "running",
                   "at": "2026-11-17T22:15:43.885Z",
                   "reason": "stable"
+                },
+                {
+                  "revision": 87,
+                  "state": "closing",
+                  "at": "2026-11-18T01:50:24.443Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 90,
+                  "state": "failed",
+                  "at": "2026-11-18T01:50:25.080Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 91,
+                  "state": "launching",
+                  "at": "2026-11-18T01:50:25.942Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 92,
+                  "state": "launching",
+                  "at": "2026-11-18T01:50:25.946Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 93,
+                  "state": "running",
+                  "at": "2026-11-18T01:50:27.591Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 95,
+                  "state": "closing",
+                  "at": "2026-11-18T01:50:33.688Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 97,
+                  "state": "failed",
+                  "at": "2026-11-18T01:50:33.971Z",
+                  "reason": "Managed browser closed unexpectedly."
+                },
+                {
+                  "revision": 98,
+                  "state": "launching",
+                  "at": "2026-11-18T01:51:20.953Z",
+                  "reason": "launch"
+                },
+                {
+                  "revision": 99,
+                  "state": "launching",
+                  "at": "2026-11-18T01:51:20.956Z",
+                  "reason": "prepared"
+                },
+                {
+                  "revision": 100,
+                  "state": "running",
+                  "at": "2026-11-18T01:51:22.068Z",
+                  "reason": "running"
+                },
+                {
+                  "revision": 106,
+                  "state": "running",
+                  "at": "2026-11-18T01:51:52.077Z",
+                  "reason": "stable"
                 }
               ],
-              "attemptId": "86ae05bc-f6ba-4779-a440-883f125b0516"
+              "attemptId": "cdc20e5b-26f6-47f0-8b23-3c60335c2746"
             },
             "status": "connected",
             "clients": [
               {
                 "commandReady": true,
                 "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
-                "browserEpoch": 2,
+                "browserEpoch": 4,
                 "deviceClass": "managed",
-                "pageId": "tab-mwl93oe8-gyi8js",
+                "pageId": "tab-mwlgtmbl-69nl4z",
                 "role": "app",
-                "tabGeneration": 7
+                "tabGeneration": 20
               },
               {
                 "commandReady": true,
                 "sessionId": "cc8667e9-dc53-4d32-9410-7d1ba76c15ca",
-                "browserEpoch": 2,
+                "browserEpoch": 4,
                 "deviceClass": "managed",
-                "pageId": "tab-mwl93ini-lszvgu",
+                "pageId": "tab-mwlgtgns-kdn45f",
                 "role": "editor",
-                "sceneSessionId": "scene-h4fhuavrnvm",
+                "sceneSessionId": "scene-xjxqk3wj9je",
                 "tabGeneration": 3
               }
             ],
-            "lastBridgeConnectedAt": "2026-11-17T23:14:49.643Z",
-            "lastCommandReadyAt": "2026-11-17T23:14:49.832Z",
+            "lastBridgeConnectedAt": "2026-11-18T03:31:25.900Z",
+            "lastCommandReadyAt": "2026-11-18T03:31:26.079Z",
             "connected": true,
             "commandReady": true,
             "connectedClientCount": 2,
-            "lastTransitionAt": "2026-11-17T22:15:13.876Z",
+            "lastTransitionAt": "2026-11-18T01:51:22.068Z",
             "audioMuted": false
           },
           "browserConnected": true,
@@ -1936,7 +2146,7 @@
         "operation": "ecs.resume",
         "result": {
           "paused": false,
-          "framesWhilePaused": 5390
+          "framesWhilePaused": 5289
         }
       }
     }

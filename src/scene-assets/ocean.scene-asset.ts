@@ -13,7 +13,8 @@ const vertex = `
       p = instanceMatrix * p;
       n = mat3(instanceMatrix) * n;
     #endif
-    vPosition = p.xyz;
+    // Pre-instancing local position: shaders that read vPosition need per-instance local coordinates.
+    vPosition = position;
     vWorld = (modelMatrix * p).xyz;
     vNormal = normalize(mat3(modelMatrix) * n);
     gl_Position = projectionMatrix * viewMatrix * vec4(vWorld, 1.0);
@@ -146,14 +147,16 @@ export function createOcean() {
       gl_FragColor = vec4(0.28, 0.73, 0.69, edge * end * breathe * uReveal * 0.045 * uLight);
     }`);
   shaftMaterial.side = DoubleSide;
+  // Seven shafts in one instanced draw call.
+  const shafts = new InstancedMesh(new PlaneGeometry(2, 2), shaftMaterial, 7);
+  shafts.name = 'Sun shafts';
   for (let i = 0; i < 7; i++) {
-    const beam = new Mesh(new PlaneGeometry(2, 2), shaftMaterial);
-    beam.name = `Sun shaft ${i + 1}`;
-    beam.position.set(-8 + i * 2.6, 1.7, -7 - i * 1.2);
-    beam.scale.set(0.7 + i * 0.16, 5, 1);
-    beam.rotation.z = -0.22; beam.rotation.y = (i - 3) * 0.12;
-    beam.renderOrder = -60; frame.add(beam);
+    dummy.position.set(-8 + i * 2.6, 1.7, -7 - i * 1.2);
+    dummy.scale.set(0.7 + i * 0.16, 5, 1);
+    dummy.rotation.set(0, (i - 3) * 0.12, -0.22);
+    dummy.updateMatrix(); shafts.setMatrixAt(i, dummy.matrix);
   }
+  shafts.renderOrder = -60; shafts.frustumCulled = false; frame.add(shafts);
 
   const motePositions = new Float32Array(360 * 3);
   for (let i = 0; i < 360; i++) {

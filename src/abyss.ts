@@ -1,6 +1,8 @@
 import { CanvasTexture, createSystem, Mesh, MeshStandardMaterial, Object3D, Pressed, ShaderMaterial, Sprite, SpriteMaterial, Vector3 } from '@iwsdk/core';
 import { AbyssSphere } from './abyss-component.js';
 import { immersionPhase, smoothReveal, stepImmersion } from './transition.js';
+import { runtime } from './runtime.js';
+import { audio } from './audio/audio-engine.js';
 
 export class AbyssSystem extends createSystem({
   spheres: { required: [AbyssSphere] },
@@ -36,6 +38,7 @@ export class AbyssSystem extends createSystem({
   private diagnostics = document.getElementById('diagnostic-values')!;
   private enter = document.getElementById('enter-xr') as HTMLButtonElement;
   private exit = document.getElementById('exit-xr') as HTMLButtonElement;
+  private instruction!: Sprite;
 
   init() {
     this.anchor = this.world.requireSceneObject('experience');
@@ -69,6 +72,8 @@ export class AbyssSystem extends createSystem({
     panel.name = 'Journey instruction';
     panel.scale.set(0.43, 0.143, 1);
     panel.position.set(0, -0.22, 0);
+    this.instruction = panel;
+    panel.raycast = () => {}; // never a ray target (Sprite.raycast needs a camera)
     this.world.createTransformEntity(panel, { parent: this.world.requireSceneEntity('experience') });
 
     this.cleanupFuncs.push(this.queries.pressed.subscribe('qualify', entity => {
@@ -86,6 +91,8 @@ export class AbyssSystem extends createSystem({
     }));
     const launch = async () => {
       this.enter.disabled = true;
+      // Audio may only start from a user gesture; failure is harmless.
+      audio.start(); audio.setEnabled(runtime.prefs.sound);
       try { await this.world.launchXR(); }
       catch (error) { this.status.textContent = `XR could not start: ${String(error)}. Check HTTPS and XR support.`; }
       finally { this.enter.disabled = false; }
@@ -143,6 +150,13 @@ export class AbyssSystem extends createSystem({
         this.status.textContent = 'XR ended. Desktop input remains available; enter again to reconnect.';
       }
     }
+    // Requests from gestures and the Depth Compass.
+    if (runtime.requests.enterOcean) {
+      runtime.requests.enterOcean = false;
+      if (this.destination === 0) { this.destination = 1; this.lastEvent = 'Open palm → ocean'; this.diagnosticClock = 1; }
+    }
+    if (runtime.requests.returnRoom) { runtime.requests.returnRoom = false; this.destination = 0; this.diagnosticClock = 1; }
+    if (runtime.requests.recenter) { runtime.requests.recenter = false; if (this.session) this.needsPlacement = true; }
     if (this.needsPlacement && this.world.renderer.xr.getFrame()) {
       // Wait for a valid tracked pose; place content once, never move the camera.
       const frame = this.world.renderer.xr.getFrame();
@@ -174,6 +188,9 @@ export class AbyssSystem extends createSystem({
     // Do not advance through a hidden session; resumption never skips a fade.
     const visible = !this.session || this.session.visibilityState === 'visible';
     if (visible) this.immersion = stepImmersion(this.immersion, this.destination, delta);
+    runtime.immersion = this.immersion;
+    runtime.destination = this.destination === 1 ? 'ocean' : 'room';
+    this.instruction.visible = this.debugSpatial || this.immersion < 0.999;
     const reveal = smoothReveal(this.immersion);
     this.ocean.visible = reveal > 0;
     for (const mat of this.oceanMaterials) {

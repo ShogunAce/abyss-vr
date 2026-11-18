@@ -49,3 +49,109 @@ Following the user's report that the foundation worked, the chosen direction is 
 - **Session lifecycle.** Every new XR session starts with a fresh, reset director, so a re-entry begins sunlit with no travel offset.
 - **Debug controls.** The desktop diagnostics panel has 0.00 / 0.35 / 0.65 / 1.00, Auto, Pause and Reset buttons. `OceanStatus.command` accepts the same vocabulary (`depth:<v>`, `release`, `pause`, `resume`, `reset`, `reduced:on|off`) for automated tests.
 - Not in Phase 1: animals, encounters, discoveries, palm gestures, audio. `activeEncounter` and `discoveries` exist in state but are unused.
+
+## Phases 2–5 — living ocean, encounters, midnight reveal, NAMI, opening and comfort (2026-11-17)
+
+**Architecture.** Simulation is pure and unit-tested in `src/sim/` (no Three.js/DOM):
+- `gesture.ts`: HandGesture interpreter and `arbitratePinch`
+- `flock.ts`: boids
+- `shark.ts`: shark state machine
+- `encounters.ts`: seeded scheduler
+- `biolum.ts`: organisms, pulse wavefronts and the hero reveal
+- `nami.ts`: caption controller
+
+Systems in `src/systems/` render these and wire them through one shared service object, `src/runtime.ts`. It holds the director, hands, pinch owners, requests, discoveries, prefs, NAMI, the event log and stats. System order is Gesture → Abyss → Ocean → Creature → Reveal → Guide. `runtime.generation` increments on every XR session change and on Restart; each system resets its own state when it sees a new generation.
+
+**Spec module mapping.**
+- XRBootstrap = AbyssSystem + `iwsdk.config.json`
+- GestureInterpreter/Arbiter = `sim/gesture.ts` + GestureSystem
+- OceanDirector/WorldRenderer = `ocean/`
+- CreatureManager/FlockingSystem = CreatureSystem + `sim/flock.ts` + `sim/shark.ts`
+- Encounter scheduler = `sim/encounters.ts`
+- Bioluminescence = RevealSystem + `sim/biolum.ts`
+- DiscoveryManager/NamiGuide = GuideSystem + `data/species.ts` + `sim/nami.ts`
+- AudioSystem = `audio/audio-engine.ts`
+- ComfortManager = Depth Compass rows 2–3 + runtime prefs
+- Diagnostics = HTML panel + the `OceanStatus` component (also the automated-test surface)
+
+**Gestures (hands-first).** Joint poses come from `XRFrame.getJointPose`, transformed by the XR origin. From them we derive the palm centre, extended-finger count, thumb–index gap and index–pinky spread.
+- **Open palm** requires 4 extended fingers, a thumb gap over 11 cm and a finger spread over 11.5 cm, held 0.25 s, with 0.2 s release hysteresis. These thresholds come from measurements: IWER's relaxed default hand reads as 4 fingers / 9.4 cm / 10.3 cm and must not count; its "open" (high-five) pose reads 12.7 cm / 13.2 cm. They still need tuning against real hands on Quest.
+- **Fast sweep:** speed above 0.7 m/s (exit below 0.45), with a 0.8 s cooldown.
+- **Tracking jumps:** any movement over 4 m/s snaps position with zero velocity and produces no gesture.
+- **Recovery:** gestures are ignored for 0.3 s after a hand (re)appears, so tracking recovery cannot cause a gesture storm.
+- **Fallbacks:** controllers use grip position (no palm gestures); the desktop has no gestures.
+
+**Pinch arbiter.** Each pinch is owned for its whole duration by the first applicable owner:
+1. **Target:** the hand's ray is on any interactable (panel, card, caption, sphere, creature). Its `Pressed` handler acts.
+2. **Pulse:** only when armed, meaning an open palm at depth ≥ 0.75 within the last 3 s. It fires once, on release.
+3. **Travel:** fully immersed, unpaused, and the other hand is not already travelling.
+
+So one pinch can never both inspect and travel, or pulse and travel.
+
+**Fish.** 56 boids (within the spec's 48–64), one InstancedMesh and one draw call. A swim shader bends the body in a travelling wave driven by a per-instance phase.
+- Forces: separation, alignment, cohesion, home volume, hand attraction (steady or slow hands within 1.6 m; fish settle in a ring and never enter the hand), sweep scatter (1.6 s burst), shark threat (4 m field) and a 0.55 m viewer keep-out.
+- Fixed 60 Hz sub-steps (at most 4 per frame) and a 512-cell spatial hash. No per-step allocation.
+- Population tiers with hysteresis:
+
+  | Depth | Fish |
+  | --- | --- |
+  | below 0.59 (back below 0.51) | 56 |
+  | 0.59 to 0.84 (back below 0.76) | 18 |
+  | above 0.84 | 0 |
+
+  Leaving fish swim off and fade rather than popping.
+- In the passthrough room, 8 half-size scouts circle the sphere: the MR "fish move past" beat.
+
+**Shark.** CRUISE → NOTICE → INVESTIGATE → TURN_AWAY → done.
+- Spawns 22 m out inside the viewer's forward arc and cruises past the far side of the school, so the cause and effect is visible.
+- Turns at most 0.55 rad/s. In INVESTIGATE it arcs at a 4.2 m radius.
+- A hard 3.2 m comfort radius is enforced after every move. A 75 s timeout forces it to turn away, and it fades out with distance.
+- The fish respond only to its threat field; the user never triggers this.
+- Procedural countershaded model. To replace it, register a licensed glTF and swap `createShark()`; `SharkBrain` stays.
+
+**Encounters.** The scheduler is seeded (42 in the default showcase mode, time-based with `?explore`). It handles depth eligibility, per-encounter cooldowns, a 45 s minimum gap between hero encounters, double weight for undiscovered species, and timeouts.
+- Showcase guarantees a turtle pass after 5 s in sunlit water and a shark pass after 4 s in open blue, then switches to weighted free scheduling.
+- The turtle is the one additional lightweight encounter: a 40 s sunlit pass 4.2 m away with animated flippers.
+
+**Midnight reveal.**
+- 90 organisms (one additive Points draw call), each running DORMANT → STIMULATED → GLOWING → FADING.
+- The palm light wakes organisms within 1.1 m of an open palm. It is a glow sprite, not a dynamic light.
+- Each pinch-release while armed sends one wavefront (3.2 m/s, 16 m max, 1.2 s cooldown). Organisms light in wavefront order (unit-tested).
+- When a wavefront reaches the hidden giant squid (11 m ahead, depth ≥ 0.78), it emerges over 5 s and drifts 1.5 m closer, staying about 9.5 m away. It stays 32 s, then fades over 6 s. No jump scare.
+- The squid is a single merged procedural mesh: arm sway in the vertex shader, a fresnel rim plus photophore speckles for the reveal. No volumetrics.
+- The discovery card and NAMI both say the reveal is stylized.
+
+**Other creatures.** Six moon jellies (twilight and deeper) with pulsing bells, gonad rings and swaying tentacles; they glow after a pulse. One anglerfish at midnight with a living lure.
+
+**Decorative sprites are never ray targets.** `Sprite.raycast` throws without `Raycaster.camera`. When the anglerfish (which contains a glow sprite) became pinchable at twilight, this exception stopped the render loop, as found by the live experience test. Every glow sprite and the instruction sprite now has a no-op `raycast`.
+
+**Discovery and NAMI.** Six species with curated facts and source URLs (`src/data/species.ts`), all marked `needs-human-check`.
+- Flow: ray hover highlights the creature (rim glow); pinching shows a card and saves the discovery to localStorage, with a chime and a NAMI caption.
+- Close the card by pinching it.
+- NAMI is captions-only and deterministic: one-time story lines, a 9 s minimum gap, and high priority can interrupt. Pinch the caption to dismiss it. There is no network or LLM.
+- Clownfish (in the spec's list) is not implemented, since it needs a reef/anemone set. The blue-green chromis school and the giant squid hero were added instead.
+
+**Opening (Phase 5).** In passthrough, NAMI invites the user, bubbles rise around the sphere and scout fish circle it. Pinching the sphere or holding an open palm for 0.6 s starts the 8 s room-to-ocean fade inside the same `immersive-ar` session.
+- Room understanding is **not** used. Plane and mesh detection are enabled in config, but nothing is placed against room geometry.
+- Passthrough is a deliberate, user-initiated transition. Do not claim room-aware placement in the submission.
+
+**Comfort and accessibility.**
+- No camera motion ever. Travel moves scenery only, at 0.35 m/s (0.15 in Calm), within 6 m.
+- Depth Compass row 3:
+  - **Recenter:** re-places the content anchor and ocean in front of the current head pose.
+  - **Text size:** 1.0 or 1.3 scale for the panel, captions and cards.
+  - **Sound:** toggles the procedural soundscape.
+  - **Room:** returns to passthrough.
+- Restart resets the ocean, encounters, reveal and school while staying in XR.
+- Pause freezes simulation, creatures and the reveal; head tracking stays live.
+- NAMI says when hands are lost.
+- Preferences persist locally. There is no microphone code, and sound-reactive mode is not implemented (lowest-priority optional).
+
+**Audio.** Procedural Web Audio:
+- brown-noise water hush with a depth-dependent low-pass
+- a deep drone that rises with depth
+- synthesized tones for UI, discovery, pulse and reveal
+
+It starts from the Enter XR click, and every call is a no-op if audio is blocked. No audio files.
+
+**Visual identity.** The spec palette (#071824, #155B78, #77D8DB, #9D82D4, #E9E5DA) is used for all spatial UI. Manrope is named but not bundled (system sans-serif fallback). All creatures share the environment uniforms, so they darken, fog and glow consistently with depth.

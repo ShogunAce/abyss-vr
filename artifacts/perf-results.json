@@ -1,0 +1,582 @@
+{
+  "room": {
+    "calls": 10,
+    "triangles": 2948,
+    "points": 248,
+    "lines": 60,
+    "programs": 28,
+    "textures": 13,
+    "frame": {},
+    "raw": {
+      "available": true,
+      "calls": 10,
+      "triangles": 2948,
+      "points": 248,
+      "lines": 60,
+      "geometries": 55,
+      "textures": 13,
+      "programs": 28,
+      "meshCount": 54,
+      "materialCount": 39,
+      "shadowCasters": 0,
+      "framingBounds": {
+        "min": [
+          -0.7181116938591003,
+          0.827249868772924,
+          -1.540839970111847
+        ],
+        "max": [
+          0.7406283617019653,
+          2.2469777576625347,
+          -0.5479038059711456
+        ],
+        "size": [
+          1.4587400555610657,
+          1.4197278888896108,
+          0.9929361641407013
+        ]
+      },
+      "worldBounds": {
+        "min": [
+          -55,
+          -53.5,
+          -55
+        ],
+        "max": [
+          55,
+          56.5,
+          55
+        ],
+        "size": [
+          110,
+          110,
+          110
+        ]
+      },
+      "environment": {
+        "canvas": {
+          "width": 1045,
+          "height": 752
+        },
+        "pixelRatio": 1,
+        "renderer": "WebGLRenderer",
+        "shadows": false,
+        "toneMapping": 4
+      },
+      "sceneAssets": [
+        {
+          "id": "confirmation",
+          "meshCount": 1
+        },
+        {
+          "id": "label",
+          "meshCount": 0
+        },
+        {
+          "id": "ocean",
+          "meshCount": 5
+        },
+        {
+          "id": "particles",
+          "meshCount": 0
+        },
+        {
+          "id": "sphere",
+          "meshCount": 1
+        }
+      ],
+      "sceneEnvironment": {
+        "background": {
+          "type": "transparent"
+        },
+        "clearAlpha": 0,
+        "exposure": 1,
+        "imageBasedLighting": null,
+        "fog": null,
+        "groundShadows": {
+          "contactShadows": 0,
+          "shadowCatchers": 0
+        },
+        "shadows": false,
+        "shadowMapType": "pcf",
+        "toneMapping": "aces",
+        "domeFades": []
+      },
+      "sceneLights": [
+        {
+          "castShadow": false,
+          "color": "#26b3cc",
+          "intensity": 1.2000000476837158,
+          "nodeId": "aqua-light",
+          "sourceNodeId": "aqua-light",
+          "type": "ambient"
+        }
+      ],
+      "sceneMaterials": []
+    }
+  },
+  "sunlit": {
+    "calls": 30,
+    "triangles": 38684,
+    "points": 248,
+    "lines": 60,
+    "programs": 28,
+    "textures": 13,
+    "frame": {},
+    "raw": {
+      "available": true,
+      "calls": 30,
+      "triangles": 38684,
+      "points": 248,
+      "lines": 60,
+      "geometries": 55,
+      "textures": 13,
+      "programs": 28,
+      "meshCount": 87,
+      "materialCount": 43,
+      "shadowCasters": 0,
+      "framingBounds": {
+        "min": [
+          -1.8046865463256836,
+          0.9220039742067456,
+          -2.944228172302246
+        ],
+        "max": [
+          2.033334970474243,
+          2.3469777815043926,
+          -0.36167595134426794
+        ],
+        "size": [
+          3.8380215167999268,
+          1.424973807297647,
+          2.5825522209579783
+        ]
+      },
+      "worldBounds": {
+        "min": [
+          -55,
+          -53.39999997615814,
+          -55
+        ],
+        "max": [
+          55,
+          56.60000002384186,
+          55
+        ],
+        "size": [
+          110,
+          110,
+          110
+        ]
+      },
+      "environment": {
+        "canvas": {
+          "width": 1045,
+          "height": 752
+        },
+        "pixelRatio": 1,
+        "renderer": "WebGLRenderer",
+        "shadows": false,
+        "toneMapping": 4
+      },
+      "sceneAssets": [
+        {
+          "id": "confirmation",
+          "meshCount": 1
+        },
+        {
+          "id": "label",
+          "meshCount": 0
+        },
+        {
+          "id": "ocean",
+          "meshCount": 5
+        },
+        {
+          "id": "particles",
+          "meshCount": 0
+        },
+        {
+          "id": "sphere",
+          "meshCount": 1
+        }
+      ],
+      "sceneEnvironment": {
+        "background": {
+          "type": "transparent"
+        },
+        "clearAlpha": 0,
+        "exposure": 1,
+        "imageBasedLighting": null,
+        "fog": null,
+        "groundShadows": {
+          "contactShadows": 0,
+          "shadowCatchers": 0
+        },
+        "shadows": false,
+        "shadowMapType": "pcf",
+        "toneMapping": "aces",
+        "domeFades": []
+      },
+      "sceneLights": [
+        {
+          "castShadow": false,
+          "color": "#26b3cc",
+          "intensity": 1.2000000476837158,
+          "nodeId": "aqua-light",
+          "sourceNodeId": "aqua-light",
+          "type": "ambient"
+        }
+      ],
+      "sceneMaterials": []
+    }
+  },
+  "openBlue": {
+    "calls": 28,
+    "triangles": 38680,
+    "points": 248,
+    "lines": 60,
+    "programs": 28,
+    "textures": 13,
+    "frame": {},
+    "raw": {
+      "available": true,
+      "calls": 28,
+      "triangles": 38680,
+      "points": 248,
+      "lines": 60,
+      "geometries": 55,
+      "textures": 13,
+      "programs": 28,
+      "meshCount": 87,
+      "materialCount": 43,
+      "shadowCasters": 0,
+      "framingBounds": {
+        "min": [
+          -8.816930770874023,
+          0.9179844921454787,
+          -8.870591163635254
+        ],
+        "max": [
+          8.904634475708008,
+          2.3469777815043926,
+          -0.31170871292515345
+        ],
+        "size": [
+          17.72156524658203,
+          1.428993289358914,
+          8.558882450710101
+        ]
+      },
+      "worldBounds": {
+        "min": [
+          -55,
+          -53.39999997615814,
+          -55
+        ],
+        "max": [
+          55,
+          56.60000002384186,
+          55
+        ],
+        "size": [
+          110,
+          110,
+          110
+        ]
+      },
+      "environment": {
+        "canvas": {
+          "width": 1045,
+          "height": 752
+        },
+        "pixelRatio": 1,
+        "renderer": "WebGLRenderer",
+        "shadows": false,
+        "toneMapping": 4
+      },
+      "sceneAssets": [
+        {
+          "id": "confirmation",
+          "meshCount": 1
+        },
+        {
+          "id": "label",
+          "meshCount": 0
+        },
+        {
+          "id": "ocean",
+          "meshCount": 5
+        },
+        {
+          "id": "particles",
+          "meshCount": 0
+        },
+        {
+          "id": "sphere",
+          "meshCount": 1
+        }
+      ],
+      "sceneEnvironment": {
+        "background": {
+          "type": "transparent"
+        },
+        "clearAlpha": 0,
+        "exposure": 1,
+        "imageBasedLighting": null,
+        "fog": null,
+        "groundShadows": {
+          "contactShadows": 0,
+          "shadowCatchers": 0
+        },
+        "shadows": false,
+        "shadowMapType": "pcf",
+        "toneMapping": "aces",
+        "domeFades": []
+      },
+      "sceneLights": [
+        {
+          "castShadow": false,
+          "color": "#26b3cc",
+          "intensity": 1.2000000476837158,
+          "nodeId": "aqua-light",
+          "sourceNodeId": "aqua-light",
+          "type": "ambient"
+        }
+      ],
+      "sceneMaterials": []
+    }
+  },
+  "midnight": {
+    "calls": 28,
+    "triangles": 38680,
+    "points": 248,
+    "lines": 60,
+    "programs": 28,
+    "textures": 13,
+    "frame": {},
+    "raw": {
+      "available": true,
+      "calls": 28,
+      "triangles": 38680,
+      "points": 248,
+      "lines": 60,
+      "geometries": 55,
+      "textures": 13,
+      "programs": 28,
+      "meshCount": 87,
+      "materialCount": 43,
+      "shadowCasters": 0,
+      "framingBounds": {
+        "min": [
+          -9.187254905700684,
+          0.9047514805570245,
+          -9.483392715454102
+        ],
+        "max": [
+          9.858725547790527,
+          2.3469777815043926,
+          -0.19112094080406794
+        ],
+        "size": [
+          19.04598045349121,
+          1.4422263009473681,
+          9.292271774650034
+        ]
+      },
+      "worldBounds": {
+        "min": [
+          -55,
+          -53.39999997615814,
+          -55
+        ],
+        "max": [
+          55,
+          56.60000002384186,
+          55
+        ],
+        "size": [
+          110,
+          110,
+          110
+        ]
+      },
+      "environment": {
+        "canvas": {
+          "width": 1045,
+          "height": 752
+        },
+        "pixelRatio": 1,
+        "renderer": "WebGLRenderer",
+        "shadows": false,
+        "toneMapping": 4
+      },
+      "sceneAssets": [
+        {
+          "id": "confirmation",
+          "meshCount": 1
+        },
+        {
+          "id": "label",
+          "meshCount": 0
+        },
+        {
+          "id": "ocean",
+          "meshCount": 5
+        },
+        {
+          "id": "particles",
+          "meshCount": 0
+        },
+        {
+          "id": "sphere",
+          "meshCount": 1
+        }
+      ],
+      "sceneEnvironment": {
+        "background": {
+          "type": "transparent"
+        },
+        "clearAlpha": 0,
+        "exposure": 1,
+        "imageBasedLighting": null,
+        "fog": null,
+        "groundShadows": {
+          "contactShadows": 0,
+          "shadowCatchers": 0
+        },
+        "shadows": false,
+        "shadowMapType": "pcf",
+        "toneMapping": "aces",
+        "domeFades": []
+      },
+      "sceneLights": [
+        {
+          "castShadow": false,
+          "color": "#26b3cc",
+          "intensity": 1.2000000476837158,
+          "nodeId": "aqua-light",
+          "sourceNodeId": "aqua-light",
+          "type": "ambient"
+        }
+      ],
+      "sceneMaterials": []
+    }
+  },
+  "reveal": {
+    "calls": 104,
+    "triangles": 98626,
+    "points": 1148,
+    "lines": 2660,
+    "programs": 28,
+    "textures": 13,
+    "frame": {},
+    "raw": {
+      "available": true,
+      "calls": 104,
+      "triangles": 98626,
+      "points": 1148,
+      "lines": 2660,
+      "geometries": 56,
+      "textures": 13,
+      "programs": 28,
+      "meshCount": 87,
+      "materialCount": 43,
+      "shadowCasters": 0,
+      "framingBounds": {
+        "min": [
+          -55,
+          -53.39999997615814,
+          -55
+        ],
+        "max": [
+          55,
+          56.60000002384186,
+          55
+        ],
+        "size": [
+          110,
+          110,
+          110
+        ]
+      },
+      "worldBounds": {
+        "min": [
+          -55,
+          -53.39999997615814,
+          -55
+        ],
+        "max": [
+          55,
+          56.60000002384186,
+          55
+        ],
+        "size": [
+          110,
+          110,
+          110
+        ]
+      },
+      "environment": {
+        "canvas": {
+          "width": 1045,
+          "height": 752
+        },
+        "pixelRatio": 1,
+        "renderer": "WebGLRenderer",
+        "shadows": false,
+        "toneMapping": 4
+      },
+      "sceneAssets": [
+        {
+          "id": "confirmation",
+          "meshCount": 1
+        },
+        {
+          "id": "label",
+          "meshCount": 0
+        },
+        {
+          "id": "ocean",
+          "meshCount": 5
+        },
+        {
+          "id": "particles",
+          "meshCount": 0
+        },
+        {
+          "id": "sphere",
+          "meshCount": 1
+        }
+      ],
+      "sceneEnvironment": {
+        "background": {
+          "type": "transparent"
+        },
+        "clearAlpha": 0,
+        "exposure": 1,
+        "imageBasedLighting": null,
+        "fog": null,
+        "groundShadows": {
+          "contactShadows": 0,
+          "shadowCatchers": 0
+        },
+        "shadows": false,
+        "shadowMapType": "pcf",
+        "toneMapping": "aces",
+        "domeFades": []
+      },
+      "sceneLights": [
+        {
+          "castShadow": false,
+          "color": "#26b3cc",
+          "intensity": 1.2000000476837158,
+          "nodeId": "aqua-light",
+          "sourceNodeId": "aqua-light",
+          "type": "ambient"
+        }
+      ],
+      "sceneMaterials": []
+    }
+  }
+}

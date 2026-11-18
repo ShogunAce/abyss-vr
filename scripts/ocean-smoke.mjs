@@ -5,6 +5,7 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 const evidence = [];
+const testStartedAt = Date.now(); // console checks only count errors logged during this run
 function cli(domain, action, input) {
   const args = ['node_modules/@iwsdk/cli/bin/iwsdk.js', domain, action];
   if (input) args.push('--input-json', JSON.stringify(input));
@@ -119,7 +120,7 @@ try {
   cli('xr', 'exit');
   const logs = cli('browser', 'logs', { count: 150 });
   const navigationAbort = e => e.kind === 'requestfailed' && e.failure === 'net::ERR_ABORTED';
-  check(!logs.some(e => e.level === 'error' && !navigationAbort(e)), 'No browser console errors');
+  check(!logs.some(e => e.level === 'error' && e.timestamp >= testStartedAt && !navigationAbort(e)), 'No browser console errors');
   console.log('Ocean smoke passed. Physical Quest review still required.');
 } finally {
   try { cli('xr', 'set-select-value', { device: 'hand-right', value: 0 }); cli('xr', 'set-select-value', { device: 'hand-left', value: 0 }); } catch {}

@@ -16,3 +16,14 @@ Dependency package licenses remain in installed packages; this file is an asset 
 ## Additional original assets — The Arrival
 
 `src/scene-assets/ocean.scene-asset.ts` contains original procedural terrain, reef instances, water/light shaders and particle geometry. No downloaded texture, 3D model, sound or font was added. The same installed IWSDK/Three MIT notices apply.
+
+## Phases 2–5 additions
+
+| Asset | Origin | License / contest use |
+| --- | --- | --- |
+| Fish school, reef shark, green sea turtle, moon jellies, anglerfish, giant squid | Original procedural geometry and shaders in `src/visuals/creature-models.ts` | Created for this project; permissible |
+| Bioluminescent organisms, pulse wavefront, glow sprite, NAMI orb, opening bubbles | Same module; the glow texture is drawn at runtime on a canvas | Created for this project; permissible |
+| Soundscape, chimes, pulse and reveal tones | Synthesized at runtime with Web Audio (`src/audio/audio-engine.ts`) | Created for this project; no audio files |
+| Species facts | Written for ABYSS, paraphrasing the per-species sources in `src/data/species.ts` (FishBase, NOAA Fisheries, Florida Museum, Monterey Bay Aquarium, NOAA Ocean Exploration, Smithsonian Ocean) | Paraphrased, not copied; **re-check each fact and URL before submission** |
+
+No third-party models, textures, fonts, music or AI-generated media were added. To use a licensed model later, register the glTF in `src/assets.ts` and swap the matching `create*()` call. Behaviour code does not depend on the mesh.

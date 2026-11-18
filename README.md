@@ -1,19 +1,32 @@
-# ABYSS — The Arrival
+# ABYSS — The Living Ocean
 
-A seated, hands-first journey from your own room into an underwater world. Built on the verified Phase 0 foundation with IWSDK 1.1.0.
+Your room becomes an ocean, and the ocean responds to you. ABYSS is a seated, hands-first WebXR experience for Meta Quest 3/3S, built with IWSDK 1.1.0. Everything is procedural: no downloaded models, textures or audio files.
 
 ## Try it
 
-- Laptop: https://localhost:8081/
-- Quest on the same Wi-Fi: https://10.0.0.222:8081/ (current laptop address; check `ipconfig` after network changes).
-- Select **Enter XR**, stay seated, and look forward.
-- **Point and pinch the sphere** to let the room fade into an ocean over roughly eight seconds.
-- **Pinch again at any time** to reverse toward your room. A full return takes roughly 4.5 seconds.
-- The viewer never moves. The ocean surrounds the initial seated position.
-- Desktop users can click the sphere. **Return to room** and **Escape** also reverse the reveal. Quest Browser's system exit always ends the immersive session.
-- Opening a fresh XR session always starts in the room, including after exiting from the ocean.
+- Laptop (IWER emulator): https://localhost:8081/
+- Quest on the same Wi-Fi: use the Network URL from `npm run dev:status` (it was https://10.0.0.222:8081/).
+- `?explore` switches off the deterministic showcase and uses a random seed. `?debug=1` puts detailed diagnostics on the spatial panel.
 
-The underwater environment includes a rippled seabed, distant reef outcrops, an overhead water surface, drifting motes and soft light shafts. This is the first environment/transition slice; wildlife, audio and ocean exploration are not implemented yet.
+**The arc, 5–8 minutes, hands only:**
+
+1. **Room.** Select **Enter XR** and stay seated. NAMI, a small glowing guide, invites you in while bubbles rise and a few scout fish circle the glowing sphere in your room.
+2. **Arrival.** Pinch the sphere, or hold an open palm (a high five, fingers spread) for about half a second. Your room dissolves into a sunlit ocean over about 8 s.
+3. **Fish.** Hold a steady or slowly moving hand toward the school and the fish gather around it. A quick sweep scatters them, and they regroup.
+4. **Turtle.** A green sea turtle glides past. Point at it (it highlights), then pinch to discover it. Pinch the card to close it.
+5. **Open blue.** Choose **Open blue** on the Depth Compass (the panel to your lower left). A reef shark arrives, investigates from a distance and turns away. Watch the school flee from it on their own. Pinch the shark to discover it.
+6. **Midnight.** Choose **Midnight**. Moon jellies and an anglerfish appear in the dark. Open your palm and organisms near your hand begin to glow.
+7. **The reveal.** While your palm has recently been open, pinch and release: one pulse of light expands outward. When it reaches the dark, a giant squid emerges as a glowing silhouette. Pinch it to discover it.
+8. **Exploring.** Pinch and hold while pointing at open water to glide gently in that direction; release to stop.
+
+**Depth Compass buttons:**
+- Bands: Sunlit, Open blue, Twilight, Midnight
+- Drift, Pause, Calm (reduced motion), Restart
+- Recenter, Text size, Sound, Room
+
+Pinch NAMI's caption to dismiss it. Discoveries and comfort preferences are saved on the device.
+
+The viewer is never moved. Travel and depth change the world, never the camera. There is no microphone use.
 
 ## Run
 
@@ -34,6 +47,7 @@ With the managed development browser/server running:
 ```powershell
 npm run test:journey
 npm run test:ocean
+npm run test:experience
 npm run test:smoke
 ```
 

@@ -49,3 +49,20 @@ New files: `src/ocean/ocean-director.ts` (pure seeded simulation), `src/ocean/oc
 Updated: `src/scene-assets/ocean.scene-asset.ts` (depth uniforms, travel frame, drifting motes), `src/abyss.ts` (no longer writes ocean time), `src/components.ts`, `src/index.ts`, `public/scenes/main.iwsdk.scene.json` (authored `OceanStatus`), `index.html`/`src/style.css` (ocean diagnostics and debug buttons), `package.json`.
 
 Evidence: `artifacts/ocean-results.json`, `artifacts/phase1-depth-bands.png` (sunlit / open blue / midnight in emulated XR).
+
+## Phases 2–5 — living ocean
+
+New source:
+- `src/runtime.ts`: shared services
+- `src/sim/{gesture,flock,shark,encounters,biolum,nami}.ts`: pure simulations
+- `src/systems/{gesture,creature,reveal,guide}-system.ts`
+- `src/visuals/creature-models.ts`: procedural creatures and shaders
+- `src/data/species.ts`: curated facts
+- `src/audio/audio-engine.ts`: procedural sound
+
+Updated: `src/ocean/ocean-system.ts` (shared director, comfort row, shared creature environment uniforms, test surface), `src/ocean/ocean-components.ts` (`Inspectable`, diagnostic fields), `src/abyss.ts` (runtime requests, audio start, sprite raycast guard), `src/index.ts` (system order), `src/components.ts`, `public/scenes/main.iwsdk.scene.json`, `README.md`, `package.json` (`test:experience`).
+
+Tests:
+- `tests/sims.test.mjs`: gestures, arbiter, flock, shark, scheduler, bioluminescence, NAMI
+- `scripts/experience-smoke.mjs`: the full arc with emulated hands
+- Evidence: `artifacts/experience-results.json`, `artifacts/phase2-5-*.png`

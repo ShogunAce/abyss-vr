@@ -16,7 +16,8 @@
     "test:smoke": "node scripts/smoke.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:journey": "node scripts/journey-smoke.mjs",
-    "test:ocean": "node scripts/ocean-smoke.mjs"
+    "test:ocean": "node scripts/ocean-smoke.mjs",
+    "test:experience": "node scripts/experience-smoke.mjs"
   },
   "dependencies": {
     "@iwsdk/core": "1.1.0",
