@@ -20,6 +20,8 @@ Your room becomes an ocean, and the ocean responds to you. ABYSS is a seated, ha
 7. **The reveal.** Keep your palm open for about a second: one pulse of light expands outward. When it reaches the dark, a giant squid emerges as a glowing silhouette. Pinch it to discover it.
 8. **Exploring.** Point a finger to swim. Each zone has gold dive markers under a column of light; swim to one to log it and read about the real ocean at that depth. The menu's **Map & journal** page shows where you are, the markers, and which animals you've found.
 
+**Hang out or explore.** The ocean is also a place to just be: soft generative ambient music (made live in code, no audio files) plays as you float and shifts deeper and darker as you descend. Stay as long as you like, or swim off and explore. **Music** in the Dive menu turns it on or off.
+
 **Hand signs (each sign does exactly one thing):**
 
 | Sign | Does |

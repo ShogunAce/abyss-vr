@@ -12,7 +12,7 @@ const MARKERS_KEY = 'abyss.markers.v1';
 
 /** Saved panel pose: anchor-local position + Euler rotation. */
 type Pose = number[];
-type Prefs = { reducedMotion: boolean; textScale: number; sound: boolean; namiMuted: boolean; guide: boolean; menu: boolean; menuPose: Pose | null; guidePose: Pose | null };
+type Prefs = { reducedMotion: boolean; textScale: number; sound: boolean; namiMuted: boolean; guide: boolean; music: boolean; menu: boolean; menuPose: Pose | null; guidePose: Pose | null };
 
 function load<T>(key: string, fallback: T): T {
   try { const raw = localStorage.getItem(key); return raw ? { ...fallback, ...JSON.parse(raw) } : fallback; } catch { return fallback; }
@@ -55,7 +55,7 @@ export const runtime = {
   markers: new Set<string>(load<{ ids: string[] }>(MARKERS_KEY, { ids: [] }).ids),
   /** A marker the viewer just reached; GuideSystem shows its card. */
   pendingMarker: '' as string,
-  prefs: load<Prefs>(PREFS_KEY, { reducedMotion: false, textScale: 1, sound: true, namiMuted: false, guide: true, menu: true, menuPose: null, guidePose: null }),
+  prefs: load<Prefs>(PREFS_KEY, { reducedMotion: false, textScale: 1, sound: true, namiMuted: false, guide: true, music: true, menu: true, menuPose: null, guidePose: null }),
   nami: new NamiGuide(),
   events: [] as string[],
   /** Increments on every log() so readers can cache derived strings. */

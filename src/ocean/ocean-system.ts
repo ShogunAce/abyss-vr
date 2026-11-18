@@ -27,8 +27,9 @@ const BUTTONS: Button[] = [
   ...row(176, BANDS.map(b => [`depth:${b.preset}`, b.label] as [string, string])),
   ...row(282, [['release', 'Drift'], ['toggle-pause', 'Pause'], ['toggle-reduced', 'Calm'], ['reset', 'Restart']]),
   ...row(388, [['recenter', 'Recenter'], ['text', 'Text size'], ['sound', 'Sound'], ['guide', 'Guide']]),
-  { action: 'reset-layout', label: 'Reset layout', x: 20, y: 494, w: 292, h: 70, page: 'controls' },
-  { action: 'clear-discoveries', label: 'New expedition', x: 324, y: 494, w: 296, h: 70, page: 'controls' },
+  { action: 'music', label: 'Music', x: 20, y: 494, w: 192, h: 70, page: 'controls' },
+  { action: 'reset-layout', label: 'Reset layout', x: 224, y: 494, w: 192, h: 70, page: 'controls' },
+  { action: 'clear-discoveries', label: 'New expedition', x: 428, y: 494, w: 192, h: 70, page: 'controls' },
 ];
 /** Which zone each species lives in (for the journal's hints). */
 const SPECIES_ZONE: Record<string, string> = {
@@ -123,6 +124,7 @@ export class OceanSystem extends createSystem({
     this.indicator.visible = false;
     this.world.createTransformEntity(this.indicator);
 
+    audio.setMusic(runtime.prefs.music);
     const d = this.director;
     Object.assign(runtime.commandHandlers, {
       release: () => d.releaseDepth(),
@@ -135,6 +137,7 @@ export class OceanSystem extends createSystem({
       reset: () => { d.reset(); runtime.travelHand = null; runtime.generation++; this.countOceanInstances(); runtime.log('restart', 'ocean, encounters and reveal reset'); },
       recenter: () => { runtime.requests.recenter = true; runtime.log('comfort', 'recenter'); },
       text: () => { runtime.prefs.textScale = runtime.prefs.textScale > 1.1 ? 1 : 1.3; runtime.savePrefs(); runtime.log('comfort', `text ${runtime.prefs.textScale}`); },
+      music: () => { runtime.prefs.music = !runtime.prefs.music; audio.setMusic(runtime.prefs.music); runtime.savePrefs(); runtime.log('comfort', `music ${runtime.prefs.music ? 'on' : 'off'}`); },
       sound: () => { runtime.prefs.sound = !runtime.prefs.sound; audio.setEnabled(runtime.prefs.sound); runtime.savePrefs(); runtime.log('comfort', `sound ${runtime.prefs.sound ? 'on' : 'off'}`); },
       room: () => { runtime.requests.returnRoom = true; },
       menu: () => {
@@ -397,6 +400,7 @@ export class OceanSystem extends createSystem({
         || (button.action === 'toggle-reduced' && s.reducedMotion)
         || (button.action === 'text' && runtime.prefs.textScale > 1.1)
         || (button.action === 'sound' && runtime.prefs.sound)
+        || (button.action === 'music' && runtime.prefs.music)
         || (button.action === 'guide' && runtime.prefs.guide);
       ctx.fillStyle = selected ? PALETTE.sea : 'rgba(21,91,120,0.28)';
       ctx.strokeStyle = selected ? PALETTE.cyan : 'rgba(119,216,219,0.35)';

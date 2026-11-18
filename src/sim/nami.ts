@@ -5,7 +5,7 @@ export type NamiLine = { id: string; text: string; priority: number; once: boole
 
 export const NAMI_LINES: Record<string, NamiLine> = {
   welcome: { id: 'welcome', text: 'Hi, I’m NAMI. Touch or pinch the glowing pearl to let the ocean in. Make a fist any time for the menu and hand signs.', priority: 2, once: true },
-  entered: { id: 'entered', text: 'The sunlit zone, the top 200 metres. Point a finger to swim — find the glowing dive markers and log every animal.', priority: 2, once: true },
+  entered: { id: 'entered', text: 'Welcome to your ocean. Stay and float with the music as long as you like — or point a finger to swim and explore.', priority: 2, once: true },
   sweep: { id: 'sweep', text: 'A quick sweep startles a school — watch them regroup.', priority: 1, once: true },
   turtle: { id: 'turtle', text: 'A sea turtle is gliding by. Point at it and pinch to learn more.', priority: 2, once: true },
   suggestDeeper: { id: 'suggestDeeper', text: 'Ready to go deeper? Make a fist for the menu and choose Open blue.', priority: 1, once: true },
