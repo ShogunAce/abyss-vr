@@ -242,3 +242,41 @@ CI fixes:
 - `--experimental-strip-types` for the Node 22 test runner
 
 Not done: PWA manifest, icons and APK packaging. A Pages project site is a subpath, so a TWA would also need `assetlinks.json` at the `shogunace.github.io` origin root.
+
+## Headset feedback pass — QC (2026-11-18)
+
+Emulator results:
+- Typecheck and build: PASS.
+- `npm test`: 27/27 PASS. New: 30 Hz pose updates still detect a real sweep.
+- `npm run test:experience`: 34/34. One squid pinch retry is still noted.
+- `npm run test:ocean`: 22/22. `npm run test:smoke`: 12/12. `npm run test:journey`: 12/12.
+
+Fixed during this pass:
+- **The tracking-jump guard rejected real sweeps when hand poses update slower than frames** (the emulator, or Quest's 30 Hz hand tracking). It is now distance-based: a jump of more than 25 cm in one update counts as a glitch.
+- **Fingertip touch is gated to slow approaches** (under 0.5 m/s), so a sweep passing through the sphere never flips the world back to the room.
+- **Only visible fish are drawn** (instances compacted, plus `mesh.count`).
+
+Render cost (IWER desktop, both eyes; not Quest numbers):
+
+| State | Draw calls | Triangles |
+| --- | --- | --- |
+| Room | 36 | 27k |
+| Sunlit (reef + 120 fish) | 96 | 293k |
+| Open blue | 94 | 293k |
+| Midnight | 114 | 248k |
+| Reveal | 122 | 256k |
+
+Midnight frame time in the emulator: 16.7 ms p50, 0 dropped frames. **Quest FPS is UNVERIFIED.**
+
+If the headset is short of 60 FPS, cut in this order:
+1. seagrass blades (1300)
+2. branching coral (70)
+3. terrain grid (120²)
+4. fish count (120)
+
+New headset checks:
+- [ ] Pointing at the sphere makes it glow and swell. A pinch or a slow fingertip touch activates it. A fast sweep through it does nothing.
+- [ ] Fish come toward a steady hand but keep a hand's width away, and never crowd the Depth Compass or your face.
+- [ ] Fish swim level and bank into turns. No vertical or upside-down fish.
+- [ ] The ABYSS title and instruction screen disappear once the ocean begins. NAMI sits to the left. **Guide** hides and shows NAMI.
+- [ ] The reef reads as a living seabed: rippled sand, mounds, corals, sponges, swaying anemones and seagrass, starfish. No popping as the ocean fades in.

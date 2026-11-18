@@ -24,8 +24,9 @@ export const GESTURE = {
   fastEnter: 0.7,
   fastExit: 0.45,
   sweepCooldown: 0.8,
-  /** Faster than any real hand: a tracking jump, never a gesture. */
-  maxPlausibleSpeed: 4,
+  /** A single-update jump this large is a tracking glitch, never a gesture. Distance-based so
+   *  low-rate (e.g. 30 Hz) pose updates arriving in bursts still read as real motion. */
+  maxJump: 0.25,
   openHold: 0.25,
   openRelease: 0.2,
   // A relaxed hand also has 4 roughly straight fingers; a deliberate open palm
@@ -74,7 +75,7 @@ export class HandGesture {
     }
     this.trackedFor += dt;
     if (dt <= 0) return;
-    if (Math.hypot(sample.x - this.x, sample.y - this.y, sample.z - this.z) / dt > GESTURE.maxPlausibleSpeed) {
+    if (Math.hypot(sample.x - this.x, sample.y - this.y, sample.z - this.z) > GESTURE.maxJump) {
       // Tracking jump (glitch or re-localisation): snap, zero velocity, no gesture.
       this.x = sample.x; this.y = sample.y; this.z = sample.z;
       this.vx = this.vy = this.vz = 0; this.speed = 0; this.motion = 'still';

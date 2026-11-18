@@ -1,3 +1,4 @@
+import { createReef, rockGeometry, seabedHeight } from './reef.scene-asset.js';
 import { BackSide, Color, BufferGeometry, DoubleSide, Float32BufferAttribute, Group, IcosahedronGeometry, InstancedMesh, Mesh, Object3D, PlaneGeometry, Points, ShaderMaterial, SphereGeometry, Vector3 } from '@iwsdk/core';
 
 // A stationary 110 m underwater volume. Origin is the initial viewer eye position.
@@ -65,46 +66,67 @@ export function createOcean() {
   sky.name = 'Water volume'; sky.renderOrder = -100;
   root.add(sky);
 
-  const floorGeometry = new PlaneGeometry(90, 90, 100, 100);
+  // Terrain: dunes, reef mounds and a calm hollow beneath the viewer (see seabedHeight).
+  const floorGeometry = new PlaneGeometry(90, 90, 120, 120);
   floorGeometry.rotateX(-Math.PI / 2);
   const positions = floorGeometry.getAttribute('position');
   for (let i = 0; i < positions.count; i++) {
-    const x = positions.getX(i), z = positions.getZ(i);
-    const height = Math.sin(x * 0.28 + Math.sin(z * 0.19)) * 0.35 + Math.sin(z * 0.48 + x * 0.09) * 0.16;
-    positions.setY(i, height);
+    positions.setY(i, seabedHeight(positions.getX(i), positions.getZ(i)));
   }
   floorGeometry.computeVertexNormals();
   const groundMaterial = material(`
     void main() {
       vec3 d = normalize(vWorld - cameraPosition);
       float distanceToEye = length(vWorld - cameraPosition);
-      float ripple = sin(vPosition.x * 5.0 + sin(vPosition.z * 1.2) * 1.1) * 0.018;
-      float caustic = pow(0.5 + 0.5 * sin(vPosition.x * 1.6 + sin(vPosition.z * 1.9 + uTime * 0.18) * 1.8), 12.0);
-      caustic *= pow(0.5 + 0.5 * sin(vPosition.z * 1.4 - uTime * 0.12), 2.0);
-      vec3 sand = (vec3(0.16, 0.31, 0.29) + ripple) * (0.12 + 0.88 * uLight) + vec3(0.14, 0.30, 0.23) * caustic * 0.42 * uLight * uLight;
-      sand *= 0.7 + max(vNormal.y, 0.0) * 0.3;
-      vec3 col = mix(sand, water(d), 1.0 - exp(-distanceToEye * uFog));
+      vec2 q = vPosition.xz;
+      // Wave-formed sand ripples whose direction wanders across the seabed.
+      float warp = sin(q.x * 0.23 + sin(q.y * 0.31) * 1.7) + sin(q.y * 0.17 - q.x * 0.11);
+      float ang = warp * 0.6 + 0.4;
+      vec2 dir = vec2(cos(ang), sin(ang));
+      float phase = dot(q, dir) * 13.0 + warp * 3.0;
+      float ripple = 0.5 + 0.5 * sin(phase + 0.6 * sin(phase));
+      float grain = fract(sin(dot(floor(q * 95.0), vec2(12.9898, 78.233))) * 43758.5453);
+      float patchy = 0.5 + 0.5 * sin(q.x * 0.4 + sin(q.y * 0.5) * 2.0) * sin(q.y * 0.33 + 1.2);
+      vec3 sand = mix(vec3(0.3, 0.29, 0.23), vec3(0.55, 0.52, 0.41), 0.4 + 0.4 * patchy);
+      sand *= (0.86 + 0.2 * ripple) * (0.93 + 0.09 * grain);
+      // Steep mound flanks read as rock; scattered algae and rubble on the reef.
+      float slope = 1.0 - clamp(normalize(vNormal).y, 0.0, 1.0);
+      sand = mix(sand, vec3(0.33, 0.34, 0.31) * (0.85 + 0.2 * grain), smoothstep(0.22, 0.55, slope));
+      float algae = smoothstep(0.7, 0.95, sin(q.x * 3.1 + sin(q.y * 2.7)) * sin(q.y * 2.3 + q.x * 0.7));
+      sand = mix(sand, vec3(0.25, 0.42, 0.2), algae * 0.4 * smoothstep(-3.0, -2.2, vPosition.y));
+      sand *= vec3(0.72, 0.88, 0.95); // water absorbs reds first
+      float caustic = pow(0.5 + 0.5 * sin(q.x * 1.6 + sin(q.y * 1.9 + uTime * 0.18) * 1.8), 12.0);
+      caustic *= pow(0.5 + 0.5 * sin(q.y * 1.4 - uTime * 0.12), 2.0);
+      float key = 0.35 + 0.65 * max(dot(normalize(vNormal), normalize(vec3(-0.3, 1.0, -0.2))), 0.0);
+      vec3 lit = sand * key * (0.08 + 0.92 * uLight) + vec3(0.4, 0.6, 0.5) * caustic * 0.32 * uLight * uLight;
+      vec3 col = mix(lit, water(d), 1.0 - exp(-distanceToEye * uFog));
       gl_FragColor = vec4(col, uReveal);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
     }`);
   const seabed = new Mesh(floorGeometry, groundMaterial);
   groundMaterial.userData.solid = true;
-  seabed.name = 'Rippled sand'; seabed.position.y = -3.4; seabed.renderOrder = -90;
+  seabed.name = 'Rippled sand'; seabed.renderOrder = -90;
   frame.add(seabed);
 
   const rockMaterial = material(`
     void main() {
       float lighting = 0.26 + max(dot(normalize(vNormal), normalize(vec3(-0.3, 1.0, -0.2))), 0.0) * 0.7;
-      float strata = sin(vWorld.y * 7.0 + sin(vWorld.x * 3.0)) * 0.018;
-      vec3 stone = (vec3(0.075, 0.18, 0.19) + strata) * lighting * (0.1 + 0.9 * uLight);
+      float strata = sin(vWorld.y * 7.0 + sin(vWorld.x * 3.0)) * 0.03;
+      vec3 nn = normalize(vNormal);
+      vec3 stone = vec3(0.3, 0.31, 0.28) + strata;
+      // Coralline crust and algae on upward faces; darker crevices.
+      float crust = smoothstep(0.35, 0.8, nn.y) * (0.5 + 0.5 * sin(vWorld.x * 4.3 + sin(vWorld.z * 3.7) * 2.0));
+      stone = mix(stone, vec3(0.72, 0.38, 0.48), crust * 0.55);
+      stone = mix(stone, vec3(0.22, 0.4, 0.2), smoothstep(0.6, 0.9, sin(vWorld.z * 5.1 + vWorld.x * 2.3)) * smoothstep(0.2, 0.7, nn.y) * 0.5);
+      stone *= vec3(0.78, 0.9, 0.95) * lighting * (0.08 + 0.92 * uLight);
       float distanceToEye = length(vWorld - cameraPosition);
       vec3 col = mix(stone, water(normalize(vWorld - cameraPosition)), 1.0 - exp(-distanceToEye * uFog * 0.79));
       gl_FragColor = vec4(col, uReveal);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
     }`);
-  const reef = new InstancedMesh(new IcosahedronGeometry(1, 2), rockMaterial, 42);
+  const reef = new InstancedMesh(rockGeometry(), rockMaterial, 42);
   rockMaterial.userData.solid = true;
   reef.name = 'Distant reef outcrops'; reef.renderOrder = -80;
   const dummy = new Object3D();
@@ -114,12 +136,16 @@ export function createOcean() {
     const angle = i / 42 * Math.PI * 2;
     const radius = 7 + random() * 17;
     const height = 0.5 + random() * 3.3;
-    dummy.position.set(Math.cos(angle) * radius, -3.5 + height * 0.3, Math.sin(angle) * radius);
+    const rx = Math.cos(angle) * radius, rz = Math.sin(angle) * radius;
+    dummy.position.set(rx, seabedHeight(rx, rz) + height * 0.2, rz);
     dummy.scale.set(0.8 + random() * 1.8, height, 0.8 + random() * 2);
     dummy.rotation.set(random() * 0.3, random() * Math.PI, random() * 0.15);
     dummy.updateMatrix(); reef.setMatrixAt(i, dummy.matrix);
   }
   frame.add(reef);
+
+  // Living reef: corals, sponges, anemones, seagrass and starfish (one instanced draw per type).
+  frame.add(createReef({ uniforms: environmentUniforms, glsl: `${environmentGlsl} ${waterColor}` }));
 
   const surfaceMaterial = material(`
     void main() {

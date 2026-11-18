@@ -9,7 +9,7 @@ const params = new URLSearchParams(location.search);
 const DISCOVERY_KEY = 'abyss.discoveries.v1';
 const PREFS_KEY = 'abyss.prefs.v1';
 
-type Prefs = { reducedMotion: boolean; textScale: number; sound: boolean; namiMuted: boolean };
+type Prefs = { reducedMotion: boolean; textScale: number; sound: boolean; namiMuted: boolean; guide: boolean };
 
 function load<T>(key: string, fallback: T): T {
   try { const raw = localStorage.getItem(key); return raw ? { ...fallback, ...JSON.parse(raw) } : fallback; } catch { return fallback; }
@@ -43,9 +43,11 @@ export const runtime = {
   commandHandlers: {} as Record<string, () => void>,
   command(action: string) { const handler = this.commandHandlers[action]; if (handler) { handler(); return true; } return false; },
   hoveredSpecies: '' as string,
+  /** Index fingertip world positions (for touching the sphere). */
+  tips: { left: { ok: false, x: 0, y: 0, z: 0 }, right: { ok: false, x: 0, y: 0, z: 0 } },
   discovered: new Set<string>(load<{ ids: string[] }>(DISCOVERY_KEY, { ids: [] }).ids),
   newDiscovery: '' as string,
-  prefs: load<Prefs>(PREFS_KEY, { reducedMotion: false, textScale: 1, sound: true, namiMuted: false }),
+  prefs: load<Prefs>(PREFS_KEY, { reducedMotion: false, textScale: 1, sound: true, namiMuted: false, guide: true }),
   nami: new NamiGuide(),
   events: [] as string[],
   /** Increments on every log() so readers can cache derived strings. */
@@ -69,4 +71,4 @@ export const runtime = {
   savePrefs() { save(PREFS_KEY, this.prefs); },
 };
 runtime.director.setReducedMotion(runtime.prefs.reducedMotion);
-runtime.nami.setMuted(runtime.prefs.namiMuted);
+runtime.nami.setMuted(runtime.prefs.namiMuted || !runtime.prefs.guide);

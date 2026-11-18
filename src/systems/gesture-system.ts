@@ -44,6 +44,7 @@ export class GestureSystem extends createSystem({}) {
     const select = this.input.xr.getSelectState(hand);
     s.select = select.active;
     s.tracked = false;
+    runtime.tips[hand].ok = false;
     const source = this.input.xr.getPrimaryInputSource(hand);
     if (!source || !frame || !ref) return;
     if (source.hand) {
@@ -61,6 +62,7 @@ export class GestureSystem extends createSystem({}) {
       s.x = this.palm.x; s.y = this.palm.y; s.z = this.palm.z;
       s.extended = extended;
       s.pinchDistance = hasThumb ? this.thumb.distanceTo(this.index) : 1;
+      if (hasThumb) { const t = runtime.tips[hand]; t.ok = true; t.x = this.index.x; t.y = this.index.y; t.z = this.index.z; }
       const spread = hasThumb && this.readJoint(frame, ref, source.hand, 'pinky-finger-tip', this.tip) ? this.index.distanceTo(this.tip) : 0;
       s.spread = spread;
       if ((this.frame & 3) === 0) this.features += `${hand[0]} ext${extended} pinch${s.pinchDistance.toFixed(3)} spread${spread.toFixed(3)} `;

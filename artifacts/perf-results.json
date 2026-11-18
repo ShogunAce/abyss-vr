@@ -1,39 +1,39 @@
 {
   "room": {
-    "calls": 30,
-    "triangles": 38684,
+    "calls": 36,
+    "triangles": 27004,
     "points": 248,
     "lines": 60,
-    "programs": 28,
+    "programs": 29,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 30,
-      "triangles": 38684,
+      "calls": 36,
+      "triangles": 27004,
       "points": 248,
       "lines": 60,
-      "geometries": 51,
+      "geometries": 60,
       "textures": 13,
-      "programs": 28,
-      "meshCount": 87,
-      "materialCount": 43,
+      "programs": 29,
+      "meshCount": 97,
+      "materialCount": 53,
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
-          -4.984327793121338,
-          0.9108441695570946,
-          -5.462948799133301
+          -0.7181116938591003,
+          0.9125734437257051,
+          -1.540839970111847
         ],
         "max": [
-          5.0326714515686035,
+          0.7406283617019653,
           2.3469777815043926,
-          -0.2955435964426856
+          -0.4490120875170779
         ],
         "size": [
-          10.016999244689941,
-          1.436133611947298,
-          5.167405202690615
+          1.4587400555610657,
+          1.4344043377786875,
+          1.0918278825947692
         ]
       },
       "worldBounds": {
@@ -55,8 +55,8 @@
       },
       "environment": {
         "canvas": {
-          "width": 1045,
-          "height": 752
+          "width": 1048,
+          "height": 755
         },
         "pixelRatio": 1,
         "renderer": "WebGLRenderer",
@@ -74,7 +74,7 @@
         },
         {
           "id": "ocean",
-          "meshCount": 5
+          "meshCount": 13
         },
         {
           "id": "particles",
@@ -82,7 +82,7 @@
         },
         {
           "id": "sphere",
-          "meshCount": 1
+          "meshCount": 2
         }
       ],
       "sceneEnvironment": {
@@ -116,24 +116,24 @@
     }
   },
   "sunlit": {
-    "calls": 78,
-    "triangles": 103736,
+    "calls": 96,
+    "triangles": 293092,
     "points": 968,
-    "lines": 60,
-    "programs": 28,
+    "lines": 0,
+    "programs": 29,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 78,
-      "triangles": 103736,
+      "calls": 96,
+      "triangles": 293092,
       "points": 968,
-      "lines": 60,
-      "geometries": 51,
+      "lines": 0,
+      "geometries": 60,
       "textures": 13,
-      "programs": 28,
-      "meshCount": 87,
-      "materialCount": 43,
+      "programs": 29,
+      "meshCount": 97,
+      "materialCount": 53,
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
@@ -171,8 +171,8 @@
       },
       "environment": {
         "canvas": {
-          "width": 1045,
-          "height": 752
+          "width": 1048,
+          "height": 755
         },
         "pixelRatio": 1,
         "renderer": "WebGLRenderer",
@@ -190,7 +190,7 @@
         },
         {
           "id": "ocean",
-          "meshCount": 5
+          "meshCount": 13
         },
         {
           "id": "particles",
@@ -198,7 +198,7 @@
         },
         {
           "id": "sphere",
-          "meshCount": 1
+          "meshCount": 2
         }
       ],
       "sceneEnvironment": {
@@ -232,24 +232,24 @@
     }
   },
   "openBlue": {
-    "calls": 78,
-    "triangles": 103736,
+    "calls": 94,
+    "triangles": 293088,
     "points": 968,
-    "lines": 60,
-    "programs": 28,
+    "lines": 0,
+    "programs": 29,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 78,
-      "triangles": 103736,
+      "calls": 94,
+      "triangles": 293088,
       "points": 968,
-      "lines": 60,
-      "geometries": 51,
+      "lines": 0,
+      "geometries": 60,
       "textures": 13,
-      "programs": 28,
-      "meshCount": 87,
-      "materialCount": 43,
+      "programs": 29,
+      "meshCount": 97,
+      "materialCount": 53,
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
@@ -287,8 +287,8 @@
       },
       "environment": {
         "canvas": {
-          "width": 1045,
-          "height": 752
+          "width": 1048,
+          "height": 755
         },
         "pixelRatio": 1,
         "renderer": "WebGLRenderer",
@@ -306,7 +306,7 @@
         },
         {
           "id": "ocean",
-          "meshCount": 5
+          "meshCount": 13
         },
         {
           "id": "particles",
@@ -314,7 +314,7 @@
         },
         {
           "id": "sphere",
-          "meshCount": 1
+          "meshCount": 2
         }
       ],
       "sceneEnvironment": {
@@ -348,24 +348,24 @@
     }
   },
   "midnight": {
-    "calls": 98,
-    "triangles": 97166,
+    "calls": 114,
+    "triangles": 248406,
     "points": 1148,
-    "lines": 2140,
-    "programs": 28,
+    "lines": 2080,
+    "programs": 29,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 98,
-      "triangles": 97166,
+      "calls": 114,
+      "triangles": 248406,
       "points": 1148,
-      "lines": 2140,
-      "geometries": 51,
+      "lines": 2080,
+      "geometries": 60,
       "textures": 13,
-      "programs": 28,
-      "meshCount": 87,
-      "materialCount": 43,
+      "programs": 29,
+      "meshCount": 97,
+      "materialCount": 53,
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
@@ -403,8 +403,8 @@
       },
       "environment": {
         "canvas": {
-          "width": 1045,
-          "height": 752
+          "width": 1048,
+          "height": 755
         },
         "pixelRatio": 1,
         "renderer": "WebGLRenderer",
@@ -422,7 +422,7 @@
         },
         {
           "id": "ocean",
-          "meshCount": 5
+          "meshCount": 13
         },
         {
           "id": "particles",
@@ -430,7 +430,7 @@
         },
         {
           "id": "sphere",
-          "meshCount": 1
+          "meshCount": 2
         }
       ],
       "sceneEnvironment": {
@@ -464,24 +464,24 @@
     }
   },
   "reveal": {
-    "calls": 102,
-    "triangles": 102678,
+    "calls": 122,
+    "triangles": 255982,
     "points": 1148,
-    "lines": 2140,
-    "programs": 28,
+    "lines": 2080,
+    "programs": 29,
     "textures": 13,
     "frame": {},
     "raw": {
       "available": true,
-      "calls": 102,
-      "triangles": 102678,
+      "calls": 122,
+      "triangles": 255982,
       "points": 1148,
-      "lines": 2140,
-      "geometries": 51,
+      "lines": 2080,
+      "geometries": 60,
       "textures": 13,
-      "programs": 28,
-      "meshCount": 87,
-      "materialCount": 43,
+      "programs": 29,
+      "meshCount": 97,
+      "materialCount": 53,
       "shadowCasters": 0,
       "framingBounds": {
         "min": [
@@ -519,8 +519,8 @@
       },
       "environment": {
         "canvas": {
-          "width": 1045,
-          "height": 752
+          "width": 1048,
+          "height": 755
         },
         "pixelRatio": 1,
         "renderer": "WebGLRenderer",
@@ -538,7 +538,7 @@
         },
         {
           "id": "ocean",
-          "meshCount": 5
+          "meshCount": 13
         },
         {
           "id": "particles",
@@ -546,7 +546,7 @@
         },
         {
           "id": "sphere",
-          "meshCount": 1
+          "meshCount": 2
         }
       ],
       "sceneEnvironment": {

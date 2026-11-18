@@ -48,7 +48,7 @@
     {
       "label": "School regroups",
       "pass": true,
-      "detail": "attracted"
+      "detail": "schooling"
     },
     {
       "label": "Showcase turtle encounter begins in sunlit water",
@@ -83,7 +83,7 @@
     {
       "label": "Shark stays outside the 3.2 m comfort radius",
       "pass": true,
-      "detail": "3.64 m"
+      "detail": "3.63 m"
     },
     {
       "label": "Shark can be inspected (left hand)",
@@ -133,7 +133,7 @@
     {
       "label": "Revealed squid can be inspected",
       "pass": true,
-      "detail": "2 → 3; hovered giant-squid; log 123.0s nami: caption cleared | 127.9s reveal: revealed | 127.9s nami: reveal | 128.3s pinch: right → target | 128.6s discovery: giant-squid (new) | 128.6s pinch: right → target; targets ABYSS sphere,Discovery card,Moon jelly#38,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Deep-sea anglerfish,Giant squid"
+      "detail": "2 → 3; hovered giant-squid; log 128.5s reveal: revealed | 128.5s nami: reveal | 128.9s gesture: right fast sweep | 128.9s pinch: right → target | 129.2s discovery: giant-squid (new) | 129.2s pinch: right → target; targets ABYSS sphere,Discovery card,Moon jelly#38,Moon jelly#39,Moon jelly#40,Moon jelly#41,Moon jelly#42,Moon jelly#43,Deep-sea anglerfish,Giant squid"
     },
     {
       "label": "At least three species discovered",

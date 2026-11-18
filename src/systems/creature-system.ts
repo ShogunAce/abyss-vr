@@ -1,5 +1,5 @@
 import {
-  createSystem, type Entity, Group, Hovered, InstancedMesh, Matrix4, Object3D, Quaternion, RayInteractable,
+  createSystem, type Entity, Group, Hovered, InstancedBufferAttribute, InstancedMesh, Matrix4, Object3D, Quaternion, RayInteractable,
   ShaderMaterial, Vector3,
 } from '@iwsdk/core';
 import { audio } from '../audio/audio-engine.js';
@@ -10,7 +10,7 @@ import { Flock } from '../sim/flock.js';
 import { SharkBrain } from '../sim/shark.js';
 import { createAnglerfish, createFishSchool, createJelly, createShark, createTurtle } from '../visuals/creature-models.js';
 
-const FISH = 56;
+const FISH = 120;
 const SCOUTS = 8;
 const JELLIES = 6;
 
@@ -58,6 +58,11 @@ export class CreatureSystem extends createSystem({
   private quat = new Quaternion();
   private scale = new Vector3();
   private zAxis = new Vector3(0, 0, 1);
+  private worldUp = new Vector3(0, 1, 0);
+  private bx = new Vector3(); private by = new Vector3(); private bz = new Vector3();
+  private rx = new Vector3(); private ry = new Vector3();
+  private sharkBank = 0;
+  private sharkPrevX = 0; private sharkPrevZ = -1;
   private sharkMinDistance = Infinity;
   private sunlitFor = 0;
   /** Scouts are small near the face in the room; the school grows to full size in the ocean. */
@@ -166,12 +171,18 @@ export class CreatureSystem extends createSystem({
       f.activeCount = runtime.sessionActive ? SCOUTS : 0;
       this.tier = 0;
     } else {
-      f.home.x = this.viewer.x + this.forward.x * 2.3; f.home.y = this.viewer.y - 0.15; f.home.z = this.viewer.z + this.forward.z * 2.3; f.home.radius = 1.3;
+      f.home.x = this.viewer.x + this.forward.x * 2.8; f.home.y = this.viewer.y - 0.1; f.home.z = this.viewer.z + this.forward.z * 2.8; f.home.radius = 1.7;
       // Population tiers with hysteresis (no flicker at band edges).
       if (this.tier === 0 && depth > 0.59) this.tier = 1; else if (this.tier === 1 && depth < 0.51) this.tier = 0;
       if (this.tier === 1 && depth > 0.84) this.tier = 2; else if (this.tier === 2 && depth < 0.76) this.tier = 1;
-      f.activeCount = this.tier === 0 ? FISH : this.tier === 1 ? 18 : 0;
+      f.activeCount = this.tier === 0 ? FISH : this.tier === 1 ? 36 : 0;
     }
+    // Keep the school clear of the sphere and the Depth Compass (left of the sphere) in the ocean.
+    const clearUi = runtime.destination === 'ocean' || immersion > 0.05;
+    const o0 = f.obstacles[0], o1 = f.obstacles[1];
+    o0.active = clearUi; o0.x = this.anchorLocal.x; o0.y = this.anchorLocal.y; o0.z = this.anchorLocal.z; o0.r = 0.45;
+    o1.active = clearUi;
+    o1.x = this.anchorLocal.x + this.forward.z * 0.35; o1.y = this.anchorLocal.y - 0.08; o1.z = this.anchorLocal.z - this.forward.x * 0.35; o1.r = 0.45;
     for (let i = 0; i < 2; i++) {
       const g = i === 0 ? runtime.hands.left : runtime.hands.right;
       const h = f.hands[i];
@@ -210,9 +221,12 @@ export class CreatureSystem extends createSystem({
     f.threat.x = sb.x; f.threat.y = sb.y; f.threat.z = sb.z;
     this.shark.mesh.visible = sb.presence > 0.01 && immersion > 0.5;
     if (this.shark.mesh.visible) {
-      this.shark.mesh.position.set(sb.x, sb.y, sb.z);
-      this.temp.set(sb.hx, sb.hy, sb.hz);
-      this.shark.mesh.quaternion.setFromUnitVectors(this.zAxis, this.temp);
+      // Level body that banks gently into turns (no arbitrary roll).
+      const yaw = dt > 0 ? (this.sharkPrevX * sb.hz - this.sharkPrevZ * sb.hx) / dt : 0;
+      this.sharkPrevX = sb.hx; this.sharkPrevZ = sb.hz;
+      this.sharkBank += (Math.max(-0.35, Math.min(0.35, yaw * 0.6)) - this.sharkBank) * Math.min(1, delta * 2);
+      this.orient(this.matrix, sb.x, sb.y, sb.z, sb.hx, sb.hy, sb.hz, this.sharkBank, 1);
+      this.matrix.decompose(this.shark.mesh.position, this.shark.mesh.quaternion, this.shark.mesh.scale);
       this.shark.material.uniforms.uPhase.value = sb.phase;
       this.shark.material.uniforms.uOpacity.value = sb.presence;
       this.sharkMinDistance = Math.min(this.sharkMinDistance, sb.distanceToViewer());
@@ -321,24 +335,44 @@ export class CreatureSystem extends createSystem({
     }
   }
 
+  /** Level, upright orientation facing (fx,fy,fz) with a roll of `bank`; writes a full TRS matrix. */
+  private orient(m: Matrix4, px: number, py: number, pz: number, fx: number, fy: number, fz: number, bank: number, scale: number) {
+    const z = this.bz.set(fx, fy, fz);
+    if (z.lengthSq() < 1e-8) z.set(0, 0, 1); else z.normalize();
+    const x = this.bx.crossVectors(this.worldUp, z);
+    if (x.lengthSq() < 1e-6) x.set(1, 0, 0); else x.normalize();
+    const y = this.by.crossVectors(z, x);
+    const c = Math.cos(bank), sn = Math.sin(bank);
+    this.rx.copy(x).multiplyScalar(c).addScaledVector(y, sn);
+    this.ry.copy(y).multiplyScalar(c).addScaledVector(x, -sn);
+    m.makeBasis(this.rx, this.ry, z);
+    this.scale.setScalar(scale);
+    m.scale(this.scale);
+    m.setPosition(px, py, pz);
+    return m;
+  }
+
   private writeSchool() {
     const f = this.flock, mesh = this.school.mesh as InstancedMesh, phase = this.school.phase;
     if (f.activeCount === 0 && !mesh.visible) { setTargetable(this.schoolEntity, false); return; }
+    const variantAttr = mesh.geometry.getAttribute('aVariant') as InstancedBufferAttribute;
+    const variant = variantAttr.array as Float32Array;
     let visible = 0;
     for (let i = 0; i < f.capacity; i++) {
       const presence = f.presence[i];
       const ix = i * 3;
-      this.temp.set(f.vel[ix], f.vel[ix + 1], f.vel[ix + 2]);
-      if (this.temp.lengthSq() < 1e-8) this.temp.set(0, 0, 1); else this.temp.normalize();
-      this.quat.setFromUnitVectors(this.zAxis, this.temp);
-      const size = presence < 0.02 ? 0 : presence * (0.85 + (i % 5) * 0.07) * this.fishScale;
-      this.scale.setScalar(size);
-      this.matrix.compose(this.temp.set(f.pos[ix], f.pos[ix + 1], f.pos[ix + 2]), this.quat, this.scale);
-      mesh.setMatrixAt(i, this.matrix);
-      (phase.array as Float32Array)[i] = f.phase[i];
-      if (size > 0) visible++;
+      const size = presence < 0.02 ? 0 : presence * (0.8 + (i % 7) * 0.06) * this.fishScale;
+      if (size === 0) continue;
+      // Compact visible fish into [0, visible) and draw only those (hidden fish cost nothing).
+      this.orient(this.matrix, f.pos[ix], f.pos[ix + 1], f.pos[ix + 2], f.dir[ix], f.dir[ix + 1], f.dir[ix + 2], f.bank[i], size);
+      mesh.setMatrixAt(visible, this.matrix);
+      (phase.array as Float32Array)[visible] = f.phase[i];
+      variant[visible] = (i * 0.6180339) % 1;
+      visible++;
     }
+    mesh.count = visible;
     mesh.instanceMatrix.needsUpdate = true;
+    variantAttr.needsUpdate = true;
     phase.needsUpdate = true;
     mesh.visible = visible > 0;
     // Keep ray picking accurate as the school moves (cheap at this count).

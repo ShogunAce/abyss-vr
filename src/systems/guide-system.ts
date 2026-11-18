@@ -56,10 +56,11 @@ export class GuideSystem extends createSystem({
     this.anchor = this.world.requireSceneObject('experience');
     const experience = this.world.requireSceneEntity('experience');
     // Layout keeps pinchable text above eye line, out of the rays aimed at the sphere, panel and creatures.
-    this.nami.group.position.set(0.21, 0.24, 0.02);
+    // NAMI and captions live to the left, above the Depth Compass, never in the centre of view.
+    this.nami.group.position.set(-0.28, 0.14, 0.12);
     this.world.createTransformEntity(this.nami.group, { parent: experience });
     this.caption = this.makePanel('NAMI caption', 720, 190, 0.34, 'nami-dismiss');
-    this.caption.mesh.position.set(0, 0.3, -0.02); this.caption.mesh.rotation.set(0.12, 0, 0);
+    this.caption.mesh.position.set(-0.38, 0.2, 0.16); this.caption.mesh.rotation.set(0.05, 0.55, 0);
     this.card = this.makePanel('Discovery card', 720, 470, 0.36, 'card-close');
     this.card.mesh.position.set(0.34, 0.26, 0.06); this.card.mesh.rotation.set(0.1, -0.45, 0);
     this.bubbles.points.position.set(0, -0.05, 0);
@@ -68,6 +69,12 @@ export class GuideSystem extends createSystem({
     Object.assign(runtime.commandHandlers, {
       'nami-dismiss': () => { runtime.nami.dismiss(); runtime.log('nami', 'dismissed'); },
       'card-close': () => { this.cardUntil = 0; runtime.log('discovery', 'card closed'); },
+      guide: () => {
+        runtime.prefs.guide = !runtime.prefs.guide;
+        runtime.nami.setMuted(!runtime.prefs.guide || runtime.prefs.namiMuted);
+        runtime.savePrefs();
+        runtime.log('comfort', `guide ${runtime.prefs.guide ? 'on' : 'off'}`);
+      },
       'nami-mute': () => { runtime.prefs.namiMuted = !runtime.prefs.namiMuted; runtime.nami.setMuted(runtime.prefs.namiMuted); runtime.savePrefs(); },
       'clear-discoveries': () => { runtime.discovered.clear(); try { localStorage.removeItem('abyss.discoveries.v1'); } catch { /* ignore */ } },
     });
@@ -136,14 +143,14 @@ export class GuideSystem extends createSystem({
 
     // NAMI orb: gentle bob, brighter while speaking.
     const talking = runtime.nami.current !== null;
-    this.nami.group.position.y = 0.24 + Math.sin(t * 1.1) * 0.01;
-    this.nami.group.visible = runtime.sessionActive || runtime.immersion > 0;
+    this.nami.group.position.y = 0.14 + Math.sin(t * 1.1) * 0.01;
+    this.nami.group.visible = runtime.prefs.guide && (runtime.sessionActive || runtime.immersion > 0);
     ((this.nami.core.material as unknown as { uniforms: { uTalk: { value: number } } }).uniforms.uTalk).value = talking ? 0.6 + 0.4 * Math.sin(t * 6) : 0;
     this.nami.halo.material.opacity = talking ? 0.9 : 0.5;
 
     const text = runtime.nami.current?.text ?? '';
     if (text !== this.captionText) { runtime.log('nami', text ? runtime.nami.current!.id : 'caption cleared'); this.captionText = text; if (text) this.drawCaption(text); }
-    this.setShown(this.caption, text !== '' && this.cardUntil <= t);
+    this.setShown(this.caption, runtime.prefs.guide && text !== '' && this.cardUntil <= t);
     this.caption.mesh.scale.setScalar(scale);
 
     this.setShown(this.card, this.cardUntil > t);

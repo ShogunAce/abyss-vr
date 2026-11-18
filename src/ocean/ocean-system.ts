@@ -15,7 +15,7 @@ const row = (y: number, items: Array<[string, string]>): Button[] => items.map((
 const BUTTONS: Button[] = [
   ...row(112, BANDS.map(b => [`depth:${b.preset}`, b.label] as [string, string])),
   ...row(228, [['release', 'Drift'], ['toggle-pause', 'Pause'], ['toggle-reduced', 'Calm'], ['reset', 'Restart']]),
-  ...row(344, [['recenter', 'Recenter'], ['text', 'Text size'], ['sound', 'Sound'], ['room', 'Room']]),
+  ...row(344, [['recenter', 'Recenter'], ['text', 'Text size'], ['sound', 'Sound'], ['guide', 'Guide']]),
 ];
 export const PALETTE = { navy: '#071824', sea: '#155B78', cyan: '#77D8DB', violet: '#9D82D4', neutral: '#E9E5DA' };
 
@@ -280,7 +280,8 @@ export class OceanSystem extends createSystem({
         || (button.action === 'toggle-pause' && s.paused)
         || (button.action === 'toggle-reduced' && s.reducedMotion)
         || (button.action === 'text' && runtime.prefs.textScale > 1.1)
-        || (button.action === 'sound' && runtime.prefs.sound);
+        || (button.action === 'sound' && runtime.prefs.sound)
+        || (button.action === 'guide' && runtime.prefs.guide);
       ctx.fillStyle = selected ? PALETTE.sea : 'rgba(21,91,120,0.28)';
       ctx.strokeStyle = selected ? PALETTE.cyan : 'rgba(119,216,219,0.35)';
       ctx.lineWidth = 2;

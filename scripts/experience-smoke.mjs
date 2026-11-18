@@ -65,7 +65,7 @@ try {
   check(s.band === 'sunlit' && s.schoolState !== '', 'Sunlit ocean with school', s.schoolState);
 
   // ---- slow/steady hand attracts the school
-  cli('xr', 'animate-to', { device: 'hand-right', position: { x: 0.1, y: 1.35, z: -0.6 }, duration: 0.6 });
+  cli('xr', 'animate-to', { device: 'hand-right', position: { x: 0.3, y: 1.2, z: -0.5 }, duration: 0.6 });
   wait(800);
   s = until(v => v.schoolState === 'attracted', 8);
   check(s.schoolState === 'attracted', 'Steady hand near the school attracts fish');
@@ -73,7 +73,9 @@ try {
   // ---- fast sweep scatters (real-time animation, ECS running)
   const sweepsBefore = s.sweeps, scattersBefore = s.scatters;
   cli('ecs', 'resume');
-  cli('xr', 'animate-to', { device: 'hand-right', position: { x: -0.5, y: 1.3, z: -0.6 }, duration: 0.35, easing: 'linear' });
+  // Sweep below and in front of the sphere (not through it), with the ECS running long enough to see it.
+  cli('xr', 'animate-to', { device: 'hand-right', position: { x: -0.5, y: 1.05, z: -0.45 }, duration: 0.35, easing: 'linear' });
+  wait(450);
   cli('ecs', 'pause');
   s = status();
   check(s.sweeps >= sweepsBefore + 1 && s.sweeps <= sweepsBefore + 2, 'Fast sweep detected (cooldown-limited)', `${sweepsBefore} → ${s.sweeps}`);

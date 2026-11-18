@@ -1,4 +1,4 @@
-import { CanvasTexture, createSystem, Mesh, MeshStandardMaterial, Object3D, Pressed, ShaderMaterial, Sprite, SpriteMaterial, Vector3 } from '@iwsdk/core';
+import { CanvasTexture, createSystem, Hovered, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, Pressed, ShaderMaterial, SphereGeometry, Sprite, SpriteMaterial, Vector3 } from '@iwsdk/core';
 import { AbyssSphere } from './abyss-component.js';
 import { immersionPhase, smoothReveal, stepImmersion } from './transition.js';
 import { runtime } from './runtime.js';
@@ -7,6 +7,7 @@ import { audio } from './audio/audio-engine.js';
 export class AbyssSystem extends createSystem({
   spheres: { required: [AbyssSphere] },
   pressed: { required: [AbyssSphere, Pressed] },
+  hovered: { required: [AbyssSphere, Hovered] },
 }) {
   private anchor!: Object3D;
   private sphere!: Mesh;
@@ -39,11 +40,22 @@ export class AbyssSystem extends createSystem({
   private enter = document.getElementById('enter-xr') as HTMLButtonElement;
   private exit = document.getElementById('exit-xr') as HTMLButtonElement;
   private instruction!: Sprite;
+  private label!: Object3D;
+  private hover = 0;
+  private pokeArmed = true;
+  private lastActivation = -10;
+  private sphereWorld = new Vector3();
 
   init() {
     this.anchor = this.world.requireSceneObject('experience');
     this.sphere = this.world.requireSceneObject<Mesh>('sphere');
     this.ring = this.world.requireSceneObject('confirmation');
+    this.label = this.world.requireSceneObject('label');
+    // Generous, invisible pick volume (15 cm radius): easy to hit with a hand ray.
+    // Colour/depth writes are masked rather than hidden: the SDK pointer skips invisible materials.
+    const pick = new Mesh(new SphereGeometry(0.15, 16, 12), new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false }));
+    pick.name = 'Sphere pick volume';
+    this.sphere.add(pick);
     this.particles = this.world.requireSceneObject('particles');
     this.ocean = this.world.requireSceneObject('ocean');
     this.ocean.visible = false;
@@ -76,18 +88,9 @@ export class AbyssSystem extends createSystem({
     panel.raycast = () => {}; // never a ray target (Sprite.raycast needs a camera)
     this.world.createTransformEntity(panel, { parent: this.world.requireSceneEntity('experience') });
 
-    this.cleanupFuncs.push(this.queries.pressed.subscribe('qualify', entity => {
+    this.cleanupFuncs.push(this.queries.pressed.subscribe('qualify', () => {
       // Pressed is the SDK's edge-triggered ray selection (hand pinch, trigger, or mouse).
-      // No select listener or polling duplicates this event.
-      this.count++;
-      this.destination = this.destination === 0 ? 1 : 0;
-      this.pulse = 0.65;
-      this.lastEvent = `${this.inputMode()} select #${this.count}`;
-      entity.setValue(AbyssSphere, 'interactions', this.count);
-      entity.setValue(AbyssSphere, 'lastEvent', this.lastEvent);
-      this.material.color.setHex(0x26fff0);
-      this.material.emissive.setHex(0x06e8df);
-      this.diagnosticClock = 1;
+      this.activate('select');
     }));
     const launch = async () => {
       this.enter.disabled = true;
@@ -118,6 +121,23 @@ export class AbyssSystem extends createSystem({
       for (const mat of this.oceanMaterials) mat.dispose();
       this.texture.dispose(); panelMaterial.dispose(); this.material.dispose();
     });
+  }
+
+  /** One activation per gesture: ray pinch or fingertip touch, with a short shared cooldown. */
+  private activate(kind: 'select' | 'touch') {
+    if (this.elapsed - this.lastActivation < 0.5) return;
+    this.lastActivation = this.elapsed;
+    this.count++;
+    this.destination = this.destination === 0 ? 1 : 0;
+    this.pulse = 0.65;
+    this.lastEvent = `${this.inputMode()} ${kind} #${this.count}`;
+    for (const entity of this.queries.spheres.entities) {
+      entity.setValue(AbyssSphere, 'interactions', this.count);
+      entity.setValue(AbyssSphere, 'lastEvent', this.lastEvent);
+    }
+    this.material.color.setHex(0x26fff0);
+    this.material.emissive.setHex(0x06e8df);
+    this.diagnosticClock = 1;
   }
 
   private handAvailable(hand: XRHandedness) {
@@ -175,9 +195,29 @@ export class AbyssSystem extends createSystem({
         }
       }
     }
+    // Fingertip touch: an index tip inside 13 cm of the sphere centre activates it once;
+    // it re-arms only after every tip has moved more than 20 cm away.
+    if (this.session) {
+      this.sphere.getWorldPosition(this.sphereWorld);
+      let nearest = Infinity, deliberate = false;
+      for (const hand of ['left', 'right'] as const) {
+        const tip = runtime.tips[hand];
+        if (!tip.ok) continue;
+        const d = Math.hypot(tip.x - this.sphereWorld.x, tip.y - this.sphereWorld.y, tip.z - this.sphereWorld.z);
+        nearest = Math.min(nearest, d);
+        // A deliberate touch is slow; a fast sweep passing through the sphere must not toggle the world.
+        if (d < 0.13 && runtime.hands[hand].speed < 0.5) deliberate = true;
+      }
+      if (this.pokeArmed && deliberate) { this.pokeArmed = false; this.activate('touch'); }
+      if (nearest > 0.2) this.pokeArmed = true;
+    }
+    // Hover feedback: brighter and slightly larger while a ray rests on the sphere.
+    const hovered = this.queries.hovered.entities.size > 0;
+    this.hover += ((hovered ? 1 : 0) - this.hover) * Math.min(1, delta * 12);
+    this.material.emissiveIntensity = 1.4 + this.hover * 1.2;
     this.pulse = Math.max(0, this.pulse - delta);
     const strength = Math.sin(this.pulse / 0.65 * Math.PI);
-    this.sphere.scale.setScalar(1 + strength * 0.16);
+    this.sphere.scale.setScalar(1 + strength * 0.16 + this.hover * 0.07);
     this.ring.visible = this.pulse > 0;
     this.ring.scale.setScalar(1 + (1 - this.pulse / 0.65) * 0.5);
     if (this.pulse === 0) {
@@ -190,7 +230,10 @@ export class AbyssSystem extends createSystem({
     if (visible) this.immersion = stepImmersion(this.immersion, this.destination, delta);
     runtime.immersion = this.immersion;
     runtime.destination = this.destination === 1 ? 'ocean' : 'room';
-    this.instruction.visible = this.debugSpatial || this.immersion < 0.999;
+    // The opening title and instruction screen step aside once the ocean begins.
+    const opening = this.destination === 0 && this.immersion < 0.3;
+    this.instruction.visible = this.debugSpatial || opening;
+    this.label.visible = opening;
     const reveal = smoothReveal(this.immersion);
     this.ocean.visible = reveal > 0;
     for (const mat of this.oceanMaterials) {

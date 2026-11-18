@@ -12,7 +12,7 @@ export const FLOCK = {
   wAlignment: 1.0,
   wCohesion: 0.7,
   wHome: 0.9,
-  wHand: 1.4,
+  wHand: 0.9,
   wScatter: 7,
   wThreat: 6,
   wViewer: 9,
@@ -20,11 +20,18 @@ export const FLOCK = {
   maxSpeed: 0.75,
   panicSpeed: 2.0,
   maxForce: 2.4,
-  handRange: 1.6,
+  handRange: 1.2,
+  /** Fish never come closer than this to a hand. */
+  handGap: 0.32,
   scatterRange: 1.5,
   scatterTime: 1.6,
   threatRadius: 4,
-  viewerRadius: 0.55,
+  viewerRadius: 0.85,
+  /** Fish swim mostly level: |vy| ≤ this × horizontal speed. */
+  maxClimb: 0.35,
+  /** Heading smoothing (1/s) and banking for rendering. */
+  turnRate: 5,
+  maxBank: 0.55,
   step: 1 / 60,
 };
 
@@ -38,6 +45,12 @@ export class Flock {
   readonly presence: Float32Array;
   /** Swim phase per fish, advanced by speed (drives tail animation). */
   readonly phase: Float32Array;
+  /** Smoothed unit heading per fish (render orientation; never snaps). */
+  readonly dir: Float32Array;
+  /** Roll into turns, radians. */
+  readonly bank: Float32Array;
+  /** Extra keep-out spheres (e.g. the sphere and Depth Compass), up to 4. */
+  obstacles: Array<{ active: boolean; x: number; y: number; z: number; r: number }> = [0, 1, 2, 3].map(() => ({ active: false, x: 0, y: 0, z: 0, r: 0 }));
   activeCount: number;
   home = { x: 0, y: 1.4, z: -2.2, radius: 1.4 };
   viewer = { x: 0, y: 1.5, z: 0 };
@@ -60,6 +73,8 @@ export class Flock {
     this.vel = new Float32Array(capacity * 3);
     this.presence = new Float32Array(capacity);
     this.phase = new Float32Array(capacity);
+    this.dir = new Float32Array(capacity * 3);
+    this.bank = new Float32Array(capacity);
     this.next = new Int32Array(capacity);
     this.activeCount = capacity;
     let s = seed >>> 0;
@@ -79,6 +94,9 @@ export class Flock {
       this.vel[i * 3 + 2] = Math.sin(a + 1.6) * 0.3;
       this.presence[i] = i < this.activeCount ? 1 : 0;
       this.phase[i] = this.random() * Math.PI * 2;
+      const l = Math.hypot(this.vel[i * 3], this.vel[i * 3 + 2]) || 1;
+      this.dir[i * 3] = this.vel[i * 3] / l; this.dir[i * 3 + 1] = 0; this.dir[i * 3 + 2] = this.vel[i * 3 + 2] / l;
+      this.bank[i] = 0;
     }
     this.scatterTimer = 0;
     this.state = 'schooling';
@@ -157,8 +175,8 @@ export class Flock {
       for (const hand of this.hands) {
         if (!hand.active || !target) continue;
         const dx = hand.x - px, dy = hand.y - py, dz = hand.z - pz, d = Math.hypot(dx, dy, dz);
-        if (d < F.handRange && d > 0.18) { const k = F.wHand * (1 - d / F.handRange) / d; fx += dx * k; fy += dy * k; fz += dz * k; attracted = true; }
-        else if (d <= 0.18 && d > 1e-4) { fx -= dx / d * 2; fy -= dy / d * 2; fz -= dz / d * 2; }
+        if (d < F.handRange && d > F.handGap) { const k = F.wHand * (1 - d / F.handRange) / d; fx += dx * k; fy += dy * k; fz += dz * k; attracted = true; }
+        else if (d <= F.handGap && d > 1e-4) { const k = 3 * (1 - d / F.handGap) / d; fx -= dx * k; fy -= dy * k; fz -= dz * k; }
       }
       // Fast sweep: strong radial burst for a short time.
       if (scattering) {
@@ -179,6 +197,11 @@ export class Flock {
         const dx = px - this.viewer.x, dy = py - this.viewer.y, dz = pz - this.viewer.z, d = Math.hypot(dx, dy, dz);
         if (d < F.viewerRadius && d > 1e-4) { const k = F.wViewer * (1 - d / F.viewerRadius) / d; fx += dx * k; fy += dy * k; fz += dz * k; }
       }
+      for (const o of this.obstacles) {
+        if (!o.active) continue;
+        const dx = px - o.x, dy = py - o.y, dz = pz - o.z, d = Math.hypot(dx, dy, dz);
+        if (d < o.r && d > 1e-4) { const k = F.wViewer * (1 - d / o.r) / d; fx += dx * k; fy += dy * k; fz += dz * k; }
+      }
       const panic = (scattering || maxThreat > 0.05) ? 1 : 0;
       const maxForce = panic ? F.maxForce * 4 : F.maxForce;
       const fl = Math.hypot(fx, fy, fz);
@@ -188,7 +211,21 @@ export class Flock {
       const speed = Math.hypot(vx, vy, vz);
       if (speed > maxSpeed) { vx *= maxSpeed / speed; vy *= maxSpeed / speed; vz *= maxSpeed / speed; }
       else if (speed < F.minSpeed && speed > 1e-5) { vx *= F.minSpeed / speed; vy *= F.minSpeed / speed; vz *= F.minSpeed / speed; }
+      // Real fish cruise level: limit climb/dive relative to forward speed.
+      const horizontal = Math.hypot(vx, vz);
+      const maxVy = F.maxClimb * Math.max(horizontal, F.minSpeed);
+      if (vy > maxVy) vy = maxVy; else if (vy < -maxVy) vy = -maxVy;
       v[ix] = vx; v[ix + 1] = vy; v[ix + 2] = vz;
+      // Smoothed heading with turn-rate limit, and banking proportional to yaw rate.
+      const sp = Math.hypot(vx, vy, vz) || 1;
+      const ox = this.dir[ix], oz = this.dir[ix + 2];
+      const t = Math.min(1, dt * F.turnRate);
+      let ux = ox + (vx / sp - ox) * t, uy = this.dir[ix + 1] + (vy / sp - this.dir[ix + 1]) * t, uz = oz + (vz / sp - oz) * t;
+      const ul = Math.hypot(ux, uy, uz) || 1; ux /= ul; uy /= ul; uz /= ul;
+      const yawRate = (ox * uz - oz * ux) / dt;
+      const targetBank = Math.max(-F.maxBank, Math.min(F.maxBank, yawRate * 0.35));
+      this.bank[i] += (targetBank - this.bank[i]) * Math.min(1, dt * 4);
+      this.dir[ix] = ux; this.dir[ix + 1] = uy; this.dir[ix + 2] = uz;
       p[ix] = px + vx * dt; p[ix + 1] = py + vy * dt; p[ix + 2] = pz + vz * dt;
       this.phase[i] = (this.phase[i] + dt * (6 + Math.hypot(vx, vy, vz) * 14)) % (Math.PI * 2);
     }

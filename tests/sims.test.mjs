@@ -33,6 +33,15 @@ test('gesture: tracking loss and reacquire far away never fires a sweep', () => 
   assert.equal(sweeps, 0);
 });
 
+test('gesture: 30 Hz pose updates at 60 fps still detect a real sweep', () => {
+  const g = new HandGesture();
+  let x = 0;
+  for (let i = 0; i < 60; i++) g.update(sample(x, 1.2, -0.4), 1 / 60);
+  let sweeps = 0;
+  for (let i = 0; i < 24; i++) { if (i % 2 === 0) x += 2.3 / 30; g.update(sample(x, 1.2, -0.4), 1 / 60); if (g.sweep) sweeps++; }
+  assert.equal(sweeps, 1);
+});
+
 test('gesture: an implausible jump (tracking glitch) is not a sweep', () => {
   const g = new HandGesture();
   for (let i = 0; i < 60; i++) g.update(sample(0, 1, 0), 1 / 60);
@@ -72,12 +81,12 @@ test('arbiter priority: targets > pulse > travel', () => {
 test('flock: slow hand attracts, fast sweep scatters, school regroups', () => {
   const f = new Flock(56);
   for (let i = 0; i < 600; i++) f.update(1 / 60);
-  const hand = { x: f.home.x + 0.9, y: f.home.y, z: f.home.z + 0.4 };
+  const hand = { x: f.home.x + 0.8, y: f.home.y, z: f.home.z + 0.4 };
   const before = f.meanDistance(hand.x, hand.y, hand.z);
   f.hands[0] = { active: true, ...hand };
   for (let i = 0; i < 240; i++) f.update(1 / 60);
   const attracted = f.meanDistance(hand.x, hand.y, hand.z);
-  assert.ok(attracted < before - 0.15, `attraction ${before.toFixed(2)} → ${attracted.toFixed(2)}`);
+  assert.ok(attracted < before - 0.1, `attraction ${before.toFixed(2)} → ${attracted.toFixed(2)}`);
   assert.equal(f.state, 'attracted');
   f.hands[0].active = false;
   const calmSpeed = f.meanSpeed();

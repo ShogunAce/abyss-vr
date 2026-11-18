@@ -155,3 +155,60 @@ So one pinch can never both inspect and travel, or pulse and travel.
 It starts from the Enter XR click, and every call is a no-op if audio is blocked. No audio files.
 
 **Visual identity.** The spec palette (#071824, #155B78, #77D8DB, #9D82D4, #E9E5DA) is used for all spatial UI. Manrope is named but not bundled (system sans-serif fallback). All creatures share the environment uniforms, so they darken, fog and glow consistently with depth.
+
+## Headset feedback pass: sphere, fish, guide clutter, living reef (2026-11-18)
+
+Feedback from the first Quest session, and what changed:
+
+- **Opening sphere felt unresponsive to pointing.**
+  - A 15 cm invisible pick volume now surrounds the 8.5 cm sphere. Its colour and depth writes are masked rather than hidden, because the SDK pointer skips invisible materials.
+  - While a ray hovers it, the sphere glows brighter and swells about 7%, so you see it respond before you pinch.
+  - An index fingertip within 13 cm of its centre also activates it. Touch re-arms only after every fingertip is more than 20 cm away.
+  - Pinch and touch share a 0.5 s cooldown, so one gesture never fires twice.
+- **Fish attracted to the hand got in the way.**
+  - Hand pull: weight 1.4 → 0.9, range 1.6 → 1.2 m, minimum gap to the hand 0.18 → 0.32 m.
+  - Viewer keep-out radius 0.55 → 0.85 m.
+  - New keep-out spheres (0.45 m) around the sphere and the Depth Compass while in the ocean.
+  - The school's home moved 2.3 → 2.8 m ahead.
+- **The ABYSS screen and NAMI orb sat in the centre.**
+  - The title label and instruction screen hide as soon as the ocean starts.
+  - NAMI and its captions now sit to the left, above the Depth Compass.
+  - New Depth Compass **Guide** button turns NAMI and captions on or off (persisted). It replaced Room; pinching the sphere still returns you to the room.
+- **Fish "shape physics".** Fish swam pitched nearly vertical and rolled arbitrarily, because their orientation was taken from raw velocity.
+  - Climb is now limited to 0.35 × horizontal speed.
+  - Each fish keeps a smoothed heading (turn rate 5/s) and banks into turns (up to 0.55 rad).
+  - Orientation is built from an upright basis, so fish and shark stay level.
+- **More fish.** 120 instead of 56, still one instanced draw. Population tiers: 120 / 36 / 0 by depth.
+- **Fish look.** New damselfish profile: blunt head, deep body, forked tail, long dorsal and anal fins, pectorals. Added eyes, a wet specular highlight, iridescent sheen, per-fish colour variation and lighter fins.
+- **Shark look.** Fin tagging, a dark-edged tail (a grey reef shark field mark) and eyes.
+
+### Living reef (`src/scene-assets/reef.scene-asset.ts`)
+
+**Terrain.** `seabedHeight()` combines:
+- dunes and undulation
+- a reef mound about 6 m ahead and two flanking mounds
+- a calm hollow beneath the viewer
+
+The seabed is a 150×150-segment heightfield, capped at 1.5 m below eye level.
+
+**Sand shader.** Wave ripples whose direction wanders across the seabed, grain, colour patches, rock on steep slopes, algae on the mounds, red absorption, and caustics.
+
+**Rocks.** Deterministic noise-displaced icospheres with welded smooth normals, coralline crust and algae on upward faces, sitting on the terrain.
+
+**Reef.** Each type is one InstancedMesh with per-instance colour and seed:
+
+| Type | Count |
+| --- | --- |
+| Branching corals (paler growing tips) | 70 |
+| Brain corals (groove pattern) | 40 |
+| Table corals | 12 |
+| Sea fans (lattice, swaying) | 28 |
+| Tube sponges (dark interiors) | 32 |
+| Anemones (swaying tentacles, pale tips) | 18 |
+| Seagrass blades | 1300 |
+| Starfish | 36 |
+
+- Placement is seeded and weighted toward garden zones, densest on the mound ahead, with nothing within about 2.4 m of the viewer.
+- All reef pieces share the ocean's depth uniforms: they darken and fog with depth, and some corals faintly fluoresce at midnight.
+- They live in the travel frame (they move with hand-directed travel) and fade in with the room-to-ocean reveal.
+- Cost: 8 extra instanced draws.
